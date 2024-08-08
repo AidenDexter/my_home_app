@@ -1,1 +1,14 @@
-include: package:flutter_lints/flutter.yaml
+include: package:surf_lint_rules/analysis_options.yaml
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+    no_leading_underscores_for_local_identifiers: ignore
+  exclude:
+    # Generated code
+    - "lib/.*.dart"
+linter:
+  rules:
+    sort_pub_dependencies: false
+    avoid_field_initializers_in_const_classes: false #rule for web
+    always_use_package_imports: false
+    prefer_relative_imports: true
