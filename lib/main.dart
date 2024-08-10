@@ -1,20 +1,13 @@
-import 'package:flutter/material.dart';
+import 'core/environment/app_environment.dart';
+
+import 'runner/runner.dart' as runner;
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  AppEnvironment.init(
+    config: const AppConfig(
+      flavor: Flavor.dev,
+      debugOptions: DebugOptions(),
+    ),
+  );
+  runner.run();
 }
