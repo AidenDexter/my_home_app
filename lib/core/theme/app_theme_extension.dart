@@ -2,26 +2,31 @@ part of 'app_theme.dart';
 
 class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final CommonColors commonColors;
+  final CommonTextStyles commonTextStyles;
 
   const AppThemeExtension({
     required this.commonColors,
+    required this.commonTextStyles,
   });
 
-  factory AppThemeExtension.lightThemeExtension() => const AppThemeExtension(
+  factory AppThemeExtension.lightThemeExtension() => AppThemeExtension(
         commonColors: _commonColors,
+        commonTextStyles: _commonTextStyles,
       );
 
-  factory AppThemeExtension.darkThemeExtension() => const AppThemeExtension(
+  factory AppThemeExtension.darkThemeExtension() => AppThemeExtension(
         commonColors: _commonColors,
+        commonTextStyles: _commonTextStyles,
       );
 
   @override
-  // ignore: long-parameter-list
   ThemeExtension<AppThemeExtension> copyWith({
     CommonColors? commonColors,
+    CommonTextStyles? commonTextStyles,
   }) =>
       AppThemeExtension(
         commonColors: commonColors ?? this.commonColors,
+        commonTextStyles: commonTextStyles ?? this.commonTextStyles,
       );
 
   @override
@@ -31,5 +36,6 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   ) =>
       AppThemeExtension(
         commonColors: commonColors,
+        commonTextStyles: commonTextStyles,
       );
 }
