@@ -5,10 +5,12 @@ part 'common_colors.dart';
 part 'app_theme_extension.dart';
 part 'typography.dart';
 part 'common_text_styles.dart';
+part 'button_styles.dart';
 
 const _commonColors = CommonColors();
 const _typography = Typography();
 final _commonTextStyles = CommonTextStyles();
+final _buttonStyles = ButtonStyles();
 
 // ignore: avoid_classes_with_only_static_members
 abstract class AppTheme {
@@ -25,6 +27,7 @@ final _lightThemeData = ThemeData(
     AppThemeExtension.lightThemeExtension(),
   ],
   cardColor: _commonColors.white,
+  elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
   scaffoldBackgroundColor: _commonColors.neutralgrey3,
 );
 
@@ -34,5 +37,6 @@ final _darkThemeData = ThemeData(
     AppThemeExtension.darkThemeExtension(),
   ],
   cardColor: _commonColors.black,
+  elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
   scaffoldBackgroundColor: _commonColors.black,
 );
