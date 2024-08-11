@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 part 'common_colors.dart';
 part 'app_theme_extension.dart';
+part 'typography.dart';
+part 'common_text_styles.dart';
 
 const _commonColors = CommonColors();
+const _typography = Typography();
+final _commonTextStyles = CommonTextStyles();
 
 // ignore: avoid_classes_with_only_static_members
 abstract class AppTheme {

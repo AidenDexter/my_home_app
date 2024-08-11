@@ -17,3 +17,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: TBCXBold
+      fonts:
+        - asset: fonts/TBCX/TBCX-Bold.ttf
+    - family: TBCXMedium
+      fonts:
+        - asset: fonts/TBCX/TBCX-Medium.ttf
+    - family: TBCXRegular
+      fonts:
+        - asset: fonts/TBCX/TBCX-Regular.ttf
