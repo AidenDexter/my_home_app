@@ -1,0 +1,24 @@
+part of 'app_theme.dart';
+
+class CommonColors {
+  final white = const Color(0xFFFFFFFF);
+  final black = const Color(0xFF000000);
+  final transparent = const Color(0x00000000);
+
+  final darkGrey100 = const Color(0xFF222222);
+  final darkGrey70 = const Color(0xFF646464);
+  final darkGrey30 = const Color(0xFFA7A7A7);
+
+  final orange = const Color(0xFFFF3D00);
+  final yellow = const Color(0xFFFABD00);
+  final blue = const Color(0xFF3B73FC);
+
+  final green100 = const Color(0xFF26B571);
+  final green10 = const Color(0xFFE9F8F1);
+
+  final neutralgrey10 = const Color(0xFFE5E5E5);
+  final neutralgrey5 = const Color(0xFFF7F7F7);
+  final neutralgrey3 = const Color(0xFFFBFBFB);
+
+  const CommonColors();
+}
