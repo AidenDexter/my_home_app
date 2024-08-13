@@ -19,7 +19,7 @@ dependencies:
   intl: ^0.19.0
 
   # Http Client
-  dio: ^5.4.3
+  dio: ^5.6.0
 
   #BLoC
   flutter_bloc: ^8.1.6
@@ -27,21 +27,21 @@ dependencies:
 
   # Service Locator
   get_it: ^7.7.0
-  injectable: ^2.4.2
+  injectable: ^2.4.4
 
   # Logging
   l: ^4.0.2
   stack_trace: ^1.11.1
 
   # Local storages
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.1
 
   # Network connection status
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^6.0.5
 
   # Code-generation
-  retrofit: ^4.1.0
-  freezed_annotation: ^2.4.1
+  retrofit: ^4.2.0
+  freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
 
 dev_dependencies:
@@ -49,18 +49,21 @@ dev_dependencies:
     sdk: flutter
 
   # Code generation
-  build_runner: ^2.4.11
-  freezed: ^2.5.2
-  retrofit_generator: ^8.1.0
+  build_runner: ^2.4.12
+  freezed: ^2.5.7
+  retrofit_generator: ^8.2.0
   json_serializable: ^6.8.0
   flutter_gen_runner: ^5.5.0+1
-  injectable_generator: ^2.6.1
+  injectable_generator: ^2.6.2
 
   # Lint rules
   surf_lint_rules: ^3.1.0
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env
 
   fonts:
     - family: TBCXBold

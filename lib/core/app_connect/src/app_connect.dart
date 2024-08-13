@@ -16,7 +16,7 @@ abstract class IAppConnect {
 abstract class AppConnectBase implements IAppConnect {
   @override
   Stream<bool> get onConnectChanged => Connectivity().onConnectivityChanged.map(
-        (event) => event != ConnectivityResult.none,
+        (event) => !event.contains(ConnectivityResult.none),
       );
 
   const AppConnectBase();
@@ -24,7 +24,7 @@ abstract class AppConnectBase implements IAppConnect {
   @override
   Future<bool> hasConnect() async {
     final result = await Connectivity().checkConnectivity();
-    return result != ConnectivityResult.none;
+    return !result.contains(ConnectivityResult.none);
   }
 }
 
