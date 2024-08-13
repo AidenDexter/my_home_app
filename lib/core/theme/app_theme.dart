@@ -18,8 +18,7 @@ abstract class AppTheme {
   static ThemeData get darkThemeData => _darkThemeData;
 
   // ignore: library_private_types_in_public_api
-  static AppThemeExtension themeExtension(BuildContext context) =>
-      Theme.of(context).extension<AppThemeExtension>()!;
+  static AppThemeExtension themeExtension(BuildContext context) => Theme.of(context).extension<AppThemeExtension>()!;
 }
 
 final _lightThemeData = ThemeData(
