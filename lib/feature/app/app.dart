@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/theme/app_theme.dart';
 import '../mock/presentation/mock_page.dart';
 
 class App extends StatelessWidget {
@@ -7,8 +8,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MockPage(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const MockPage(),
+      theme: AppTheme.lightThemeData,
     );
   }
 }
