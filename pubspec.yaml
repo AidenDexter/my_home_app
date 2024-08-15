@@ -46,6 +46,7 @@ dependencies:
 
   # Widgets
   flutter_svg: ^2.0.10
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:
