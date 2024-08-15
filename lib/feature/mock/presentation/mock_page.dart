@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extension/src/error_extension.dart';
+import '../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../../core/ui_kit/vip_card.dart';
 import '../bloc/mock_bloc.dart';
 import '../domain/entity/post.dart';
@@ -36,7 +37,15 @@ class _DataLayout extends StatelessWidget {
   const _DataLayout({required this.post});
 
   @override
-  Widget build(BuildContext context) => const VipCard.vip();
+  Widget build(BuildContext context) => InkWell(
+        child: const VipCard.vip(),
+        onTap: () => PrimaryBottomSheet.show(
+          context: context,
+          builder: (context) => const Column(
+            children: [Text('text'), Text('text')],
+          ),
+        ),
+      );
 }
 
 class _ErrorLayout extends StatelessWidget {
@@ -66,6 +75,5 @@ class _ProgressLayout extends StatelessWidget {
   const _ProgressLayout();
 
   @override
-  Widget build(BuildContext context) =>
-      const Center(child: CircularProgressIndicator());
+  Widget build(BuildContext context) => const Center(child: CircularProgressIndicator());
 }
