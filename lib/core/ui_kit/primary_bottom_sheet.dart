@@ -21,11 +21,12 @@ mixin PrimaryBottomSheet {
     bool enableDrag = true,
     Duration? duration,
     RouteSettings? settings,
-    SystemUiOverlayStyle? overlayStyle,
-    EdgeInsets? padding,
-    BorderRadiusGeometry? borderRadius,
+    SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle.light,
+    EdgeInsets padding =
+        const EdgeInsets.only(top: 60, left: 16, right: 16, bottom: 16),
+    BorderRadiusGeometry borderRadius =
+        const BorderRadius.all(Radius.circular(16)),
     Color? backgroundColor,
-    ClipRectType clipRectType = ClipRectType.all,
   }) async {
     final modalBottomSheet = cmbs.ModalSheetRoute<T>(
       builder: builder,
@@ -39,7 +40,6 @@ mixin PrimaryBottomSheet {
         overlayStyle: overlayStyle,
         borderRadius: borderRadius,
         backgroundColor: backgroundColor,
-        clipRectType: clipRectType,
       ),
       expanded: expand,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -62,20 +62,18 @@ class _BottomSheet extends StatelessWidget {
   final Widget child;
   final Clip? clipBehavior;
   final double? elevation;
-  final SystemUiOverlayStyle? overlayStyle;
-  final EdgeInsetsGeometry? padding;
-  final BorderRadiusGeometry? borderRadius;
+  final SystemUiOverlayStyle overlayStyle;
+  final EdgeInsetsGeometry padding;
+  final BorderRadiusGeometry borderRadius;
   final Color? backgroundColor;
-  final ClipRectType clipRectType;
 
   const _BottomSheet({
     required this.child,
-    this.clipRectType = ClipRectType.all,
+    required this.borderRadius,
+    required this.padding,
+    required this.overlayStyle,
     this.clipBehavior,
-    this.padding,
     this.elevation,
-    this.overlayStyle,
-    this.borderRadius,
     this.backgroundColor,
   });
 
@@ -84,12 +82,12 @@ class _BottomSheet extends StatelessWidget {
     final bottomSheetTheme = Theme.of(context).bottomSheetTheme;
     final colors = context.theme.commonColors;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: overlayStyle ?? SystemUiOverlayStyle.light,
+      value: overlayStyle,
       child: SafeArea(
         child: Padding(
-          padding: padding ?? const EdgeInsets.only(top: 60, left: 16, right: 16, bottom: 16),
+          padding: padding,
           child: ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.circular(16),
+            borderRadius: borderRadius,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +100,7 @@ class _BottomSheet extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
-                          color: const Color.fromRGBO(175, 181, 207, 0.5),
+                          color: colors.darkGrey30,
                         ),
                         height: 4,
                         width: 44,
@@ -113,7 +111,9 @@ class _BottomSheet extends StatelessWidget {
                 Flexible(
                   child: Material(
                     shape: bottomSheetTheme.shape,
-                    clipBehavior: clipBehavior ?? bottomSheetTheme.clipBehavior ?? Clip.hardEdge,
+                    clipBehavior: clipBehavior ??
+                        bottomSheetTheme.clipBehavior ??
+                        Clip.hardEdge,
                     elevation: elevation ?? bottomSheetTheme.elevation ?? 0,
                     borderRadius: BorderRadius.zero,
                     color: backgroundColor ?? colors.white,
@@ -136,9 +136,4 @@ class _BottomSheet extends StatelessWidget {
       ),
     );
   }
-}
-
-enum ClipRectType {
-  all,
-  top,
 }
