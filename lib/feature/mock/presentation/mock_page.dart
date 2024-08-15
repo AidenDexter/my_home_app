@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extension/src/error_extension.dart';
-import '../../../core/ui_kit/currency_switcher.dart';
+import '../../../core/ui_kit/vip_card.dart';
 import '../bloc/mock_bloc.dart';
 import '../domain/entity/post.dart';
 import 'mock_scope.dart';
@@ -36,9 +36,7 @@ class _DataLayout extends StatelessWidget {
   const _DataLayout({required this.post});
 
   @override
-  Widget build(BuildContext context) => CurrencySwitcher(
-        onChange: (isLariEnabled) {},
-      );
+  Widget build(BuildContext context) => const VipCard.vip();
 }
 
 class _ErrorLayout extends StatelessWidget {

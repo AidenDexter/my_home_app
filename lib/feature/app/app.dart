@@ -12,6 +12,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const MockPage(),
       theme: AppTheme.lightThemeData,
+      darkTheme: AppTheme.darkThemeData,
     );
   }
 }
