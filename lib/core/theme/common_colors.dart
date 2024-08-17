@@ -11,7 +11,9 @@ class CommonColors {
 
   final orange = const Color(0xFFFF3D00);
   final yellow = const Color(0xFFFABD00);
-  final blue = const Color(0xFF3B73FC);
+
+  final blue100 = const Color(0xFF3B73FC);
+  final blue10 = const Color(0xFFF5F7FF);
 
   final green100 = const Color(0xFF26B571);
   final green10 = const Color(0xFFE9F8F1);
