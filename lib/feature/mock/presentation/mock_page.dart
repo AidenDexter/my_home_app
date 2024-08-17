@@ -6,6 +6,7 @@ import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../../core/ui_kit/primary_elevated_button.dart';
+import '../../../core/ui_kit/range_text_field.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
 import '../../../core/ui_kit/vip_card.dart';
 import '../bloc/mock_bloc.dart';
@@ -56,89 +57,109 @@ class _DataLayoutState extends State<_DataLayout> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext context) => ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            InkWell(
-              child: VipCard.vip(),
-              onTap: () => PrimaryBottomSheet.show(
-                context: context,
-                builder: (context) => const Column(
-                  children: [Text('text'), Text('text')],
-                ),
+        children: [
+          InkWell(
+            child: VipCard.vip(),
+            onTap: () => PrimaryBottomSheet.show(
+              context: context,
+              builder: (context) => const Column(
+                children: [Text('text'), Text('text')],
               ),
             ),
-            const SizedBox(height: 16),
-            AnimatedBuilder(
-              animation: _singleSelectionGroupValue,
-              builder: (context, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SingleSelectionCard(
-                      onTap: (value) => _singleSelectionGroupValue.value = value,
-                      groupValue: _singleSelectionGroupValue.value,
-                      value: 1,
-                      title: 'Аренда',
-                    ),
-                    SingleSelectionCard(
-                      onTap: (value) => _singleSelectionGroupValue.value = value,
-                      groupValue: _singleSelectionGroupValue.value,
-                      value: 2,
-                      title: 'Продажа',
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            AnimatedBuilder(
-              animation: _multiSelectionValue,
-              builder: (context, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MultiSelectionCard(
-                      onTap: (value) {
-                        if (_multiSelectionValue.value.contains(1)) {
-                          _multiSelectionValue.value = List.from(_multiSelectionValue.value)..remove(value);
-                          return;
-                        }
-                        _multiSelectionValue.value = List.from(_multiSelectionValue.value)..add(value);
-                      },
-                      isSelected: _multiSelectionValue.value.contains(1),
-                      value: 1,
-                      title: 'Аренда',
-                    ),
-                    MultiSelectionCard(
-                      onTap: (value) {
-                        if (_multiSelectionValue.value.contains(2)) {
-                          _multiSelectionValue.value = List.from(_multiSelectionValue.value)..remove(value);
-                          return;
-                        }
-                        _multiSelectionValue.value = List.from(_multiSelectionValue.value)..add(value);
-                      },
-                      isSelected: _multiSelectionValue.value.contains(2),
-                      value: 2,
-                      title: 'Продажа',
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            PrimaryElevatedButton(
-              child: const Text('PrimaryElevatedButton'),
-              onPressed: () {},
-            ),
-            const SizedBox(height: 16),
-            PrimaryElevatedButton.secondary(
-              child: const Text('PrimaryElevatedButton.secondary'),
-              onPressed: () {},
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+          AnimatedBuilder(
+            animation: _singleSelectionGroupValue,
+            builder: (context, child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SingleSelectionCard(
+                    onTap: (value) => _singleSelectionGroupValue.value = value,
+                    groupValue: _singleSelectionGroupValue.value,
+                    value: 1,
+                    title: 'Аренда',
+                  ),
+                  SingleSelectionCard(
+                    onTap: (value) => _singleSelectionGroupValue.value = value,
+                    groupValue: _singleSelectionGroupValue.value,
+                    value: 2,
+                    title: 'Продажа',
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+          AnimatedBuilder(
+            animation: _multiSelectionValue,
+            builder: (context, child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MultiSelectionCard(
+                    onTap: (value) {
+                      if (_multiSelectionValue.value.contains(1)) {
+                        _multiSelectionValue.value = List.from(_multiSelectionValue.value)..remove(value);
+                        return;
+                      }
+                      _multiSelectionValue.value = List.from(_multiSelectionValue.value)..add(value);
+                    },
+                    isSelected: _multiSelectionValue.value.contains(1),
+                    value: 1,
+                    title: 'Аренда',
+                  ),
+                  MultiSelectionCard(
+                    onTap: (value) {
+                      if (_multiSelectionValue.value.contains(2)) {
+                        _multiSelectionValue.value = List.from(_multiSelectionValue.value)..remove(value);
+                        return;
+                      }
+                      _multiSelectionValue.value = List.from(_multiSelectionValue.value)..add(value);
+                    },
+                    isSelected: _multiSelectionValue.value.contains(2),
+                    value: 2,
+                    title: 'Продажа',
+                  ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+          PrimaryElevatedButton(
+            child: const Text('PrimaryElevatedButton'),
+            onPressed: () {},
+          ),
+          const SizedBox(height: 16),
+          PrimaryElevatedButton.secondary(
+            child: const Text('PrimaryElevatedButton.secondary'),
+            onPressed: () {},
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: RangeTextField(
+                  label: 'от',
+                  suffix: r'$', //₾, м²
+                  controller: TextEditingController(),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: RangeTextField(
+                  label: 'до',
+                  suffix: r'$',
+                  controller: TextEditingController(),
+                  isError: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+        ],
       );
 
   @override

@@ -25,6 +25,7 @@ abstract class AppTheme {
 
 final _lightThemeData = ThemeData(
   useMaterial3: true,
+  primaryColor: _commonColors.green100,
   extensions: [
     AppThemeExtension.lightThemeExtension(),
   ],
@@ -35,6 +36,7 @@ final _lightThemeData = ThemeData(
 
 final _darkThemeData = ThemeData(
   useMaterial3: true,
+  primaryColor: _commonColors.green100,
   extensions: [
     AppThemeExtension.darkThemeExtension(),
   ],
