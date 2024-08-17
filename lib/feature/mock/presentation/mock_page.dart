@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/error/error_handler.dart';
 import '../../../core/resources/assets.gen.dart';
+import '../../../core/ui_kit/primary_check_box.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
@@ -49,11 +50,13 @@ class _DataLayout extends StatefulWidget {
 class _DataLayoutState extends State<_DataLayout> {
   late final ValueNotifier<int?> _singleSelectionGroupValue;
   late final ValueNotifier<List<int>> _multiSelectionValue;
+  late final ValueNotifier<bool> _checkboxController;
 
   @override
   void initState() {
     _singleSelectionGroupValue = ValueNotifier(null);
     _multiSelectionValue = ValueNotifier([]);
+    _checkboxController = ValueNotifier(false);
     super.initState();
   }
 
@@ -144,6 +147,15 @@ class _DataLayoutState extends State<_DataLayout> {
               icon: Assets.icons.arrow.svg(),
               text: 'Кодовая дверь',
             ),
+            const SizedBox(height: 16),
+            AnimatedBuilder(
+                animation: _checkboxController,
+                builder: (context, child) {
+                  return PrimaryCheckBox(
+                    isChecked: _checkboxController.value,
+                    onChanged: (value) => _checkboxController.value = value ?? false,
+                  );
+                }),
           ],
         ),
       );
@@ -152,6 +164,7 @@ class _DataLayoutState extends State<_DataLayout> {
   void dispose() {
     _singleSelectionGroupValue.dispose();
     _multiSelectionValue.dispose();
+    _checkboxController.dispose();
     super.dispose();
   }
 }
