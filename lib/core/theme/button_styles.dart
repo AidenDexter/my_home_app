@@ -14,7 +14,7 @@ class ButtonStyles {
       elevation: 0,
     ),
   );
-  final textButtonThemeData = TextButtonThemeData();
+  final textButtonThemeData = const TextButtonThemeData();
 
-  final radioButtonTheme = RadioThemeData();
+  final radioButtonTheme = const RadioThemeData();
 }
