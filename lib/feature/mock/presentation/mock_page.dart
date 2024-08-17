@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/extension/src/error_extension.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
+import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
 import '../../../core/ui_kit/vip_card.dart';
 import '../bloc/mock_bloc.dart';
@@ -54,7 +55,8 @@ class _DataLayoutState extends State<_DataLayout> {
   }
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             InkWell(
@@ -123,6 +125,16 @@ class _DataLayoutState extends State<_DataLayout> {
                   ],
                 );
               },
+            ),
+            const SizedBox(height: 16),
+            PrimaryElevatedButton(
+              child: const Text('PrimaryElevatedButton'),
+              onPressed: () {},
+            ),
+            const SizedBox(height: 16),
+            PrimaryElevatedButton.secondary(
+              child: const Text('PrimaryElevatedButton.secondary'),
+              onPressed: () {},
             ),
           ],
         ),
