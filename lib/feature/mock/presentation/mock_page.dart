@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/extension/src/error_extension.dart';
+import '../../../core/error/error_handler.dart';
+import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
@@ -23,9 +24,9 @@ class MockPage extends StatelessWidget {
           builder: (context, state) => state.map(
             progress: (_) => const _ProgressLayout(),
             success: (data) => _DataLayout(post: data.post),
-            error: (error) => _ErrorLayout(
-              errorText: context.messageFromError(error.errorHandler),
-              onTap: () => MockScope.readOf(context),
+            error: (error) => ErrorBody(
+              error: ErrorHandler.fromError('object'),
+              actions: [ElevatedButton(onPressed: () {}, child: const Text('try again'))],
             ),
           ),
         ),
@@ -134,29 +135,6 @@ class _DataLayoutState extends State<_DataLayout> {
     _multiSelectionValue.dispose();
     super.dispose();
   }
-}
-
-class _ErrorLayout extends StatelessWidget {
-  final VoidCallback? onTap;
-  final String errorText;
-  const _ErrorLayout({required this.errorText, this.onTap});
-
-  @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              errorText,
-              textAlign: TextAlign.center,
-            ),
-            OutlinedButton(
-              onPressed: onTap,
-              child: const Text('ОБНОВИТЬ'),
-            ),
-          ],
-        ),
-      );
 }
 
 class _ProgressLayout extends StatelessWidget {

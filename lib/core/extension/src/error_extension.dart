@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
 
 import '../../error/error_handler.dart';
+import '../../resources/assets.gen.dart';
 
 extension ErrorExtension on BuildContext {
+  /* TODO: Заменить на локализованные */
   String messageFromError(IErrorHandler errorHandler) => errorHandler.when(
         timeout: (_) => 'timeout',
         dio: (_) => 'unexpected_error',
@@ -18,13 +20,14 @@ extension ErrorExtension on BuildContext {
         message: (message) => message,
       );
 
-  // Image imageFromError(IErrorHandler errorHandler) => errorHandler.when(
-  //       timeout: (_) => Assets.images.clock.image(),
-  //       dio: (_) => Assets.images.fail.image(),
-  //       connection: () => Assets.images.internet.image(),
-  //       apiError: (_) => Assets.images.fail.image(),
-  //       apiFields: (_) => Assets.images.fail.image(),
-  //       unknown: (_) => Assets.images.fail.image(),
-  //       message: (_) => Assets.images.fail.image(),
-  //     );
+  /* TODO: Заменить на картинки ошибок */
+  Widget imageFromError(IErrorHandler errorHandler) => errorHandler.when(
+        timeout: (_) => Assets.icons.arrowLeft.svg(),
+        dio: (_) => Assets.icons.arrowLeft.svg(),
+        connection: Assets.icons.arrowLeft.svg,
+        apiError: (_) => Assets.icons.arrowLeft.svg(),
+        apiFields: (_) => Assets.icons.arrowLeft.svg(),
+        unknown: (_) => Assets.icons.arrowLeft.svg(),
+        message: (_) => Assets.icons.arrowLeft.svg(),
+      );
 }
