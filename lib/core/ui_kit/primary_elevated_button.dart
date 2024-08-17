@@ -42,9 +42,9 @@ class PrimaryElevatedButton extends StatelessWidget {
     this.foregroundColor,
     this.progressIndicatorColor,
     this.backgroundColor,
+    this.icon,
     super.key,
-  })  : icon = null,
-        isSecondary = true;
+  }) : isSecondary = true;
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,11 @@ class PrimaryElevatedButton extends StatelessWidget {
       elevation: isSecondary ? 0 : null,
     );
 
-    final ico = icon;
-    if (ico != null) {
+    if (icon != null) {
       return ElevatedButton.icon(
         style: style,
         onPressed: isLoading ? null : onPressed,
-        icon: ico,
+        icon: icon,
         label: isLoading
             ? _ProgressIndicator(
                 color: progressIndicatorColor,
@@ -82,9 +81,8 @@ class _ProgressIndicator extends StatelessWidget {
   const _ProgressIndicator({this.color});
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 20,
-        height: 20,
+  Widget build(BuildContext context) => SizedBox.square(
+        dimension: 20,
         child: CircularProgressIndicator(
           color: color ?? context.theme.commonColors.white,
           strokeWidth: 3,
