@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/error/error_handler.dart';
+import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../core/ui_kit/range_text_field.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
+import '../../../core/ui_kit/tag_card.dart';
 import '../../../core/ui_kit/vip_card.dart';
 import '../bloc/mock_bloc.dart';
 import '../domain/entity/post.dart';
@@ -136,6 +138,11 @@ class _DataLayoutState extends State<_DataLayout> {
           PrimaryElevatedButton.secondary(
             child: const Text('PrimaryElevatedButton.secondary'),
             onPressed: () {},
+          ),
+          const SizedBox(height: 16),
+          TagCard(
+            icon: Assets.icons.arrow.svg(),
+            text: 'Кодовая дверь',
           ),
           const SizedBox(height: 16),
           Row(
