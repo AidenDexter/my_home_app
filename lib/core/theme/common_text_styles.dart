@@ -88,4 +88,12 @@ class CommonTextStyles {
     height: 20 / 14,
     fontFamily: _typography.tbcxMediumFont,
   );
+
+  final rangeTextFieldLabel = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: _commonColors.darkGrey30,
+    height: 16 / 14,
+    fontFamily: _typography.tbcxRegularFont,
+  );
 }
