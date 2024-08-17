@@ -21,7 +21,7 @@ class MultiSelectionCard<T> extends StatelessWidget {
     final colors = context.theme.commonColors;
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+      duration: context.theme.durations.pageElements,
       decoration: BoxDecoration(
         color: isSelected ? colors.green100 : colors.white,
         borderRadius: BorderRadius.circular(8),

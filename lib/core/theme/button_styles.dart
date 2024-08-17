@@ -1,6 +1,6 @@
 part of 'app_theme.dart';
 
-class ButtonStyles {
+class _ButtonStyles {
   final elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: _commonColors.green100,
