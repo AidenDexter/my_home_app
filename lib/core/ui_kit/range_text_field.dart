@@ -25,9 +25,9 @@ class RangeTextField extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(_radius)),
-        color: isError ? const Color(0xFFFFF1F2) : colors.white,
+        color: isError ? colors.red10 : colors.white,
         border: Border.all(
-          color: isError ? const Color(0xFFFCA5A5) : colors.neutralgrey10,
+          color: isError ? colors.red30 : colors.neutralgrey10,
           strokeAlign: BorderSide.strokeAlignOutside,
         ),
       ),

@@ -140,9 +140,11 @@ class _DataLayoutState extends State<_DataLayout> {
             onPressed: () {},
           ),
           const SizedBox(height: 16),
-          TagCard(
-            icon: Assets.icons.arrow.svg(),
-            text: 'Кодовая дверь',
+          Center(
+            child: TagCard(
+              icon: Assets.icons.arrow.svg(),
+              text: 'Кодовая дверь',
+            ),
           ),
           const SizedBox(height: 16),
           Row(
