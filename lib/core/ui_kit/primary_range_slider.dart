@@ -10,14 +10,14 @@ import '../extension/extensions.dart';
 class PrimaryRangeSlider extends StatelessWidget {
   final ValueNotifier<double> startValue;
   final ValueNotifier<double> endValue;
-  final double? maxValue;
-  final double? minValue;
+  final double maxValue;
+  final double minValue;
   const PrimaryRangeSlider({
     required this.startValue,
     required this.endValue,
     super.key,
-    this.maxValue,
-    this.minValue,
+    this.maxValue = 33,
+    this.minValue = 3,
   });
 
   @override
@@ -37,12 +37,13 @@ class PrimaryRangeSlider extends StatelessWidget {
     return FlutterSlider(
       values: [startValue.value, endValue.value],
       rangeSlider: true,
-      max: maxValue ?? 33,
-      min: minValue ?? 3,
+      max: maxValue,
+      min: minValue,
       trackBar: FlutterSliderTrackBar(
         activeTrackBarHeight: 6,
         inactiveTrackBarHeight: 4,
-        activeTrackBar: BoxDecoration(color: context.theme.commonColors.green100),
+        activeTrackBar:
+            BoxDecoration(color: context.theme.commonColors.green100),
         inactiveTrackBar: BoxDecoration(
           color: context.theme.commonColors.green10,
           borderRadius: BorderRadius.circular(5),
@@ -52,7 +53,10 @@ class PrimaryRangeSlider extends StatelessWidget {
       rightHandler: _handler,
       handlerHeight: 20,
       handlerWidth: 20,
-      tooltip: FlutterSliderTooltip(custom: (_) => const SizedBox.shrink()),
+      tooltip: FlutterSliderTooltip(
+        alwaysShowTooltip: false,
+        disabled: true,
+      ),
       handlerAnimation: const FlutterSliderHandlerAnimation(
         reverseCurve: Curves.bounceIn,
         duration: Duration(milliseconds: 500),
