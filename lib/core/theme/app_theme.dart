@@ -2,15 +2,17 @@
 import 'package:flutter/material.dart';
 
 part 'common_colors.dart';
+part 'animation_durations.dart';
 part 'app_theme_extension.dart';
 part 'typography.dart';
 part 'common_text_styles.dart';
 part 'button_styles.dart';
 
 const _commonColors = CommonColors();
-const _typography = Typography();
+const _typography = _Typography();
 final _commonTextStyles = CommonTextStyles();
-final _buttonStyles = ButtonStyles();
+final _buttonStyles = _ButtonStyles();
+const _durations = AnimationDurations();
 
 // ignore: avoid_classes_with_only_static_members
 abstract class AppTheme {
@@ -23,6 +25,7 @@ abstract class AppTheme {
 
 final _lightThemeData = ThemeData(
   useMaterial3: true,
+  primaryColor: _commonColors.green100,
   extensions: [
     AppThemeExtension.lightThemeExtension(),
   ],
@@ -33,6 +36,7 @@ final _lightThemeData = ThemeData(
 
 final _darkThemeData = ThemeData(
   useMaterial3: true,
+  primaryColor: _commonColors.green100,
   extensions: [
     AppThemeExtension.darkThemeExtension(),
   ],

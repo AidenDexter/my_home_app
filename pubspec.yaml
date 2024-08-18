@@ -49,6 +49,12 @@ dependencies:
 
   # Splash
   flutter_native_splash: ^2.4.1
+  
+  # Widgets
+  flutter_svg: ^2.0.10
+  another_xlider: ^3.0.2
+  modal_bottom_sheet: ^3.0.0
+  flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:
@@ -67,11 +73,21 @@ dev_dependencies:
   # Lint rules
   surf_lint_rules: ^3.1.0
 
+flutter_gen:
+  output: lib/core/resources/
+  line_length: 120
+
+  # Optional
+  integrations:
+    flutter_svg: true
+
 flutter:
   uses-material-design: true
- 
+
   assets:
     - .env
+    - assets/icons/
+    - assets/nav_bar/
 
   fonts:
     - family: TBCXBold

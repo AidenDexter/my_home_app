@@ -1,9 +1,9 @@
 part of 'app_theme.dart';
 
-class Typography {
+class _Typography {
   final tbcxBoldFont = 'TBCXBold';
   final tbcxMediumFont = 'TBCXMedium';
   final tbcxRegularFont = 'TBCXRegular';
 
-  const Typography();
+  const _Typography();
 }

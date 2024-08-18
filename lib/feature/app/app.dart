@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/router/app_router.dart';
 import '../../core/services/service_locator/service_locator.dart';
+import '../../core/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -26,6 +27,8 @@ class _MaterialAppState extends State<_MaterialApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
+      theme: AppTheme.lightThemeData,
+      darkTheme: AppTheme.darkThemeData,
     );
   }
 }
