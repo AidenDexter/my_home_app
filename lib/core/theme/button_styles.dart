@@ -1,6 +1,6 @@
 part of 'app_theme.dart';
 
-class ButtonStyles {
+class _ButtonStyles {
   final elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: _commonColors.green100,
@@ -14,7 +14,7 @@ class ButtonStyles {
       elevation: 0,
     ),
   );
-  final textButtonThemeData = TextButtonThemeData();
+  final textButtonThemeData = const TextButtonThemeData();
 
-  final radioButtonTheme = RadioThemeData();
+  final radioButtonTheme = const RadioThemeData();
 }
