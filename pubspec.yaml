@@ -39,10 +39,16 @@ dependencies:
   # Network connection status
   connectivity_plus: ^6.0.5
 
+  # Navigation
+  go_router: ^14.2.3
+
   # Code-generation
   retrofit: ^4.2.0
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+
+  # Splash
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +63,6 @@ dev_dependencies:
   injectable_generator: ^2.6.2
 
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.4.1
 
   # Lint rules
   surf_lint_rules: ^3.1.0

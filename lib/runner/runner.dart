@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../core/environment/app_environment.dart';
 import '../core/services/service_locator/service_locator.dart';
+import '../core/splash_util/splash_util.dart';
 import '../feature/app/app.dart';
 import 'init_config/init_config.dart';
 
@@ -13,7 +15,7 @@ import 'init_config/init_config.dart';
 Future<void> run() => InitConfig.run<Future<void>>(
       () async {
         final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-        // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+        FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
         await SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
         ]);
@@ -24,6 +26,7 @@ Future<void> run() => InitConfig.run<Future<void>>(
         );
         await initFirebaseServices();
         await _initDependencies();
+        SplashUtil.removeSplash();
         runApp(const App());
       },
     );
