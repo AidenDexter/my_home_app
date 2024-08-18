@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
 import '../../feature/root/presentation/root_page.dart';
 import 'routes_enum.dart';

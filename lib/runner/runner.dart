@@ -50,5 +50,9 @@ Future<void> _initDependencies() async {
 Future<void> _initDotEnv() async {
   await dotenv.load();
   final config = AppEnvironment<AppConfig>.instance().config;
-  AppEnvironment.instance().config = config.copyWith(url: dotenv.env['API_HOST']);
+  AppEnvironment.instance().config = config.copyWith(
+    url: dotenv.env['API_HOST'],
+    urlHome: dotenv.env['API_HOME'],
+    urlTnet: dotenv.env['API_TNET'],
+  );
 }

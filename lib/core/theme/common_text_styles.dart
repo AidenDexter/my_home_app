@@ -43,7 +43,7 @@ class CommonTextStyles {
 
   final title2 = TextStyle(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     color: _commonColors.darkGrey100,
     height: 24 / 16,
     fontFamily: _typography.tbcxMediumFont,

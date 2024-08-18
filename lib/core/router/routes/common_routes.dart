@@ -6,6 +6,12 @@ final _commonRoutes = [
     builder: (_, state) => Placeholder(key: state.pageKey),
   ),
   GoRoute(
+    path: CommonRoutes.chooseArea.path,
+    builder: (_, state) => ChooseAreaPage(
+      key: state.pageKey,
+    ),
+  ),
+  GoRoute(
     path: CommonRoutes.contacts.path,
     builder: (_, state) => Placeholder(key: state.pageKey),
   ),

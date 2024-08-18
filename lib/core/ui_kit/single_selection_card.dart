@@ -8,12 +8,19 @@ class SingleSelectionCard<T> extends StatelessWidget {
   final T groupValue;
   final T value;
   final String title;
+  final Widget? child;
+
+  final Color? borderActiveColor;
+  final Color? borderInactiveColor;
 
   const SingleSelectionCard({
     required this.groupValue,
     required this.onTap,
     required this.value,
-    required this.title,
+    this.title = '',
+    this.child,
+    this.borderActiveColor,
+    this.borderInactiveColor,
     super.key,
   });
 
@@ -29,7 +36,9 @@ class SingleSelectionCard<T> extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: _isSelected ? context.theme.commonColors.green100 : context.theme.commonColors.darkGrey30,
+                color: _isSelected
+                    ? borderActiveColor ?? context.theme.commonColors.green100
+                    : borderInactiveColor ?? context.theme.commonColors.darkGrey30,
               ),
             ),
             child: InkWell(
@@ -37,7 +46,7 @@ class SingleSelectionCard<T> extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                child: Text(title, style: context.theme.commonTextStyles.body1),
+                child: child ?? Text(title, style: context.theme.commonTextStyles.body1),
               ),
             ),
           ),

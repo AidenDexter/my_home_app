@@ -70,6 +70,7 @@ enum AdDetailsRoutes {
 
 enum CommonRoutes {
   filters(path: '${_commonRoutesKey}filters'),
+  chooseArea(path: '${_commonRoutesKey}choose_area'),
   contacts(path: '${_commonRoutesKey}contacts'),
   help(path: '${_commonRoutesKey}help'),
   settings(path: '${_commonRoutesKey}settings'),
