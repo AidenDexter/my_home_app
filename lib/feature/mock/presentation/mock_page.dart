@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/error/error_handler.dart';
 import '../../../core/resources/assets.gen.dart';
-import '../../../core/ui_kit/primary_check_box.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
+import '../../../core/ui_kit/primary_check_box.dart';
 import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../core/ui_kit/range_text_field.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
