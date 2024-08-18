@@ -8,7 +8,6 @@ import 'components/navigation_bar.dart';
 
 class RootPage extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
-
   const RootPage({
     required this.navigationShell,
     super.key,
@@ -16,25 +15,17 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationScope(child: _Body(navigationShell));
-  }
-}
-
-class _Body extends StatelessWidget {
-  final StatefulNavigationShell navigationShell;
-  const _Body(this.navigationShell);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
-      listener: _bottomNavListener,
-      builder: (context, state) {
-        return Scaffold(
-          extendBody: true,
-          bottomNavigationBar: BottomNavBar(currentIndex: state.currentPageIndex),
-          body: navigationShell,
-        );
-      },
+    return BottomNavigationScope(
+      child: BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
+        listener: _bottomNavListener,
+        builder: (context, state) {
+          return Scaffold(
+            extendBody: true,
+            bottomNavigationBar: BottomNavBar(currentIndex: state.currentPageIndex),
+            body: navigationShell,
+          );
+        },
+      ),
     );
   }
 
