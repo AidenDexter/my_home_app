@@ -5,3 +5,4 @@ flutter_launcher_icons:
   adaptive_icon_background: "assets/app_icon/icon_background.png"
   adaptive_icon_foreground: "assets/app_icon/icon_foreground.png"
   remove_alpha_ios: true
+  # dart run flutter_launcher_icons
