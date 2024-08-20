@@ -27,9 +27,7 @@ class AppRouter {
 
   AppRouter();
 
-  GoRouter get router => _router;
-
-  GoRouter get _router => GoRouter(
+  GoRouter get router => GoRouter(
         navigatorKey: rootNavigatorKey,
         debugLogDiagnostics: kDebugMode,
         initialLocation: HomeRoutes.home.path,

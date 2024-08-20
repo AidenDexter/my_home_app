@@ -18,8 +18,7 @@ enum HomeRoutes {
 }
 
 enum SearchRoutes {
-  search(path: '${_searchRoutesKey}search'),
-  filters(path: '${_homeRoutesKey}filters');
+  search(path: '${_searchRoutesKey}search');
 
   final String path;
 
