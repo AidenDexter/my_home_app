@@ -17,9 +17,9 @@ part 'routes/common_routes.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'RootNavigatorKey');
 final _homeRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'HomeRoutesNavigatorKey');
-final _searchRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'PaymentsRoutesNavigatorKey');
-final _favouritesRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'HistoryRoutesNavigatorKey');
-final _profileRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'OtherRoutesNavigatorKey');
+final _searchRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SearchRoutesNavigatorKey');
+final _favouritesRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'FavouritesRoutesNavigatorKey');
+final _profileRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ProfileRoutesNavigatorKey');
 
 @singleton
 class AppRouter {
