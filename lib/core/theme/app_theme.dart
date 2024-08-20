@@ -34,6 +34,7 @@ final _lightThemeData = ThemeData(
   ],
   cardColor: _commonColors.white,
   elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
+  textButtonTheme: _buttonStyles.textButtonThemeData,
   scaffoldBackgroundColor: _commonColors.white,
 );
 

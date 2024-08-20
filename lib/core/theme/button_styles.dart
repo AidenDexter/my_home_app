@@ -14,7 +14,12 @@ class _ButtonStyles {
       elevation: 0,
     ),
   );
-  final textButtonThemeData = const TextButtonThemeData();
+  final textButtonThemeData = TextButtonThemeData(
+    style: TextButton.styleFrom(
+      textStyle: _commonTextStyles.body,
+      foregroundColor: _commonColors.green100,
+    ),
+  );
 
   final radioButtonTheme = const RadioThemeData();
 }
