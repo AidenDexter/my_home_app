@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/error/error_handler.dart';
 import '../../../core/resources/assets.gen.dart';
+import '../../../core/router/routes_enum.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/multi_selection_card.dart';
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
@@ -179,6 +181,7 @@ class _DataLayoutState extends State<_DataLayout> {
                   onChanged: (value) => _checkboxController.value = value ?? false,
                 );
               }),
+          const ChosenAreaWidget(),
         ],
       );
 
@@ -187,6 +190,67 @@ class _DataLayoutState extends State<_DataLayout> {
     _singleSelectionGroupValue.dispose();
     _multiSelectionValue.dispose();
     _checkboxController.dispose();
+    super.dispose();
+  }
+}
+
+class ChosenAreaWidget extends StatefulWidget {
+  const ChosenAreaWidget({
+    super.key,
+  });
+
+  @override
+  State<ChosenAreaWidget> createState() => _ChosenAreaWidgetState();
+}
+
+class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
+  late final ValueNotifier<int?> _selectedCity;
+  late final ValueNotifier<List<int>> _selectedDisctricts;
+  late final ValueNotifier<List<int>> _selectedUrbans;
+
+  @override
+  void initState() {
+    _selectedCity = ValueNotifier(null);
+    _selectedDisctricts = ValueNotifier([]);
+    _selectedUrbans = ValueNotifier([]);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+        animation: Listenable.merge([_selectedCity, _selectedDisctricts, _selectedUrbans]),
+        builder: (context, child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PrimaryElevatedButton(
+                onPressed: () => context.push(
+                  CommonRoutes.chooseArea.path,
+                  extra: {
+                    'city': _selectedCity,
+                    'disctricts': _selectedDisctricts,
+                    'urbans': _selectedUrbans,
+                  },
+                ),
+                child: const Text('Show choose area page'),
+              ),
+              const SizedBox(height: 16),
+              Text('Selected city id: ${_selectedCity.value};'),
+              const SizedBox(height: 8),
+              Text("Selected disctricts id's: ${_selectedDisctricts.value.join(', ')};"),
+              const SizedBox(height: 8),
+              Text("Selected urbans id's: ${_selectedUrbans.value.join(', ')}."),
+            ],
+          );
+        });
+  }
+
+  @override
+  void dispose() {
+    _selectedCity.dispose();
+    _selectedDisctricts.dispose();
+    _selectedUrbans.dispose();
     super.dispose();
   }
 }

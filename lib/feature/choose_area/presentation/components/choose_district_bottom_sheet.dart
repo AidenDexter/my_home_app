@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
@@ -21,7 +22,6 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
   }) =>
       PrimaryBottomSheet.show(
         context: context,
-        useRootNavigator: true,
         builder: (context) => ChooseDistrictBottomSheet._(
           selectedDisctricts,
           selectedUrbans,
@@ -36,7 +36,20 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Выбрать район'),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Выбрать район:',
+                  style: context.theme.commonTextStyles.title1,
+                ),
+              ),
+              TextButton(
+                onPressed: context.pop,
+                child: const Text('Закрыть'),
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           ColumnBuilder.separator(
             itemBuilder: (context, index) => _DistrictCard(
@@ -47,7 +60,7 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
             itemCount: districts.length,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
         ],
       ),
     );

@@ -11,7 +11,16 @@ import '../domain/entity/choose_area_response.dart';
 import 'components/choose_district_bottom_sheet.dart';
 
 class ChooseAreaPage extends StatelessWidget {
-  const ChooseAreaPage({super.key});
+  final ValueNotifier<int?> selectedCity;
+  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedUrbans;
+
+  const ChooseAreaPage({
+    required this.selectedCity,
+    required this.selectedDisctricts,
+    required this.selectedUrbans,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,12 @@ class ChooseAreaPage extends StatelessWidget {
       body: BlocBuilder<ChooseAreaBloc, ChooseAreaState>(
         builder: (context, state) => state.map(
           progress: (_) => const Center(child: CircularProgressIndicator()),
-          success: (state) => _DataLayout(data: state.data.data),
+          success: (state) => _DataLayout(
+            data: state.data.data,
+            selectedCity: selectedCity,
+            selectedDisctricts: selectedDisctricts,
+            selectedUrbans: selectedUrbans,
+          ),
           error: (state) => ErrorBody(error: state.errorHandler, actions: const []),
         ),
       ),
@@ -30,52 +44,35 @@ class ChooseAreaPage extends StatelessWidget {
   }
 }
 
-class _DataLayout extends StatefulWidget {
-  const _DataLayout({required this.data});
+class _DataLayout extends StatelessWidget {
+  final ValueNotifier<int?> selectedCity;
+  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedUrbans;
+  const _DataLayout({
+    required this.data,
+    required this.selectedCity,
+    required this.selectedDisctricts,
+    required this.selectedUrbans,
+  });
 
   final List<Datum> data;
 
   @override
-  State<_DataLayout> createState() => _DataLayoutState();
-}
-
-class _DataLayoutState extends State<_DataLayout> {
-  late final ValueNotifier<int?> _selectedCity;
-  late final ValueNotifier<List<int>> _selectedDisctricts;
-  late final ValueNotifier<List<int>> _selectedUrbans;
-
-  @override
-  void initState() {
-    _selectedCity = ValueNotifier(null);
-    _selectedDisctricts = ValueNotifier([]);
-    _selectedUrbans = ValueNotifier([]);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _selectedCity,
+      animation: selectedCity,
       builder: (context, _) => ListView.separated(
         padding: const EdgeInsets.only(right: 16, left: 16, bottom: 80, top: 8),
         separatorBuilder: (context, index) => const SizedBox(height: 8),
         itemBuilder: (context, index) => _CityCard(
-          data: widget.data[index],
-          selectedCity: _selectedCity,
-          selectedUrbans: _selectedUrbans,
-          selectedDisctricts: _selectedDisctricts,
+          data: data[index],
+          selectedCity: selectedCity,
+          selectedUrbans: selectedUrbans,
+          selectedDisctricts: selectedDisctricts,
         ),
-        itemCount: widget.data.length,
+        itemCount: data.length,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _selectedCity.dispose();
-    _selectedDisctricts.dispose();
-    _selectedUrbans.dispose();
-    super.dispose();
   }
 }
 
