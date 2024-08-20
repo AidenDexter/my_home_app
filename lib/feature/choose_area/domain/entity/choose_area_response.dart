@@ -19,35 +19,19 @@ class ChooseAreaResponse {
 class Datum {
   Datum({
     required this.id,
-    required this.displayName,
-    required this.displayNameIn,
-    required this.streetsCount,
     required this.lat,
     required this.lng,
     required this.districts,
     required this.translations,
     required this.urbans,
-    required this.hasStreet,
   });
 
   final int id;
-
-  @JsonKey(name: 'display_name')
-  final String? displayName;
-
-  @JsonKey(name: 'display_name_in')
-  final String? displayNameIn;
-
-  @JsonKey(name: 'streets_count')
-  final int? streetsCount;
   final double? lat;
   final double? lng;
   final List<Datum>? districts;
   final Translations translations;
   final List<Datum>? urbans;
-
-  @JsonKey(name: 'has_street')
-  final bool? hasStreet;
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
 }
