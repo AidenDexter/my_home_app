@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/extension/extensions.dart';
-import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
+import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../core/ui_kit/single_selection_card.dart';
 import '../bloc/choose_area_bloc.dart';
 import '../domain/entity/choose_area_response.dart';
@@ -59,20 +60,81 @@ class _DataLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
     return AnimatedBuilder(
       animation: selectedCity,
-      builder: (context, _) => ListView.separated(
-        padding: const EdgeInsets.only(right: 16, left: 16, bottom: 80, top: 8),
-        separatorBuilder: (context, index) => const SizedBox(height: 8),
-        itemBuilder: (context, index) => _CityCard(
-          data: data[index],
-          selectedCity: selectedCity,
-          selectedUrbans: selectedUrbans,
-          selectedDisctricts: selectedDisctricts,
-        ),
-        itemCount: data.length,
+      builder: (context, _) => Column(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              padding: EdgeInsets.only(right: 16, left: 16, bottom: bottomPadding + 80, top: 8),
+              separatorBuilder: (context, index) => const SizedBox(height: 8),
+              itemBuilder: (context, index) => _CityCard(
+                data: data[index],
+                selectedCity: selectedCity,
+                selectedUrbans: selectedUrbans,
+                selectedDisctricts: selectedDisctricts,
+              ),
+              itemCount: data.length,
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  AnimatedCrossFade(
+                    firstChild: const SizedBox(width: double.infinity),
+                    secondChild: Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: PrimaryElevatedButton(
+                        onPressed: () => ChooseDistrictBottomSheet.show(
+                          context,
+                          selectedDisctricts: selectedDisctricts,
+                          selectedUrbans: selectedUrbans,
+                          districts: data.firstWhere((city) => city.id == selectedCity.value).districts!,
+                        ),
+                        child: const Text('Выбрать районы'),
+                      ),
+                    ),
+                    crossFadeState: _hasDistricts() ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    duration: context.theme.durations.pageElements,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryElevatedButton.secondary(
+                          child: const Text('Очистить'),
+                          onPressed: () {
+                            selectedCity.value = null;
+                            selectedUrbans.value = [];
+                            selectedDisctricts.value = [];
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: PrimaryElevatedButton(
+                          child: const Text('Готово'),
+                          onPressed: selectedCity.value != null ? context.pop : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  bool _hasDistricts() {
+    if (selectedCity.value == null) return false;
+
+    final districts = data.firstWhere((city) => city.id == selectedCity.value).districts;
+    return districts != null && districts.isNotEmpty;
   }
 }
 
@@ -92,21 +154,15 @@ class _CityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSelected = data.id == selectedCity.value;
     return SingleSelectionCard(
       value: data.id,
       groupValue: selectedCity.value,
       onTap: (_) {
+        if (selectedCity.value == data.id) {}
         if (data.id != selectedCity.value) {
           selectedDisctricts.value = [];
           selectedUrbans.value = [];
-        }
-        if (hasDistricts) {
-          ChooseDistrictBottomSheet.show(
-            context,
-            selectedDisctricts: selectedDisctricts,
-            selectedUrbans: selectedUrbans,
-            districts: data.districts!,
-          );
         }
         selectedCity.value = data.id;
       },
@@ -122,7 +178,7 @@ class _CityCard extends StatelessWidget {
           AnimatedBuilder(
             animation: Listenable.merge([selectedCity, selectedDisctricts]),
             builder: (context, child) {
-              if (data.id == selectedCity.value && selectedDisctricts.value.isNotEmpty) {
+              if (isSelected && selectedDisctricts.value.isNotEmpty) {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   padding: const EdgeInsets.all(6),
@@ -143,16 +199,6 @@ class _CityCard extends StatelessWidget {
               return const SizedBox.shrink();
             },
           ),
-          if (hasDistricts)
-            RotatedBox(
-              child: Assets.icons.arrow.svg(
-                colorFilter: ColorFilter.mode(
-                  context.theme.commonColors.darkGrey30,
-                  BlendMode.srcIn,
-                ),
-              ),
-              quarterTurns: 2,
-            ),
         ],
       ),
     );
