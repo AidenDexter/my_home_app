@@ -26,7 +26,7 @@ class MultiSelectionCard<T> extends StatelessWidget {
         color: isSelected ? colors.green100 : colors.white,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isSelected ? colors.green100 : colors.darkGrey30,
+          color: isSelected ? colors.green100 : colors.neutralgrey10,
         ),
       ),
       child: Material(

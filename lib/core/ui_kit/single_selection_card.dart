@@ -38,7 +38,7 @@ class SingleSelectionCard<T> extends StatelessWidget {
               border: Border.all(
                 color: _isSelected
                     ? borderActiveColor ?? context.theme.commonColors.green100
-                    : borderInactiveColor ?? context.theme.commonColors.darkGrey30,
+                    : borderInactiveColor ?? context.theme.commonColors.neutralgrey10,
               ),
             ),
             child: InkWell(

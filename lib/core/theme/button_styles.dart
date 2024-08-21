@@ -8,8 +8,8 @@ class _ButtonStyles {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      minimumSize: const Size.fromHeight(48),
-      maximumSize: const Size.fromHeight(48),
+      minimumSize: const Size.fromHeight(44),
+      maximumSize: const Size.fromHeight(44),
       textStyle: _commonTextStyles.label,
       elevation: 0,
     ),

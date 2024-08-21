@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
 import '../../feature/root/presentation/root_page.dart';
+import '../../feature/search/presentation/search_page.dart';
 import 'routes_enum.dart';
 
 part 'routes/home_routes.dart';
