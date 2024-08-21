@@ -7,11 +7,13 @@ part 'app_theme_extension.dart';
 part 'typography.dart';
 part 'common_text_styles.dart';
 part 'button_styles.dart';
+part 'app_bar_theme.dart';
 
 const _commonColors = CommonColors();
 const _typography = _Typography();
 final _commonTextStyles = CommonTextStyles();
 final _buttonStyles = _ButtonStyles();
+final _appBarThemes = _AppBarThemes();
 const _durations = AnimationDurations();
 
 // ignore: avoid_classes_with_only_static_members
@@ -24,6 +26,7 @@ abstract class AppTheme {
 }
 
 final _lightThemeData = ThemeData(
+  appBarTheme: _appBarThemes.light,
   useMaterial3: true,
   primaryColor: _commonColors.green100,
   extensions: [
@@ -31,7 +34,8 @@ final _lightThemeData = ThemeData(
   ],
   cardColor: _commonColors.white,
   elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
-  scaffoldBackgroundColor: _commonColors.neutralgrey3,
+  textButtonTheme: _buttonStyles.textButtonThemeData,
+  scaffoldBackgroundColor: _commonColors.white,
 );
 
 final _darkThemeData = ThemeData(

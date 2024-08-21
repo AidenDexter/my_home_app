@@ -22,10 +22,8 @@ mixin PrimaryBottomSheet {
     Duration? duration,
     RouteSettings? settings,
     SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle.light,
-    EdgeInsets padding =
-        const EdgeInsets.only(top: 60, left: 16, right: 16, bottom: 16),
-    BorderRadiusGeometry borderRadius =
-        const BorderRadius.all(Radius.circular(16)),
+    EdgeInsets padding = const EdgeInsets.only(top: 60, left: 16, right: 16, bottom: 16),
+    BorderRadiusGeometry borderRadius = const BorderRadius.all(Radius.circular(24)),
     Color? backgroundColor,
   }) async {
     final modalBottomSheet = cmbs.ModalSheetRoute<T>(
@@ -86,45 +84,39 @@ class _BottomSheet extends StatelessWidget {
       child: SafeArea(
         child: Padding(
           padding: padding,
-          child: ClipRRect(
+          child: Material(
+            shape: bottomSheetTheme.shape,
+            clipBehavior: clipBehavior ?? bottomSheetTheme.clipBehavior ?? Clip.hardEdge,
+            elevation: elevation ?? bottomSheetTheme.elevation ?? 0,
             borderRadius: borderRadius,
+            color: backgroundColor ?? colors.white,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ColoredBox(
-                  color: backgroundColor ?? colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: colors.darkGrey30,
-                        ),
-                        height: 4,
-                        width: 44,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  child: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: colors.darkGrey30,
                       ),
+                      height: 4,
+                      width: 44,
                     ),
                   ),
                 ),
                 Flexible(
-                  child: Material(
-                    shape: bottomSheetTheme.shape,
-                    clipBehavior: clipBehavior ??
-                        bottomSheetTheme.clipBehavior ??
-                        Clip.hardEdge,
-                    elevation: elevation ?? bottomSheetTheme.elevation ?? 0,
-                    borderRadius: BorderRadius.zero,
-                    color: backgroundColor ?? colors.white,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: MediaQuery.removePadding(
-                        context: context,
-                        removeTop: true,
-                        child: SingleChildScrollView(
-                          child: child,
-                        ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        children: [child],
                       ),
                     ),
                   ),

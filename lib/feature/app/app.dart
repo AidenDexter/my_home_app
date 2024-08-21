@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nested/nested.dart';
 
 import '../../core/router/app_router.dart';
 import '../../core/services/service_locator/service_locator.dart';
 import '../../core/theme/app_theme.dart';
+import '../choose_area/presentation/choose_area_scope.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const _MaterialApp();
+    return Nested(
+      children: const [
+          ChooseAreaScope(),
+        ],
+      child: const _MaterialApp(),
+    );
   }
 }
 
@@ -28,7 +35,6 @@ class _MaterialAppState extends State<_MaterialApp> {
     return MaterialApp.router(
       routerConfig: _router,
       theme: AppTheme.lightThemeData,
-      darkTheme: AppTheme.darkThemeData,
     );
   }
 }

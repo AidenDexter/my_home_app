@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
 import '../../feature/root/presentation/root_page.dart';
 import 'routes_enum.dart';
@@ -16,9 +17,9 @@ part 'routes/common_routes.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'RootNavigatorKey');
 final _homeRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'HomeRoutesNavigatorKey');
-final _searchRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'PaymentsRoutesNavigatorKey');
-final _favouritesRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'HistoryRoutesNavigatorKey');
-final _profileRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'OtherRoutesNavigatorKey');
+final _searchRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SearchRoutesNavigatorKey');
+final _favouritesRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'FavouritesRoutesNavigatorKey');
+final _profileRoutesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ProfileRoutesNavigatorKey');
 
 @singleton
 class AppRouter {
@@ -26,9 +27,7 @@ class AppRouter {
 
   AppRouter();
 
-  GoRouter get router => _router;
-
-  GoRouter get _router => GoRouter(
+  GoRouter get router => GoRouter(
         navigatorKey: rootNavigatorKey,
         debugLogDiagnostics: kDebugMode,
         initialLocation: HomeRoutes.home.path,

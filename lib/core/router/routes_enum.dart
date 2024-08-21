@@ -18,8 +18,7 @@ enum HomeRoutes {
 }
 
 enum SearchRoutes {
-  search(path: '${_searchRoutesKey}search'),
-  filters(path: '${_homeRoutesKey}filters');
+  search(path: '${_searchRoutesKey}search');
 
   final String path;
 
@@ -70,6 +69,7 @@ enum AdDetailsRoutes {
 
 enum CommonRoutes {
   filters(path: '${_commonRoutesKey}filters'),
+  chooseArea(path: '${_commonRoutesKey}choose_area'),
   contacts(path: '${_commonRoutesKey}contacts'),
   help(path: '${_commonRoutesKey}help'),
   settings(path: '${_commonRoutesKey}settings'),
