@@ -19,32 +19,35 @@ class LanguageBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LocalizationControlBloc, LocalizationControlState>(builder: (context, state) {
       final localization = state.currentLocalization;
-      return ListView.builder(
-        padding: const EdgeInsets.all(16),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final localeEntity = LocaleEntity.values[index];
-          return Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () {
-                context.read<LocalizationControlBloc>().add(
-                      LocalizationControlEvent.changeLocalization(locale: localeEntity),
-                    );
-              },
-              child: LanguageChangeCard(
-                title: localeEntity.titleName,
-                leading: Radio<LocaleEntity>(
-                  value: localeEntity,
-                  groupValue: localization,
-                  onChanged: null,
+      return Column(
+        children: List.generate(
+          LocaleEntity.values.length,
+          (index) {
+            final localeEntity = LocaleEntity.values[index];
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () {
+                    context.read<LocalizationControlBloc>().add(
+                          LocalizationControlEvent.changeLocalization(locale: localeEntity),
+                        );
+                  },
+                  child: LanguageChangeCard(
+                    title: localeEntity.titleName,
+                    leading: Radio<LocaleEntity>(
+                      value: localeEntity,
+                      groupValue: localization,
+                      onChanged: null,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: LocaleEntity.values.length,
+            );
+          },
+        ),
       );
     });
   }
