@@ -6,6 +6,7 @@ import '../../core/router/app_router.dart';
 import '../../core/services/service_locator/service_locator.dart';
 import '../../core/theme/app_theme.dart';
 import '../choose_area/presentation/choose_area_scope.dart';
+import '../currency_control/presentation/currency_scope.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,8 +15,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Nested(
       children: const [
-          ChooseAreaScope(),
-        ],
+        ChooseAreaScope(),
+        CurrencyScope(),
+      ],
       child: const _MaterialApp(),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,18 +22,39 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         search: (event) => _search(event, emit),
         loadMore: (event) => _loadMore(event, emit),
       ),
+      transformer: restartable(),
     );
   }
 
   int _page = 1;
   bool _isEndOfList = false;
 
+  String _lastFilter = '';
+
   Future<void> _search(_SearchEvent event, Emitter<SearchState> emit) async {
     emit(SearchState.initProgress(state.items));
     try {
       _page = 1;
       _isEndOfList = false;
-      final items = await _repository.search(_page);
+      final filter = '${event.cityId == null ? '' : '&cities=${event.cityId}'}'
+          '${event.realEstateTypes.isEmpty ? '' : '&real_estate_types=${event.realEstateTypes.join(',')}'}'
+          '${event.dealType == null ? '' : '&deal_types=${event.dealType}'}'
+          '${event.districts.isEmpty ? '' : '&districts=${event.districts.join(',')}'}'
+          '${event.urbans.isEmpty ? '' : '&urbans=${event.urbans.join(',')}'}'
+          '${event.searchText.isEmpty ? '' : '&q=${event.searchText}'}'
+          '${event.currencyId == null ? '' : '&currency_id=${event.currencyId}'}'
+          '${event.priceFrom.isEmpty ? '' : '&price_from=${event.priceFrom}'}'
+          '${event.priceTo.isEmpty ? '' : '&price_to=${event.priceTo}'}'
+          '${event.areaFrom.isEmpty ? '' : '&area_from=${event.areaFrom}'}'
+          '${event.areaTo.isEmpty ? '' : '&area_to=${event.areaTo}'}'
+          '${event.floorFrom.isEmpty ? '' : '&floor_from=${event.floorFrom}'}'
+          '${event.floorTo.isEmpty ? '' : '&floor_to=${event.floorTo}'}'
+          '${!event.notFirstFloor ? '' : '&not_first=${event.notFirstFloor}'}'
+          '${!event.notLastFloor ? '' : '&not_last=${event.notLastFloor}'}'
+          '${!event.isLastFloor ? '' : '&is_last=${event.isLastFloor}'}';
+
+      _lastFilter = filter;
+      final items = await _repository.search('page=$_page$_lastFilter');
       emit(SearchState.idle(items));
       _page++;
     } on Object catch (error) {
@@ -44,7 +66,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (_isEndOfList) return;
     emit(SearchState.loadMoreProgress(state.items));
     try {
-      final transactions = await _repository.search(_page);
+      final transactions = await _repository.search('page=$_page$_lastFilter');
       emit(SearchState.idle([...state.items, ...transactions]));
       _page++;
       if (transactions.length < 20) _isEndOfList = true;

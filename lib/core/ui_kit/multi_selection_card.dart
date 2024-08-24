@@ -7,12 +7,14 @@ class MultiSelectionCard<T> extends StatelessWidget {
   final bool isSelected;
   final T value;
   final String title;
+  final Widget? icon;
 
   const MultiSelectionCard({
     required this.isSelected,
     required this.onTap,
     required this.value,
     required this.title,
+    this.icon,
     super.key,
   });
 
@@ -36,11 +38,23 @@ class MultiSelectionCard<T> extends StatelessWidget {
           onTap: () => onTap(value),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            child: Text(
-              title,
-              style: context.theme.commonTextStyles.body1.copyWith(
-                color: isSelected ? colors.white : colors.black,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (icon != null) ...[
+                  SizedBox.square(
+                    dimension: 18,
+                    child: icon,
+                  ),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  title,
+                  style: context.theme.commonTextStyles.body1.copyWith(
+                    color: isSelected ? colors.white : colors.black,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

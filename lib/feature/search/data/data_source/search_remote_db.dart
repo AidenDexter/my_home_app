@@ -12,6 +12,6 @@ abstract class SearchRemoteDB {
   @factoryMethod
   factory SearchRemoteDB(@Named('BaseDioTnet') Dio dio) = _SearchRemoteDB;
 
-  @GET('/statements?page={page}')
-  Future<SearchResponse> search(@Path() int page);
+  @GET('/statements?{filter}')
+  Future<SearchResponse> search(@Path() String filter);
 }

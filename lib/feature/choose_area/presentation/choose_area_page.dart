@@ -15,11 +15,13 @@ class ChooseAreaPage extends StatelessWidget {
   final ValueNotifier<int?> selectedCity;
   final ValueNotifier<List<int>> selectedDisctricts;
   final ValueNotifier<List<int>> selectedUrbans;
+  final VoidCallback search;
 
   const ChooseAreaPage({
     required this.selectedCity,
     required this.selectedDisctricts,
     required this.selectedUrbans,
+    required this.search,
     super.key,
   });
 
@@ -37,6 +39,7 @@ class ChooseAreaPage extends StatelessWidget {
             selectedCity: selectedCity,
             selectedDisctricts: selectedDisctricts,
             selectedUrbans: selectedUrbans,
+            search: search,
           ),
           error: (state) => ErrorBody(error: state.errorHandler, actions: const []),
         ),
@@ -49,11 +52,13 @@ class _DataLayout extends StatelessWidget {
   final ValueNotifier<int?> selectedCity;
   final ValueNotifier<List<int>> selectedDisctricts;
   final ValueNotifier<List<int>> selectedUrbans;
+  final VoidCallback search;
   const _DataLayout({
     required this.data,
     required this.selectedCity,
     required this.selectedDisctricts,
     required this.selectedUrbans,
+    required this.search,
   });
 
   final List<Datum> data;
@@ -115,8 +120,13 @@ class _DataLayout extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: PrimaryElevatedButton(
-                          child: const Text('Готово'),
-                          onPressed: selectedCity.value != null ? context.pop : null,
+                          child: const Text('Поиск'),
+                          onPressed: selectedCity.value != null
+                              ? () {
+                                  context.pop();
+                                  search();
+                                }
+                              : null,
                         ),
                       ),
                     ],

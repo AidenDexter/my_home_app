@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/extension/extensions.dart';
+import '../../../../core/resources/assets.gen.dart';
 import '../../../../core/ui_kit/multi_selection_card.dart';
 import '../../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../../../core/ui_kit/primary_elevated_button.dart';
@@ -12,17 +13,19 @@ import '../../domain/entity/real_estate_type.dart';
 class DealTypeBottomSheet extends StatelessWidget {
   final ValueNotifier<DealType?> dealType;
   final ValueNotifier<List<RealEstateType>> realEstateTypes;
-  const DealTypeBottomSheet._(this.dealType, this.realEstateTypes);
+  final VoidCallback search;
+  const DealTypeBottomSheet._(this.dealType, this.realEstateTypes, this.search);
 
   static void show(
     BuildContext context, {
     required ValueNotifier<DealType?> dealType,
     required ValueNotifier<List<RealEstateType>> realEstateTypes,
+    required VoidCallback search,
   }) =>
       PrimaryBottomSheet.show(
         context: context,
         useRootNavigator: true,
-        builder: (context) => DealTypeBottomSheet._(dealType, realEstateTypes),
+        builder: (context) => DealTypeBottomSheet._(dealType, realEstateTypes, search),
       );
 
   @override
@@ -102,6 +105,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                                     onTap: _onRealEstateTap,
                                     value: e,
                                     title: e.title,
+                                    icon: _realEstateTypeToIcon(context, e, realEstateTypes.value.contains(e)),
                                   ),
                                 ),
                               ),
@@ -142,7 +146,10 @@ class DealTypeBottomSheet extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: PrimaryElevatedButton(
-                    onPressed: context.pop,
+                    onPressed: () {
+                      context.pop();
+                      search();
+                    },
                     child: const Text('Поиск'),
                   ),
                 ),
@@ -160,5 +167,30 @@ class DealTypeBottomSheet extends StatelessWidget {
       return;
     }
     realEstateTypes.value = List.from(realEstateTypes.value)..add(value);
+  }
+
+  Widget _realEstateTypeToIcon(BuildContext context, RealEstateType type, bool isSelected) {
+    final colors = context.theme.commonColors;
+    late final SvgGenImage asset;
+    switch (type) {
+      case RealEstateType.apartments:
+        asset = Assets.icons.apartments;
+      case RealEstateType.houses:
+        asset = Assets.icons.houses;
+      case RealEstateType.countryHouses:
+        asset = Assets.icons.countryHouses;
+      case RealEstateType.hotels:
+        asset = Assets.icons.hotels;
+      case RealEstateType.landPlots:
+        asset = Assets.icons.landPlots;
+      case RealEstateType.commercial:
+        asset = Assets.icons.commercial;
+    }
+    return asset.svg(
+      colorFilter: ColorFilter.mode(
+        isSelected ? colors.white : colors.darkGrey100,
+        BlendMode.srcIn,
+      ),
+    );
   }
 }

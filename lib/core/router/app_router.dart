@@ -5,6 +5,9 @@ import 'package:injectable/injectable.dart';
 import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
 import '../../feature/root/presentation/root_page.dart';
+import '../../feature/search/domain/entity/deal_type.dart';
+import '../../feature/search/domain/entity/real_estate_type.dart';
+import '../../feature/search/presentation/filters/filters_page.dart';
 import '../../feature/search/presentation/search_page.dart';
 import 'routes_enum.dart';
 

@@ -2,28 +2,21 @@
 
 import 'package:flutter/material.dart';
 
-import '../extension/src/theme_extension.dart';
-import '../resources/assets.gen.dart';
+import '../../../core/extension/src/theme_extension.dart';
+import '../../../core/resources/assets.gen.dart';
+import '../domain/entity/currency.dart';
+import 'currency_scope.dart';
 
-class CurrencySwitcher extends StatefulWidget {
-  final Function(bool _isLariEnabled) onChange;
-  const CurrencySwitcher({required this.onChange, super.key});
-
-  @override
-  State<CurrencySwitcher> createState() => _CurrencySwitcherState();
-}
-
-class _CurrencySwitcherState extends State<CurrencySwitcher> {
-  bool _isLariEnabled = true;
+class CurrencySwitcher extends StatelessWidget {
+  const CurrencySwitcher({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final currency = CurrencyScope.currency(context);
+    final isLariEnabled = currency == Currency.lari;
     final colors = context.theme.commonColors;
     return GestureDetector(
-      onTap: () {
-        setState(() => _isLariEnabled = !_isLariEnabled);
-        widget.onChange(_isLariEnabled);
-      },
+      onTap: () => CurrencyScope.change(context, currency: isLariEnabled ? Currency.dollar : Currency.lari),
       child: SizedBox(
         width: 40,
         height: 20,
@@ -40,8 +33,7 @@ class _CurrencySwitcherState extends State<CurrencySwitcher> {
               ),
             ),
             AnimatedAlign(
-              alignment:
-                  _isLariEnabled ? Alignment.centerRight : Alignment.centerLeft,
+              alignment: isLariEnabled ? Alignment.centerLeft : Alignment.centerRight,
               duration: const Duration(milliseconds: 200),
               child: SizedBox.square(
                 dimension: 20,
@@ -59,14 +51,14 @@ class _CurrencySwitcherState extends State<CurrencySwitcher> {
                   dimension: 20,
                   child: Assets.icons.lari.svg(
                     fit: BoxFit.none,
-                    colorFilter: _fetchFilter(isEnable: _isLariEnabled),
+                    colorFilter: _fetchFilter(context, isEnable: isLariEnabled),
                   ),
                 ),
                 SizedBox.square(
                   dimension: 20,
                   child: Assets.icons.dollar.svg(
                     fit: BoxFit.none,
-                    colorFilter: _fetchFilter(isEnable: !_isLariEnabled),
+                    colorFilter: _fetchFilter(context, isEnable: !isLariEnabled),
                   ),
                 ),
               ],
@@ -77,9 +69,6 @@ class _CurrencySwitcherState extends State<CurrencySwitcher> {
     );
   }
 
-  ColorFilter _fetchFilter({required bool isEnable}) => ColorFilter.mode(
-      isEnable
-          ? context.theme.commonColors.black
-          : context.theme.commonColors.white,
-      BlendMode.srcIn);
+  ColorFilter _fetchFilter(BuildContext context, {required bool isEnable}) =>
+      ColorFilter.mode(isEnable ? context.theme.commonColors.white : context.theme.commonColors.black, BlendMode.srcIn);
 }

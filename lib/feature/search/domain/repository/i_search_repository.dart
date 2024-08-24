@@ -4,5 +4,5 @@ import '../entity/search_response.dart';
 
 @immutable
 abstract interface class ISearchRepository {
-  Future<List<SearchItem>> search(int page);
+  Future<List<SearchItem>> search(String filter);
 }

@@ -8,7 +8,6 @@ import '../../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../choose_area/presentation/choose_area_scope.dart';
 import '../../domain/entity/deal_type.dart';
 import '../../domain/entity/real_estate_type.dart';
-import '../search_scope.dart';
 import 'deal_type_bottom_sheet.dart';
 
 class SearchForm extends StatelessWidget {
@@ -18,6 +17,17 @@ class SearchForm extends StatelessWidget {
     required this.selectedCity,
     required this.selectedDisctricts,
     required this.selectedUrbans,
+    required this.search,
+    required this.searchController,
+    required this.priceFromController,
+    required this.priceToController,
+    required this.areaFromController,
+    required this.areaToController,
+    required this.floorFromController,
+    required this.floorToController,
+    required this.notFirstFloorController,
+    required this.notLastFloorController,
+    required this.isLastFloorController,
     super.key,
   });
 
@@ -28,10 +38,22 @@ class SearchForm extends StatelessWidget {
   final ValueNotifier<List<int>> selectedDisctricts;
   final ValueNotifier<List<int>> selectedUrbans;
 
+  final TextEditingController searchController;
+  final TextEditingController priceFromController;
+  final TextEditingController priceToController;
+  final TextEditingController areaFromController;
+  final TextEditingController areaToController;
+  final TextEditingController floorFromController;
+  final TextEditingController floorToController;
+  final ValueNotifier<bool> notFirstFloorController;
+  final ValueNotifier<bool> notLastFloorController;
+  final ValueNotifier<bool> isLastFloorController;
+
+  final VoidCallback search;
+
   @override
   Widget build(BuildContext context) {
     final colors = context.theme.commonColors;
-    final textStyles = context.theme.commonTextStyles;
     return Column(
       children: [
         Container(
@@ -43,21 +65,16 @@ class SearchForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _DealAndRealEstateType(dealType, realEstateTypes),
+              _DealAndRealEstateType(dealType, realEstateTypes, search),
               Divider(height: 2, color: colors.neutralgrey10),
               _ChosenArea(
                 selectedCity: selectedCity,
                 selectedDisctricts: selectedDisctricts,
                 selectedUrbans: selectedUrbans,
+                search: search,
               ),
               Divider(height: 2, color: colors.neutralgrey10),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'ID, слово, телефон',
-                  style: textStyles.body1.copyWith(color: colors.darkGrey30),
-                ),
-              ),
+              _SearchText(searchController),
             ],
           ),
         ),
@@ -70,14 +87,58 @@ class SearchForm extends StatelessWidget {
                   icon: Assets.icons.filters.svg(
                     height: 20,
                   ),
-                  onPressed: () {},
-                  child: const Text('Подробный фильтр'),
+                  onPressed: () {
+                    context.push(CommonRoutes.filters.path, extra: {
+                      'search': search,
+                      'dealType': dealType,
+                      'realEstateTypes': realEstateTypes,
+                      'priceFrom': priceFromController,
+                      'priceTo': priceToController,
+                      'areaFrom': areaFromController,
+                      'areaTo': areaToController,
+                      'floorFrom': floorFromController,
+                      'floorTo': floorToController,
+                      'notFirstFloor': notFirstFloorController,
+                      'notLastFloor': notLastFloorController,
+                      'isLastFloor': isLastFloorController,
+                    });
+                    FocusScope.of(context).unfocus();
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Подробный фильтр'),
+                      const SizedBox(width: 6),
+                      AnimatedBuilder(
+                          animation: _listenAll,
+                          builder: (context, _) {
+                            if (_usedFiltersCount == 0) return const SizedBox.shrink();
+                            return Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: colors.yellow,
+                              ),
+                              padding: const EdgeInsets.all(6),
+                              child: Text(
+                                '$_usedFiltersCount',
+                                style: context.theme.commonTextStyles.label.copyWith(
+                                  color: colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            );
+                          }),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
               InkWell(
                 borderRadius: BorderRadius.circular(8),
-                onTap: _clearAllFilters,
+                onTap: () {
+                  _clearAllFilters();
+                  FocusScope.of(context).unfocus();
+                },
                 child: Ink(
                   decoration: BoxDecoration(
                     border: Border.all(color: colors.neutralgrey10, width: 0.8),
@@ -92,12 +153,16 @@ class SearchForm extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         PrimaryElevatedButton.icon(
-          onPressed: () => SearchScope.search(context),
+          onPressed: () {
+            search();
+            FocusScope.of(context).unfocus();
+          },
           icon: Assets.navBar.search.svg(
             colorFilter: ColorFilter.mode(colors.white, BlendMode.srcIn),
           ),
           child: const Text('Поиск'),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
@@ -109,6 +174,86 @@ class SearchForm extends StatelessWidget {
     selectedCity.value = null;
     selectedDisctricts.value = [];
     selectedUrbans.value = [];
+
+    searchController.text = '';
+    priceFromController.text = '';
+    priceToController.text = '';
+    areaFromController.text = '';
+    areaToController.text = '';
+    floorFromController.text = '';
+    floorToController.text = '';
+
+    notFirstFloorController.value = false;
+    notLastFloorController.value = false;
+    isLastFloorController.value = false;
+  }
+
+  Listenable get _listenAll => Listenable.merge([
+        dealType,
+        realEstateTypes,
+        selectedCity,
+        selectedDisctricts,
+        selectedUrbans,
+        searchController,
+        priceFromController,
+        priceToController,
+        areaFromController,
+        areaToController,
+        floorFromController,
+        floorToController,
+        notFirstFloorController,
+        notLastFloorController,
+        isLastFloorController,
+      ]);
+
+  int get _usedFiltersCount {
+    var res = 0;
+    if (dealType.value != null) res++;
+    if (realEstateTypes.value.isNotEmpty) res++;
+    if (selectedCity.value != null) res++;
+    if (selectedDisctricts.value.isNotEmpty) res++;
+    if (selectedUrbans.value.isNotEmpty) res++;
+    if (searchController.text.isNotEmpty) res++;
+    if (priceFromController.text.isNotEmpty) res++;
+    if (priceToController.text.isNotEmpty) res++;
+    if (areaFromController.text.isNotEmpty) res++;
+    if (areaToController.text.isNotEmpty) res++;
+    if (floorFromController.text.isNotEmpty) res++;
+    if (floorToController.text.isNotEmpty) res++;
+    if (notFirstFloorController.value) res++;
+    if (notLastFloorController.value) res++;
+    if (isLastFloorController.value) res++;
+    return res;
+  }
+}
+
+class _SearchText extends StatelessWidget {
+  final TextEditingController searchController;
+  const _SearchText(this.searchController);
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.theme.commonColors;
+    final textStyles = context.theme.commonTextStyles;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+      child: TextField(
+        controller: searchController,
+        style: textStyles.body1,
+        cursorColor: colors.green100,
+        decoration: InputDecoration(
+          hintText: 'ID, слово, телефон',
+          hintStyle: textStyles.body1.copyWith(color: colors.darkGrey30),
+          border: InputBorder.none,
+          errorBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+        ),
+      ),
+    );
   }
 }
 
@@ -117,11 +262,13 @@ class _ChosenArea extends StatelessWidget {
     required this.selectedCity,
     required this.selectedDisctricts,
     required this.selectedUrbans,
+    required this.search,
   });
 
   final ValueNotifier<int?> selectedCity;
   final ValueNotifier<List<int>> selectedDisctricts;
   final ValueNotifier<List<int>> selectedUrbans;
+  final VoidCallback search;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +281,7 @@ class _ChosenArea extends StatelessWidget {
           'city': selectedCity,
           'disctricts': selectedDisctricts,
           'urbans': selectedUrbans,
+          'search': search,
         },
       ),
       child: SizedBox(
@@ -180,10 +328,11 @@ class _ChosenArea extends StatelessWidget {
 }
 
 class _DealAndRealEstateType extends StatelessWidget {
-  const _DealAndRealEstateType(this.dealType, this.realEstateTypes);
+  const _DealAndRealEstateType(this.dealType, this.realEstateTypes, this.search);
 
   final ValueNotifier<DealType?> dealType;
   final ValueNotifier<List<RealEstateType>> realEstateTypes;
+  final VoidCallback search;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +340,12 @@ class _DealAndRealEstateType extends StatelessWidget {
     final textStyles = context.theme.commonTextStyles;
     return InkWell(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      onTap: () => DealTypeBottomSheet.show(context, dealType: dealType, realEstateTypes: realEstateTypes),
+      onTap: () => DealTypeBottomSheet.show(
+        context,
+        dealType: dealType,
+        realEstateTypes: realEstateTypes,
+        search: search,
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(

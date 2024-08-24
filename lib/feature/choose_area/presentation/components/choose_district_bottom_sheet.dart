@@ -60,6 +60,7 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
             itemCount: districts.length,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );

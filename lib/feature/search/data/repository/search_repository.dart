@@ -12,7 +12,7 @@ class SearchRepository implements ISearchRepository {
   const SearchRepository({required SearchRemoteDB remoteDB}) : _remoteDB = remoteDB;
 
   @override
-  Future<List<SearchItem>> search(int page) async {
-    return (await _remoteDB.search(page)).data.data;
+  Future<List<SearchItem>> search(String filter) async {
+    return (await _remoteDB.search(filter)).data.data;
   }
 }

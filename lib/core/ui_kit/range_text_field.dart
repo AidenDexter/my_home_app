@@ -6,7 +6,7 @@ import '../extension/extensions.dart';
 const _radius = 8.0;
 
 class RangeTextField extends StatelessWidget {
-  final String suffix;
+  final String? suffix;
   final String label;
   final TextEditingController controller;
   final bool isError;
@@ -37,6 +37,7 @@ class RangeTextField extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: TextField(
+                controller: controller,
                 style: context.theme.commonTextStyles.body1,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
@@ -49,20 +50,21 @@ class RangeTextField extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
-            Container(
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: isError ? null : colors.neutralgrey5,
-                borderRadius: const BorderRadius.horizontal(right: Radius.circular(_radius)),
+            SizedBox(width: suffix == null ? 16 : 8),
+            if (suffix != null)
+              Container(
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: isError ? null : colors.neutralgrey5,
+                  borderRadius: const BorderRadius.horizontal(right: Radius.circular(_radius)),
+                ),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  suffix!,
+                  style: context.theme.commonTextStyles.body2,
+                ),
               ),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                suffix,
-                style: context.theme.commonTextStyles.body2,
-              ),
-            ),
           ],
         ),
       ),

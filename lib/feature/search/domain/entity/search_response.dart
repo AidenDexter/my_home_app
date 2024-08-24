@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:l/l.dart';
 
 part 'search_response.g.dart';
 
@@ -15,13 +16,23 @@ class SearchResponse {
 }
 
 @immutable
-@JsonSerializable(createToJson: false)
 class Data {
   final List<SearchItem> data;
 
   const Data({required this.data});
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory Data.fromJson(Map<String, dynamic> json) {
+    final res = <SearchItem>[];
+
+    for (final item in json['data'] as List<dynamic>) {
+      try {
+        res.add(SearchItem.fromJson(item as Map<String, dynamic>));
+      } on Object catch (e) {
+        l.w(e);
+      }
+    }
+    return Data(data: res);
+  }
 }
 
 @immutable
@@ -33,7 +44,7 @@ class SearchItem {
   @JsonKey(name: 'real_estate_type_id')
   final int? realEstateTypeId;
   @JsonKey(name: 'status_id')
-  final int statusId;
+  final int? statusId;
   final String uuid;
   final Price price;
   @JsonKey(name: 'price_negotiable')
@@ -55,10 +66,6 @@ class SearchItem {
   final bool favorite;
   @JsonKey(name: 'is_old')
   final bool isOld;
-  @JsonKey(name: 'has_3d')
-  final dynamic has3d;
-  @JsonKey(name: '3d_url')
-  final dynamic n3dUrl;
   @JsonKey(name: 'dynamic_title')
   final String? dynamicTitle;
   @JsonKey(name: 'dynamic_slug')
@@ -132,8 +139,6 @@ class SearchItem {
     required this.gifts,
     required this.favorite,
     required this.isOld,
-    required this.has3d,
-    required this.n3dUrl,
     required this.dynamicTitle,
     required this.dynamicSlug,
     required this.lastUpdated,
