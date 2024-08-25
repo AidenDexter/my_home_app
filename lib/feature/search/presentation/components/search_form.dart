@@ -102,7 +102,7 @@ class SearchForm extends StatelessWidget {
                       'notLastFloor': notLastFloorController,
                       'isLastFloor': isLastFloorController,
                     });
-                    FocusScope.of(context).unfocus();
+                    FocusManager.instance.primaryFocus?.unfocus();
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -137,7 +137,7 @@ class SearchForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 onTap: () {
                   _clearAllFilters();
-                  FocusScope.of(context).unfocus();
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -156,7 +156,7 @@ class SearchForm extends StatelessWidget {
         PrimaryElevatedButton.icon(
           onPressed: () {
             search();
-            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
           },
           icon: Assets.navBar.search.svg(
             colorFilter: ColorFilter.mode(colors.white, BlendMode.srcIn),
@@ -276,15 +276,18 @@ class _ChosenArea extends StatelessWidget {
     final colors = context.theme.commonColors;
     final textStyles = context.theme.commonTextStyles;
     return InkWell(
-      onTap: () => context.push(
-        CommonRoutes.chooseArea.path,
-        extra: {
-          'city': selectedCity,
-          'disctricts': selectedDisctricts,
-          'urbans': selectedUrbans,
-          'search': search,
-        },
-      ),
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        context.push(
+          CommonRoutes.chooseArea.path,
+          extra: {
+            'city': selectedCity,
+            'disctricts': selectedDisctricts,
+            'urbans': selectedUrbans,
+            'search': search,
+          },
+        );
+      },
       child: SizedBox(
         width: double.infinity,
         child: Padding(
@@ -341,12 +344,15 @@ class _DealAndRealEstateType extends StatelessWidget {
     final textStyles = context.theme.commonTextStyles;
     return InkWell(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      onTap: () => DealTypeBottomSheet.show(
-        context,
-        dealType: dealType,
-        realEstateTypes: realEstateTypes,
-        search: search,
-      ),
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        DealTypeBottomSheet.show(
+          context,
+          dealType: dealType,
+          realEstateTypes: realEstateTypes,
+          search: search,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(

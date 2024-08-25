@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -50,10 +48,9 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
   @override
   Widget build(BuildContext context) {
     if (images.isEmpty) return const SizedBox();
-    final topPadding = MediaQuery.of(context).padding.top;
 
     return SizedBox(
-      height: 340 + topPadding,
+      height: 340,
       width: double.infinity,
       child: Stack(
         fit: StackFit.expand,
@@ -68,7 +65,7 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             itemCount: images.length,
           ),
           Positioned(
-            top: 16 + topPadding,
+            top: 16,
             left: 16,
             right: 16,
             child: Row(
