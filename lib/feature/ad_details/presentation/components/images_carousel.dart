@@ -63,18 +63,18 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             ),
           ),
           Positioned(
-            top: 24 + topPadding,
-            right: 12,
+            top: 16 + topPadding,
+            right: 16,
             child: Assets.icons.like.svg(height: 24),
           ),
           Positioned(
             bottom: 12,
-            left: 12,
+            left: 16,
             child: VipLabel(widget.item),
           ),
           Positioned(
             bottom: 12,
-            right: 12,
+            right: 16,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),

@@ -12,14 +12,12 @@ class AdDetailsPage extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      body: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: ListView(
-          children: [
-            DetailImagesCarousel(item),
-          ],
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: DetailImagesCarousel(item),
+          )
+        ],
       ),
     );
   }
