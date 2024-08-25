@@ -21,5 +21,12 @@ class _ButtonStyles {
     ),
   );
 
-  final radioButtonTheme = const RadioThemeData();
+  final radioButtonTheme = RadioThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+      if (states.contains(WidgetState.selected)) {
+        return _commonColors.green100;
+      }
+      return _commonColors.green10;
+    }),
+  );
 }

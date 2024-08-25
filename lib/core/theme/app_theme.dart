@@ -34,6 +34,7 @@ final _lightThemeData = ThemeData(
   ],
   cardColor: _commonColors.white,
   elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
+  radioTheme: _buttonStyles.radioButtonTheme,
   textButtonTheme: _buttonStyles.textButtonThemeData,
   scaffoldBackgroundColor: _commonColors.white,
 );
@@ -46,5 +47,6 @@ final _darkThemeData = ThemeData(
   ],
   cardColor: _commonColors.black,
   elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
+  radioTheme: _buttonStyles.radioButtonTheme,
   scaffoldBackgroundColor: _commonColors.black,
 );
