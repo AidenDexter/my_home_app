@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../search/domain/entity/search_response.dart';
-import 'components/images_carousel.dart';
+import 'components/detail_images_carousel.dart';
 
 class AdDetailsPage extends StatelessWidget {
   final SearchItem item;

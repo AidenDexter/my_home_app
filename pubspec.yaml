@@ -57,6 +57,10 @@ dependencies:
   flutter_animate: ^4.5.0
   nested: ^1.0.0
   cached_network_image: ^3.4.1
+  blur: ^4.0.0
+
+  # Util & helpers
+  share_plus: ^10.0.2
 
 dev_dependencies:
   flutter_test:

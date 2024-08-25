@@ -1,8 +1,13 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
+import '../../../../core/ui_kit/circle_button.dart';
 import '../../../search/domain/entity/search_response.dart';
 
 class DetailImagesCarousel extends StatefulWidget {
@@ -40,6 +45,8 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
     super.dispose();
   }
 
+  void _onShareTap() => Share.share('https://www.myhome.ge/pr/19063268');
+
   @override
   Widget build(BuildContext context) {
     if (images.isEmpty) return const SizedBox();
@@ -55,17 +62,37 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             child: PageView.builder(
               allowImplicitScrolling: true,
               controller: _carouselController,
-              itemBuilder: (context, index) => CachedNetworkImage(
-                imageUrl: images[index].thumb,
-                fit: BoxFit.cover,
+              itemBuilder: (context, index) => Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: images[index].thumb,
+                  fit: BoxFit.cover,
+                ),
               ),
               itemCount: images.length,
             ),
           ),
           Positioned(
             top: 16 + topPadding,
+            left: 16,
             right: 16,
-            child: Assets.icons.like.svg(height: 24),
+            child: Row(
+              children: [
+                CircleButton(
+                  icon: const Icon(Icons.keyboard_arrow_left_rounded, size: 24),
+                  onTap: context.pop,
+                ),
+                const Spacer(),
+                CircleButton(
+                  icon: const Opacity(opacity: .2, child: Icon(Icons.favorite_border, size: 22)),
+                  onTap: () {},
+                ),
+                const SizedBox(width: 8),
+                CircleButton(
+                  icon: Assets.icons.share.svg(height: 20),
+                  onTap: _onShareTap,
+                ),
+              ],
+            ),
           ),
           Positioned(
             bottom: 12,
