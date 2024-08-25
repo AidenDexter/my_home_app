@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/extension/extensions.dart';
+import '../../../../core/extension/extensions.dart';
 
 class LanguageChangeCard extends StatelessWidget {
   final String title;

@@ -6,7 +6,7 @@ import '../../../core/ui_kit/currency_switcher.dart';
 import '../../../core/ui_kit/decorated_container.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
 import '../../localization_control/presentation/language_bottom_sheet.dart';
-import '../components/flag_card.dart';
+import 'components/flag_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

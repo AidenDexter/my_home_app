@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../core/extension/extensions.dart';
-import '../../../core/resources/assets.gen.dart';
+import '../../../../core/extension/extensions.dart';
+import '../../../../core/resources/assets.gen.dart';
 
 class FlagCard extends StatelessWidget {
   const FlagCard({super.key});

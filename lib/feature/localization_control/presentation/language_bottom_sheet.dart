@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
-import '../../home/presentation/localization_card.dart';
+import '../../home/presentation/components/localization_card.dart';
 import '../bloc/localization_control_bloc.dart';
 import '../domain/locale_entity/locale_entity.dart';
 
