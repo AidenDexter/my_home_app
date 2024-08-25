@@ -76,17 +76,33 @@ class _DataLayer extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const DecoratedContainer(
+          DecoratedContainer(
             child: Column(
               children: [
                 Row(
                   children: [
-                    Expanded(child: Text('Общая площадь')),
-                    Expanded(child: Text('Комнаты')),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Assets.icons.square.svg(),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Общая площадь'),
+                                Text('${item.area?.toStringAsFixed(0)} м²'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Expanded(child: Text('Комнаты')),
                   ],
                 ),
-                SizedBox(height: 8),
-                Row(
+                const SizedBox(height: 8),
+                const Row(
                   children: [
                     Expanded(child: Text('Спальня')),
                     Expanded(child: Text('Этаж')),
@@ -95,6 +111,17 @@ class _DataLayer extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 16),
+          if (item.comment != null)
+            DecoratedContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Краткое описание'),
+                  Text(item.comment!),
+                ],
+              ),
+            ),
         ],
       ),
     );
