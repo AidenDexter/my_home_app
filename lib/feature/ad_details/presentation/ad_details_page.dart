@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/resources/assets.gen.dart';
 import '../../search/domain/entity/search_response.dart';
 import 'components/detail_images_carousel.dart';
 
@@ -16,7 +17,17 @@ class AdDetailsPage extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: DetailImagesCarousel(item),
-          )
+          ),
+          // SliverList(
+          //   delegate: SliverChildListDelegate(
+          //     [
+          //       Row(children: [
+          //         Assets.icons.calendar.svg(),
+          //         Assets.icons.eye.svg(),
+          //       ],)
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

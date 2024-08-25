@@ -58,18 +58,14 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned.fill(
-            child: PageView.builder(
-              allowImplicitScrolling: true,
-              controller: _carouselController,
-              itemBuilder: (context, index) => Positioned.fill(
-                child: CachedNetworkImage(
-                  imageUrl: images[index].thumb,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              itemCount: images.length,
+          PageView.builder(
+            allowImplicitScrolling: true,
+            controller: _carouselController,
+            itemBuilder: (context, index) => CachedNetworkImage(
+              imageUrl: images[index].thumb,
+              fit: BoxFit.cover,
             ),
+            itemCount: images.length,
           ),
           Positioned(
             top: 16 + topPadding,
