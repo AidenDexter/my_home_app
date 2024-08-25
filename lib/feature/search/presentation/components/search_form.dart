@@ -139,13 +139,14 @@ class SearchForm extends StatelessWidget {
                   _clearAllFilters();
                   FocusScope.of(context).unfocus();
                 },
-                child: Ink(
+                child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: colors.neutralgrey10, width: 0.8),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Center(child: Assets.icons.delete.svg()),
+                  alignment: Alignment.center,
+                  child: Assets.icons.delete.svg(),
                 ),
               ),
             ],

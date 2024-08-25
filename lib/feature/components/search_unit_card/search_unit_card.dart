@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/extension/extensions.dart';
 import '../../../core/resources/assets.gen.dart';
+import '../../../core/router/routes_enum.dart';
 import '../../search/domain/entity/search_response.dart';
 import 'components/images_carousel.dart';
 import 'components/price_row.dart';
@@ -18,105 +20,109 @@ class SearchUnitCard extends StatelessWidget {
     final textStyles = context.theme.commonTextStyles;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: colors.neutralgrey10),
-        ),
-        child: DefaultTextStyle(
-          style: textStyles.body1.copyWith(
-            color: colors.darkGrey70,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => context.push(AdDetailsRoutes.details.path, extra: item),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: colors.neutralgrey10),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ImagesCarousel(item),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.dynamicTitle ?? 'null',
-                      style: textStyles.title3,
-                    ),
-                    const SizedBox(height: 12),
-                    PriceRow(item.price),
-                    const SizedBox(height: 12),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          if (item.floor != null) ...[
-                            WidgetSpan(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Assets.icons.floor.svg(),
-                              ),
-                              alignment: PlaceholderAlignment.middle,
-                            ),
-                            TextSpan(text: item.floor!.toString()),
-                            const WidgetSpan(child: SizedBox(width: 16)),
-                          ],
-                          if (item.room != null) ...[
-                            WidgetSpan(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Assets.icons.rooms.svg(),
-                              ),
-                              alignment: PlaceholderAlignment.middle,
-                            ),
-                            TextSpan(text: item.room.toString()),
-                            const WidgetSpan(child: SizedBox(width: 16)),
-                          ],
-                          if (item.bedroom != null) ...[
-                            WidgetSpan(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Assets.icons.bedrooms.svg(),
-                              ),
-                              alignment: PlaceholderAlignment.middle,
-                            ),
-                            TextSpan(text: item.bedroom.toString()),
-                            const WidgetSpan(child: SizedBox(width: 16)),
-                          ],
-                          if (item.area != null) ...[
-                            WidgetSpan(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Assets.icons.square.svg(),
-                              ),
-                              alignment: PlaceholderAlignment.middle,
-                            ),
-                            TextSpan(text: '${item.area!.toStringAsFixed(0)} м²'),
-                            const WidgetSpan(child: SizedBox(width: 16)),
-                          ],
-                        ],
+          child: DefaultTextStyle(
+            style: textStyles.body1.copyWith(
+              color: colors.darkGrey70,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ImagesCarousel(item),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.dynamicTitle ?? 'null',
+                        style: textStyles.title3,
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(item.address ?? ''),
-                  ],
+                      const SizedBox(height: 12),
+                      PriceRow(item.price),
+                      const SizedBox(height: 12),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            if (item.floor != null) ...[
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Assets.icons.floor.svg(),
+                                ),
+                                alignment: PlaceholderAlignment.middle,
+                              ),
+                              TextSpan(text: item.floor!.toString()),
+                              const WidgetSpan(child: SizedBox(width: 16)),
+                            ],
+                            if (item.room != null) ...[
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Assets.icons.rooms.svg(),
+                                ),
+                                alignment: PlaceholderAlignment.middle,
+                              ),
+                              TextSpan(text: item.room.toString()),
+                              const WidgetSpan(child: SizedBox(width: 16)),
+                            ],
+                            if (item.bedroom != null) ...[
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Assets.icons.bedrooms.svg(),
+                                ),
+                                alignment: PlaceholderAlignment.middle,
+                              ),
+                              TextSpan(text: item.bedroom.toString()),
+                              const WidgetSpan(child: SizedBox(width: 16)),
+                            ],
+                            if (item.area != null) ...[
+                              WidgetSpan(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Assets.icons.square.svg(),
+                                ),
+                                alignment: PlaceholderAlignment.middle,
+                              ),
+                              TextSpan(text: '${item.area!.toStringAsFixed(0)} м²'),
+                              const WidgetSpan(child: SizedBox(width: 16)),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(item.address ?? ''),
+                    ],
+                  ),
                 ),
-              ),
-              Divider(
-                height: 1,
-                thickness: 0.5,
-                color: colors.neutralgrey10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(item.cityName ?? ''),
-                    ),
-                    Text(DateFormat('dd MMM. HH:mm').format(item.lastUpdated).toLowerCase()),
-                  ],
+                Divider(
+                  height: 1,
+                  thickness: 0.5,
+                  color: colors.neutralgrey10,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(item.cityName ?? ''),
+                      ),
+                      Text(DateFormat('dd MMM. HH:mm').format(item.lastUpdated).toLowerCase()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

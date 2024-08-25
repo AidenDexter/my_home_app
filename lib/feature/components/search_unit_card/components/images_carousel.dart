@@ -58,6 +58,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
             child: PageView.builder(
+              allowImplicitScrolling: true,
               controller: _carouselController,
               itemBuilder: (context, index) => CachedNetworkImage(
                 imageUrl: images[index].thumb,

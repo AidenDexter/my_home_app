@@ -21,6 +21,7 @@ class RootPage extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             extendBody: true,
+            extendBodyBehindAppBar: true,
             bottomNavigationBar: BottomNavBar(currentIndex: state.currentPageIndex),
             body: navigationShell,
           );
