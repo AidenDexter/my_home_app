@@ -13,22 +13,25 @@ class CircleButton extends StatelessWidget {
     required this.onTap,
     super.key,
     this.backgroundColor,
-    this.dimension = 36,
+    this.dimension = 35,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.square(
       dimension: dimension,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(dimension / 2),
-        child: Ink(
-          decoration: BoxDecoration(
-            color: backgroundColor ?? context.theme.commonColors.white,
-            borderRadius: BorderRadius.circular(dimension / 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(dimension / 2),
+          child: Ink(
+            decoration: BoxDecoration(
+              color: backgroundColor ?? context.theme.commonColors.white,
+              borderRadius: BorderRadius.circular(dimension / 2),
+            ),
+            child: Center(child: icon),
           ),
-          child: Center(child: icon),
         ),
       ),
     );

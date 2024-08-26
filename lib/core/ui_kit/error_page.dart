@@ -56,7 +56,7 @@ class _Error extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                //TODO: Заменить на локализацию
+                /* TODO: Заменить на локализацию */
                 'error',
                 style: context.theme.commonTextStyles.title1,
                 textAlign: TextAlign.center,

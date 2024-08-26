@@ -4,7 +4,6 @@ import 'package:nested/nested.dart';
 
 import '../../../core/services/service_locator/service_locator.dart';
 import '../bloc/localization_control_bloc.dart';
-import '../data/repository/localization_control_repository.dart';
 import '../domain/locale_entity/locale_entity.dart';
 
 @immutable
@@ -12,23 +11,19 @@ class LocalizationScope extends SingleChildStatelessWidget {
   const LocalizationScope({super.key});
 
   static Locale? localeOf(BuildContext context) =>
-      context.watch<LocalizationControlBloc>().state.currentLocalization?.toLocale;
+      context.watch<LocalizationControlBloc>().state.currentLocalization.toLocale;
 
   static String getLocaleCode(BuildContext context) =>
-      context.watch<LocalizationControlBloc>().state.currentLocalization?.languageCode ?? LocaleEntity.en.languageCode;
+      context.watch<LocalizationControlBloc>().state.currentLocalization.languageCode;
 
   static void changeLocale(BuildContext context, {required Locale locale}) =>
       context.read<LocalizationControlBloc>().add(
-            LocalizationControlEvent.changeLocalization(
-              locale: LocaleEntity.fromLocale(locale),
-            ),
+            LocalizationControlEvent.changeLocalization(locale: LocaleEntity.fromLocale(locale)),
           );
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => BlocProvider<LocalizationControlBloc>(
-        create: (context) => LocalizationControlBloc(
-          repository: getIt<ILocalizationControlRepository>(),
-        ),
+        create: (context) => getIt<LocalizationControlBloc>(),
         child: child,
       );
 }

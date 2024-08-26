@@ -113,6 +113,7 @@ class _BottomSheet extends StatelessWidget {
                     child: MediaQuery.removePadding(
                       context: context,
                       removeTop: true,
+                      removeBottom: true,
                       child: ListView(
                         shrinkWrap: true,
                         physics: const ClampingScrollPhysics(),

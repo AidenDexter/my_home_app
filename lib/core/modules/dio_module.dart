@@ -50,6 +50,9 @@ abstract class DioModule {
       ),
     )..interceptors.addAll([LogInterceptor(requestBody: true, responseBody: true)]);
 
+    dio.options.headers['x-website-key'] = 'myhome';
+    dio.options.headers['locale'] = 'ru';
+
     // Init app connect
     const appConnect = AppConnect();
     final connectInterceptor = ConnectInterceptor(appConnect: appConnect);

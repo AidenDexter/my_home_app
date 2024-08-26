@@ -40,13 +40,14 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Выбрать район:', //TODO: добавить локализацию
+                  'Выбрать район:',
+                  /* TODO: добавить локализацию */
                   style: context.theme.commonTextStyles.title1,
                 ),
               ),
               TextButton(
                 onPressed: context.pop,
-                child: const Text('Закрыть'), //TODO: добавить локализацию
+                child: const Text('Закрыть'), /* TODO: добавить локализацию */
               ),
             ],
           ),
@@ -60,6 +61,7 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
             itemCount: districts.length,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );

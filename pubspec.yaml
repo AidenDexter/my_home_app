@@ -56,6 +56,11 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   flutter_animate: ^4.5.0
   nested: ^1.0.0
+  cached_network_image: ^3.4.1
+
+  # Util & helpers
+  share_plus: ^10.0.2
+  maps_launcher: ^2.2.1
 
 dev_dependencies:
   flutter_test:
