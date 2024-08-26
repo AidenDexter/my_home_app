@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import '../../feature/ad_details/presentation/ad_details_page.dart';
+import '../../feature/ad_details/presentation/photo_view_page/photo_view_page.dart';
 import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/home/presentation/home_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
