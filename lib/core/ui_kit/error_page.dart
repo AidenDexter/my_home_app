@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../error/error_handler.dart';
 import '../extension/extensions.dart';
-import '../extension/src/error_extension.dart';
 
 @immutable
 class ErrorBody extends StatelessWidget {
@@ -57,7 +56,7 @@ class _Error extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                //TODO: Заменить на локализацию
+                /* TODO: Заменить на локализацию */
                 'error',
                 style: context.theme.commonTextStyles.title1,
                 textAlign: TextAlign.center,
@@ -68,8 +67,8 @@ class _Error extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   context.messageFromError(error),
-                  style: context.theme.commonTextStyles.title3.copyWith(
-                      color: context.theme.commonColors.neutralgrey10),
+                  style:
+                      context.theme.commonTextStyles.title3.copyWith(color: context.theme.commonColors.neutralgrey10),
                   textAlign: TextAlign.center,
                 ),
               ),

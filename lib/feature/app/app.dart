@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 
+import '../../core/l10n/app_localizations.g.dart';
 import '../../core/router/app_router.dart';
 import '../../core/services/service_locator/service_locator.dart';
 import '../../core/theme/app_theme.dart';
 import '../choose_area/presentation/choose_area_scope.dart';
 import '../currency_control/presentation/currency_scope.dart';
+import '../localization_control/presentation/localization_scope.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -17,6 +19,7 @@ class App extends StatelessWidget {
       children: const [
         ChooseAreaScope(),
         CurrencyScope(),
+        LocalizationScope(),
       ],
       child: const _MaterialApp(),
     );
@@ -35,6 +38,9 @@ class _MaterialAppState extends State<_MaterialApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      locale: LocalizationScope.localeOf(context),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: _router,
       theme: AppTheme.lightThemeData,
     );

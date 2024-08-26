@@ -5,7 +5,7 @@ analyzer:
     no_leading_underscores_for_local_identifiers: ignore
   exclude:
     # Generated code
-    - "lib/.*.dart"
+    - "**.*.dart"
 linter:
   rules:
     sort_pub_dependencies: false

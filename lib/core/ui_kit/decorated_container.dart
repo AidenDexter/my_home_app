@@ -6,9 +6,12 @@ class DecoratedContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
   final VoidCallback? onTap;
+
+  final BorderRadius borderRadius;
   const DecoratedContainer({
     required this.child,
     this.padding = const EdgeInsets.all(16),
+    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.onTap,
     super.key,
   });
@@ -16,11 +19,11 @@ class DecoratedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: onTap,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderRadius: borderRadius,
         child: Ink(
           decoration: BoxDecoration(
             color: context.theme.commonColors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            borderRadius: borderRadius,
             border: Border.all(color: context.theme.commonColors.neutralgrey10),
           ),
           child: Padding(

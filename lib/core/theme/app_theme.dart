@@ -26,21 +26,19 @@ abstract class AppTheme {
 }
 
 final _lightThemeData = ThemeData(
-    appBarTheme: _appBarThemes.light,
-    useMaterial3: true,
-    primaryColor: _commonColors.green100,
-    extensions: [
-      AppThemeExtension.lightThemeExtension(),
-    ],
-    cardColor: _commonColors.white,
-    elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
-    textButtonTheme: _buttonStyles.textButtonThemeData,
-    scaffoldBackgroundColor: _commonColors.white,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: _commonColors.green100,
-      foregroundColor: _commonColors.white,
-      elevation: 1,
-    ));
+  appBarTheme: _appBarThemes.light,
+  useMaterial3: true,
+  primaryColor: _commonColors.green100,
+  extensions: [
+    AppThemeExtension.lightThemeExtension(),
+  ],
+  cardColor: _commonColors.white,
+  elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
+  radioTheme: _buttonStyles.radioButtonTheme,
+  textButtonTheme: _buttonStyles.textButtonThemeData,
+  scaffoldBackgroundColor: _commonColors.white,
+  floatingActionButtonTheme: _buttonStyles.floatingActionButtonTheme,
+);
 
 final _darkThemeData = ThemeData(
   useMaterial3: true,
@@ -50,5 +48,6 @@ final _darkThemeData = ThemeData(
   ],
   cardColor: _commonColors.black,
   elevatedButtonTheme: _buttonStyles.elevatedButtonThemeData,
+  radioTheme: _buttonStyles.radioButtonTheme,
   scaffoldBackgroundColor: _commonColors.black,
 );

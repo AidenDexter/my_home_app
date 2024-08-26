@@ -21,5 +21,18 @@ class _ButtonStyles {
     ),
   );
 
-  final radioButtonTheme = const RadioThemeData();
+  final radioButtonTheme = RadioThemeData(
+    fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+      if (states.contains(WidgetState.selected)) {
+        return _commonColors.green100;
+      }
+      return _commonColors.green10;
+    }),
+  );
+
+  final floatingActionButtonTheme = FloatingActionButtonThemeData(
+      backgroundColor: _commonColors.green100,
+      foregroundColor: _commonColors.white,
+      elevation: 1,
+    );
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import '../../feature/ad_details/presentation/ad_details_page.dart';
 import '../../feature/choose_area/presentation/choose_area_page.dart';
+import '../../feature/home/presentation/home_page.dart';
 import '../../feature/mock/presentation/mock_page.dart';
 import '../../feature/root/presentation/root_page.dart';
 import '../../feature/search/domain/entity/deal_type.dart';
