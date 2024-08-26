@@ -54,7 +54,9 @@ class DescriptionIconText extends StatelessWidget {
     }
 
     if (children.length % 2 != 0) {
-      rows.add(Row(children: [children.last, const Expanded(child: SizedBox.shrink())]));
+      rows
+        ..add(const SizedBox(height: 16))
+        ..add(Row(children: [children.last, const Expanded(child: SizedBox.shrink())]));
     }
     return DecoratedContainer(child: Column(children: rows));
   }

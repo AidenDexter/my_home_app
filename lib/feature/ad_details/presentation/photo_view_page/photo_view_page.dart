@@ -173,6 +173,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
 
   @override
   void dispose() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark));
     _pageController.dispose();
     _tabController.dispose();
     super.dispose();
