@@ -36,6 +36,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.theme.commonColors;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
@@ -99,30 +100,23 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                       isScrollable: true,
                       tabs: [
                         for (int i = 0; i < widget.images.length; i++)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: _tabController.index == i
-                                    ? Border.all(
-                                        color: context.theme.commonColors.green100,
-                                        width: 2,
-                                        strokeAlign: BorderSide.strokeAlignOutside)
-                                    : null,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(4),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: SizedBox.square(
-                                    dimension: 80,
-                                    child: CachedNetworkImage(
-                                      imageUrl: widget.images[i].thumb,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
+                          Container(
+                            height: 80,
+                            width: 80,
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              border: _tabController.index == i
+                                  ? Border.all(
+                                      color: colors.green100, width: 2, strokeAlign: BorderSide.strokeAlignOutside)
+                                  : null,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: CachedNetworkImage(
+                                imageUrl: widget.images[i].thumb,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
@@ -137,25 +131,21 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
             SafeArea(
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: context.theme.commonColors.black.withOpacity(0.5),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                    child: AnimatedBuilder(
-                      animation: _tabController,
-                      builder: (context, child) {
-                        return Text(
-                          '${_tabController.index + 1} / ${widget.images.length}',
-                          style: context.theme.commonTextStyles.label.copyWith(
-                            color: context.theme.commonColors.white,
-                            fontSize: 10,
-                          ),
-                        );
-                      },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: colors.black.withOpacity(0.5),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                  child: AnimatedBuilder(
+                    animation: _tabController,
+                    builder: (context, child) => Text(
+                      '${_tabController.index + 1} / ${widget.images.length}',
+                      style: context.theme.commonTextStyles.label.copyWith(
+                        color: colors.white,
+                        fontSize: 10,
+                      ),
                     ),
                   ),
                 ),
@@ -166,14 +156,12 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
               right: 16,
               child: SafeArea(
                 child: CircleButton(
-                  backgroundColor: context.theme.commonColors.black.withOpacity(.4),
+                  backgroundColor: colors.black.withOpacity(.4),
                   icon: Icon(
                     Icons.close_rounded,
-                    color: context.theme.commonColors.green10,
+                    color: colors.green10,
                   ),
-                  onTap: () {
-                    context.pop();
-                  },
+                  onTap: context.pop,
                 ),
               ),
             ),
