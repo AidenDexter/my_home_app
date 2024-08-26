@@ -13,13 +13,13 @@ import 'components/choose_district_bottom_sheet.dart';
 
 class ChooseAreaPage extends StatelessWidget {
   final ValueNotifier<int?> selectedCity;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
   final VoidCallback search;
 
   const ChooseAreaPage({
     required this.selectedCity,
-    required this.selectedDisctricts,
+    required this.selectedDistricts,
     required this.selectedUrbans,
     required this.search,
     super.key,
@@ -37,7 +37,7 @@ class ChooseAreaPage extends StatelessWidget {
           success: (state) => _DataLayout(
             data: state.data.data,
             selectedCity: selectedCity,
-            selectedDisctricts: selectedDisctricts,
+            selectedDistricts: selectedDistricts,
             selectedUrbans: selectedUrbans,
             search: search,
           ),
@@ -50,13 +50,13 @@ class ChooseAreaPage extends StatelessWidget {
 
 class _DataLayout extends StatelessWidget {
   final ValueNotifier<int?> selectedCity;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
   final VoidCallback search;
   const _DataLayout({
     required this.data,
     required this.selectedCity,
-    required this.selectedDisctricts,
+    required this.selectedDistricts,
     required this.selectedUrbans,
     required this.search,
   });
@@ -78,7 +78,7 @@ class _DataLayout extends StatelessWidget {
                 data: data[index],
                 selectedCity: selectedCity,
                 selectedUrbans: selectedUrbans,
-                selectedDisctricts: selectedDisctricts,
+                selectedDistricts: selectedDistricts,
               ),
               itemCount: data.length,
             ),
@@ -95,7 +95,7 @@ class _DataLayout extends StatelessWidget {
                       child: PrimaryElevatedButton(
                         onPressed: () => ChooseDistrictBottomSheet.show(
                           context,
-                          selectedDisctricts: selectedDisctricts,
+                          selectedDistricts: selectedDistricts,
                           selectedUrbans: selectedUrbans,
                           districts: data.firstWhere((city) => city.id == selectedCity.value).districts!,
                         ),
@@ -113,7 +113,7 @@ class _DataLayout extends StatelessWidget {
                           onPressed: () {
                             selectedCity.value = null;
                             selectedUrbans.value = [];
-                            selectedDisctricts.value = [];
+                            selectedDistricts.value = [];
                           },
                         ),
                       ),
@@ -153,11 +153,11 @@ class _CityCard extends StatelessWidget {
     required this.data,
     required this.selectedCity,
     required this.selectedUrbans,
-    required this.selectedDisctricts,
+    required this.selectedDistricts,
   });
   final Datum data;
   final ValueNotifier<int?> selectedCity;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
 
   bool get hasDistricts => data.districts != null && (data.districts ?? []).isNotEmpty;
@@ -171,7 +171,7 @@ class _CityCard extends StatelessWidget {
       onTap: (_) {
         if (selectedCity.value == data.id) {}
         if (data.id != selectedCity.value) {
-          selectedDisctricts.value = [];
+          selectedDistricts.value = [];
           selectedUrbans.value = [];
         }
         selectedCity.value = data.id;
@@ -186,9 +186,9 @@ class _CityCard extends StatelessWidget {
             ),
           ),
           AnimatedBuilder(
-            animation: Listenable.merge([selectedCity, selectedDisctricts]),
+            animation: Listenable.merge([selectedCity, selectedDistricts]),
             builder: (context, child) {
-              if (isSelected && selectedDisctricts.value.isNotEmpty) {
+              if (isSelected && selectedDistricts.value.isNotEmpty) {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   padding: const EdgeInsets.all(6),
@@ -197,7 +197,7 @@ class _CityCard extends StatelessWidget {
                     color: context.theme.commonColors.green100,
                   ),
                   child: Text(
-                    selectedDisctricts.value.length.toString(),
+                    selectedDistricts.value.length.toString(),
                     style: context.theme.commonTextStyles.body2.copyWith(
                       color: context.theme.commonColors.white,
                       fontWeight: FontWeight.w700,

@@ -42,14 +42,14 @@ final _commonRoutes = [
     builder: (_, state) {
       assert(state.extra is Map<String, Object>);
       assert((state.extra! as Map<String, Object>)['city'] is ValueNotifier<int?>);
-      assert((state.extra! as Map<String, Object>)['disctricts'] is ValueNotifier<List<int>>);
+      assert((state.extra! as Map<String, Object>)['districts'] is ValueNotifier<List<int>>);
       assert((state.extra! as Map<String, Object>)['urbans'] is ValueNotifier<List<int>>);
       assert((state.extra! as Map<String, Object>)['search'] is VoidCallback);
 
       return ChooseAreaPage(
         key: state.pageKey,
         selectedCity: (state.extra! as Map<String, Object>)['city']! as ValueNotifier<int?>,
-        selectedDisctricts: (state.extra! as Map<String, Object>)['disctricts']! as ValueNotifier<List<int>>,
+        selectedDistricts: (state.extra! as Map<String, Object>)['districts']! as ValueNotifier<List<int>>,
         selectedUrbans: (state.extra! as Map<String, Object>)['urbans']! as ValueNotifier<List<int>>,
         search: (state.extra! as Map<String, Object>)['search']! as VoidCallback,
       );

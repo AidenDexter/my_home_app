@@ -35,7 +35,6 @@ class _DataLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyles = context.theme.commonTextStyles;
-    final colors = context.theme.commonColors;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(

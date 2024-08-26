@@ -9,21 +9,21 @@ import '../../../../core/ui_kit/primary_check_box_2.dart';
 import '../../domain/entity/choose_area_response.dart';
 
 class ChooseDistrictBottomSheet extends StatelessWidget {
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
   final List<Datum> districts;
-  const ChooseDistrictBottomSheet._(this.selectedDisctricts, this.selectedUrbans, this.districts);
+  const ChooseDistrictBottomSheet._(this.selectedDistricts, this.selectedUrbans, this.districts);
 
   static void show(
     BuildContext context, {
-    required ValueNotifier<List<int>> selectedDisctricts,
+    required ValueNotifier<List<int>> selectedDistricts,
     required ValueNotifier<List<int>> selectedUrbans,
     required List<Datum> districts,
   }) =>
       PrimaryBottomSheet.show(
         context: context,
         builder: (context) => ChooseDistrictBottomSheet._(
-          selectedDisctricts,
+          selectedDistricts,
           selectedUrbans,
           districts,
         ),
@@ -55,7 +55,7 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
           ColumnBuilder.separator(
             itemBuilder: (context, index) => _DistrictCard(
               districts[index],
-              selectedDisctricts,
+              selectedDistricts,
               selectedUrbans,
             ),
             itemCount: districts.length,
@@ -70,11 +70,11 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
 
 class _DistrictCard extends StatefulWidget {
   final Datum district;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
   const _DistrictCard(
     this.district,
-    this.selectedDisctricts,
+    this.selectedDistricts,
     this.selectedUrbans,
   );
 
@@ -83,7 +83,7 @@ class _DistrictCard extends StatefulWidget {
 }
 
 class _DistrictCardState extends State<_DistrictCard> {
-  ValueNotifier<List<int>> get selectedDisctricts => widget.selectedDisctricts;
+  ValueNotifier<List<int>> get selectedDistricts => widget.selectedDistricts;
   ValueNotifier<List<int>> get selectedUrbans => widget.selectedUrbans;
 
   Datum get district => widget.district;
@@ -95,7 +95,7 @@ class _DistrictCardState extends State<_DistrictCard> {
   Widget build(BuildContext context) {
     final colors = context.theme.commonColors;
     return AnimatedBuilder(
-        animation: Listenable.merge([selectedDisctricts, selectedUrbans]),
+        animation: Listenable.merge([selectedDistricts, selectedUrbans]),
         builder: (context, child) {
           return Ink(
             decoration: BoxDecoration(
@@ -112,10 +112,10 @@ class _DistrictCardState extends State<_DistrictCard> {
                       setState(() => _isOpen = !_isOpen);
                       return;
                     }
-                    if (selectedDisctricts.value.contains(district.id)) {
-                      selectedDisctricts.value = List.from(selectedDisctricts.value)..remove(district.id);
+                    if (selectedDistricts.value.contains(district.id)) {
+                      selectedDistricts.value = List.from(selectedDistricts.value)..remove(district.id);
                     } else {
-                      selectedDisctricts.value = List.from(selectedDisctricts.value)..add(district.id);
+                      selectedDistricts.value = List.from(selectedDistricts.value)..add(district.id);
                     }
                   },
                   child: Ink(
@@ -130,8 +130,8 @@ class _DistrictCardState extends State<_DistrictCard> {
                           value: _checkBoxState(),
                           onChanged: (_) {
                             if (_isOpenable) {
-                              if (selectedDisctricts.value.contains(district.id)) {
-                                selectedDisctricts.value = List.from(selectedDisctricts.value)..remove(district.id);
+                              if (selectedDistricts.value.contains(district.id)) {
+                                selectedDistricts.value = List.from(selectedDistricts.value)..remove(district.id);
                                 final urbans = selectedUrbans.value;
                                 for (final element in district.urbans!) {
                                   if (urbans.contains(element.id)) {
@@ -140,16 +140,16 @@ class _DistrictCardState extends State<_DistrictCard> {
                                 }
                                 selectedUrbans.value = List.from(urbans);
                               } else {
-                                selectedDisctricts.value = List.from(selectedDisctricts.value)..add(district.id);
+                                selectedDistricts.value = List.from(selectedDistricts.value)..add(district.id);
                                 selectedUrbans.value = List.from(selectedUrbans.value)
                                   ..addAll(district.urbans!.map((e) => e.id));
                               }
                               return;
                             }
-                            if (selectedDisctricts.value.contains(district.id)) {
-                              selectedDisctricts.value = List.from(selectedDisctricts.value)..remove(district.id);
+                            if (selectedDistricts.value.contains(district.id)) {
+                              selectedDistricts.value = List.from(selectedDistricts.value)..remove(district.id);
                             } else {
-                              selectedDisctricts.value = List.from(selectedDisctricts.value)..add(district.id);
+                              selectedDistricts.value = List.from(selectedDistricts.value)..add(district.id);
                             }
                           },
                           tristate: _isOpenable,
@@ -226,20 +226,20 @@ class _DistrictCardState extends State<_DistrictCard> {
     if (selectedUrbans.value.contains(urbanId)) {
       selectedUrbans.value = List.from(selectedUrbans.value)..remove(urbanId);
       if (!_isSelectedOneUrbanFromDistrict()) {
-        selectedDisctricts.value = List.from(selectedDisctricts.value)..remove(district.id);
+        selectedDistricts.value = List.from(selectedDistricts.value)..remove(district.id);
       }
       return;
     }
-    if (!selectedDisctricts.value.contains(district.id)) {
-      selectedDisctricts.value = List.from(selectedDisctricts.value)..add(district.id);
+    if (!selectedDistricts.value.contains(district.id)) {
+      selectedDistricts.value = List.from(selectedDistricts.value)..add(district.id);
     }
     selectedUrbans.value = List.from(selectedUrbans.value)..add(urbanId);
   }
 
   bool? _checkBoxState() {
-    if (!_isOpenable) return selectedDisctricts.value.contains(district.id);
+    if (!_isOpenable) return selectedDistricts.value.contains(district.id);
 
-    if (selectedDisctricts.value.contains(district.id)) {
+    if (selectedDistricts.value.contains(district.id)) {
       if (selectedUrbans.value.containsAll(district.urbans!.map((e) => e.id).toList())) return true;
       return null;
     }
