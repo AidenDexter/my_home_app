@@ -205,13 +205,13 @@ class ChosenAreaWidget extends StatefulWidget {
 
 class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
   late final ValueNotifier<int?> _selectedCity;
-  late final ValueNotifier<List<int>> _selectedDisctricts;
+  late final ValueNotifier<List<int>> _selectedDistricts;
   late final ValueNotifier<List<int>> _selectedUrbans;
 
   @override
   void initState() {
     _selectedCity = ValueNotifier(null);
-    _selectedDisctricts = ValueNotifier([]);
+    _selectedDistricts = ValueNotifier([]);
     _selectedUrbans = ValueNotifier([]);
     super.initState();
   }
@@ -219,7 +219,7 @@ class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: Listenable.merge([_selectedCity, _selectedDisctricts, _selectedUrbans]),
+        animation: Listenable.merge([_selectedCity, _selectedDistricts, _selectedUrbans]),
         builder: (context, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +229,7 @@ class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
                   CommonRoutes.chooseArea.path,
                   extra: {
                     'city': _selectedCity,
-                    'disctricts': _selectedDisctricts,
+                    'districts': _selectedDistricts,
                     'urbans': _selectedUrbans,
                   },
                 ),
@@ -238,7 +238,7 @@ class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
               const SizedBox(height: 16),
               Text('Selected city id: ${_selectedCity.value};'),
               const SizedBox(height: 8),
-              Text("Selected disctricts id's: ${_selectedDisctricts.value.join(', ')};"),
+              Text("Selected districts id's: ${_selectedDistricts.value.join(', ')};"),
               const SizedBox(height: 8),
               Text("Selected urbans id's: ${_selectedUrbans.value.join(', ')}."),
             ],
@@ -249,7 +249,7 @@ class _ChosenAreaWidgetState extends State<ChosenAreaWidget> {
   @override
   void dispose() {
     _selectedCity.dispose();
-    _selectedDisctricts.dispose();
+    _selectedDistricts.dispose();
     _selectedUrbans.dispose();
     super.dispose();
   }

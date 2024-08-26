@@ -15,7 +15,7 @@ class SearchForm extends StatelessWidget {
     required this.dealType,
     required this.realEstateTypes,
     required this.selectedCity,
-    required this.selectedDisctricts,
+    required this.selectedDistricts,
     required this.selectedUrbans,
     required this.search,
     required this.searchController,
@@ -35,7 +35,7 @@ class SearchForm extends StatelessWidget {
   final ValueNotifier<List<RealEstateType>> realEstateTypes;
 
   final ValueNotifier<int?> selectedCity;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
 
   final TextEditingController searchController;
@@ -69,7 +69,7 @@ class SearchForm extends StatelessWidget {
               Divider(height: 2, color: colors.neutralgrey10),
               _ChosenArea(
                 selectedCity: selectedCity,
-                selectedDisctricts: selectedDisctricts,
+                selectedDistricts: selectedDistricts,
                 selectedUrbans: selectedUrbans,
                 search: search,
               ),
@@ -173,7 +173,7 @@ class SearchForm extends StatelessWidget {
     realEstateTypes.value = [];
 
     selectedCity.value = null;
-    selectedDisctricts.value = [];
+    selectedDistricts.value = [];
     selectedUrbans.value = [];
 
     searchController.text = '';
@@ -193,7 +193,7 @@ class SearchForm extends StatelessWidget {
         dealType,
         realEstateTypes,
         selectedCity,
-        selectedDisctricts,
+        selectedDistricts,
         selectedUrbans,
         searchController,
         priceFromController,
@@ -212,7 +212,7 @@ class SearchForm extends StatelessWidget {
     if (dealType.value != null) res++;
     if (realEstateTypes.value.isNotEmpty) res++;
     if (selectedCity.value != null) res++;
-    if (selectedDisctricts.value.isNotEmpty) res++;
+    if (selectedDistricts.value.isNotEmpty) res++;
     if (selectedUrbans.value.isNotEmpty) res++;
     if (searchController.text.isNotEmpty) res++;
     if (priceFromController.text.isNotEmpty) res++;
@@ -261,13 +261,13 @@ class _SearchText extends StatelessWidget {
 class _ChosenArea extends StatelessWidget {
   const _ChosenArea({
     required this.selectedCity,
-    required this.selectedDisctricts,
+    required this.selectedDistricts,
     required this.selectedUrbans,
     required this.search,
   });
 
   final ValueNotifier<int?> selectedCity;
-  final ValueNotifier<List<int>> selectedDisctricts;
+  final ValueNotifier<List<int>> selectedDistricts;
   final ValueNotifier<List<int>> selectedUrbans;
   final VoidCallback search;
 
@@ -282,7 +282,7 @@ class _ChosenArea extends StatelessWidget {
           CommonRoutes.chooseArea.path,
           extra: {
             'city': selectedCity,
-            'disctricts': selectedDisctricts,
+            'districts': selectedDistricts,
             'urbans': selectedUrbans,
             'search': search,
           },
@@ -293,13 +293,13 @@ class _ChosenArea extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: AnimatedBuilder(
-            animation: Listenable.merge([selectedCity, selectedDisctricts]),
+            animation: Listenable.merge([selectedCity, selectedDistricts]),
             builder: (context, child) {
               if (selectedCity.value == null) return child!;
 
-              if (selectedDisctricts.value.isNotEmpty) {
+              if (selectedDistricts.value.isNotEmpty) {
                 final res = <String>[];
-                for (final item in selectedDisctricts.value) {
+                for (final item in selectedDistricts.value) {
                   final district = ChooseAreaScope.districtById(
                     context,
                     cityId: selectedCity.value!,

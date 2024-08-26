@@ -32,7 +32,7 @@ class _BodyState extends State<_Body> {
   late final ValueNotifier<DealType?> _dealType;
   late final ValueNotifier<List<RealEstateType>> _realEstateTypes;
   late final ValueNotifier<int?> _selectedCity;
-  late final ValueNotifier<List<int>> _selectedDisctricts;
+  late final ValueNotifier<List<int>> _selectedDistricts;
   late final ValueNotifier<List<int>> _selectedUrbans;
   late final TextEditingController _searchController;
   late final TextEditingController _priceFromController;
@@ -54,7 +54,7 @@ class _BodyState extends State<_Body> {
     _dealType = ValueNotifier(null);
     _realEstateTypes = ValueNotifier([]);
     _selectedCity = ValueNotifier(null);
-    _selectedDisctricts = ValueNotifier([]);
+    _selectedDistricts = ValueNotifier([]);
     _selectedUrbans = ValueNotifier([]);
     _searchController = TextEditingController();
     _priceFromController = TextEditingController();
@@ -113,7 +113,7 @@ class _BodyState extends State<_Body> {
                     dealType: _dealType,
                     realEstateTypes: _realEstateTypes,
                     selectedCity: _selectedCity,
-                    selectedDisctricts: _selectedDisctricts,
+                    selectedDistricts: _selectedDistricts,
                     selectedUrbans: _selectedUrbans,
                     search: _search,
                     searchController: _searchController,
@@ -191,7 +191,7 @@ class _BodyState extends State<_Body> {
         cityId: _selectedCity.value,
         dealType: _dealType.value?.id,
         urbans: _selectedUrbans.value,
-        districts: _selectedDisctricts.value,
+        districts: _selectedDistricts.value,
         realEstateTypes: _realEstateTypes.value.map((e) => e.id).toList(),
         searchText: _searchController.text.trim(),
         priceFrom: _priceFromController.text,
@@ -210,7 +210,7 @@ class _BodyState extends State<_Body> {
     _dealType.dispose();
     _realEstateTypes.dispose();
     _selectedCity.dispose();
-    _selectedDisctricts.dispose();
+    _selectedDistricts.dispose();
     _selectedUrbans.dispose();
     _searchController.dispose();
     _priceFromController.dispose();

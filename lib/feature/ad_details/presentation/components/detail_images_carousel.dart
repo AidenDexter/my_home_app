@@ -43,7 +43,7 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
     super.dispose();
   }
 
-  void _onShareTap() => Share.share('https://www.myhome.ge/pr/19063268');
+  void _onShareTap() => Share.share('https://www.myhome.ge/pr/${widget.item.id}');
 
   @override
   Widget build(BuildContext context) {
