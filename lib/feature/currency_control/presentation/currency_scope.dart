@@ -26,8 +26,8 @@ class CurrencyScope extends SingleChildStatelessWidget {
     final isLari = listen
         ? (context.watch<CurrencyControlBloc>().state.currency == Currency.lari)
         : (context.read<CurrencyControlBloc>().state.currency == Currency.lari);
-    if (isLari) return '${price.first.priceTotal} ₾';
-    return price.second.priceTotal.toString() + r' $';
+    if (isLari) return '${price.first.priceTotal.toString().formatNumber()} ₾';
+    return price.second.priceTotal.toString().formatNumber() + r' $';
   }
 
   static String showPriceSquare(BuildContext context, {required Price price, bool listen = true}) {
