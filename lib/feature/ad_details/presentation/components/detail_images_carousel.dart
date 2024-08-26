@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
+import '../../../../core/router/routes_enum.dart';
 import '../../../../core/ui_kit/circle_button.dart';
 import '../../../search/domain/entity/search_response.dart';
 
@@ -55,14 +56,22 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          PageView.builder(
-            allowImplicitScrolling: true,
-            controller: _carouselController,
-            itemBuilder: (context, index) => CachedNetworkImage(
-              imageUrl: images[index].thumb,
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              context.push(CommonRoutes.photoView.path, extra: {
+                'initialIndex': _currentPage,
+                'images': images,
+              });
+            },
+            child: PageView.builder(
+              allowImplicitScrolling: true,
+              controller: _carouselController,
+              itemBuilder: (context, index) => CachedNetworkImage(
+                imageUrl: images[index].thumb,
+                fit: BoxFit.cover,
+              ),
+              itemCount: images.length,
             ),
-            itemCount: images.length,
           ),
           Positioned(
             top: 16,

@@ -73,7 +73,8 @@ enum CommonRoutes {
   contacts(path: '${_commonRoutesKey}contacts'),
   help(path: '${_commonRoutesKey}help'),
   settings(path: '${_commonRoutesKey}settings'),
-  aboutApp(path: '${_commonRoutesKey}about_app');
+  aboutApp(path: '${_commonRoutesKey}about_app'),
+  photoView(path: '${_commonRoutesKey}photo_view');
 
   final String path;
 

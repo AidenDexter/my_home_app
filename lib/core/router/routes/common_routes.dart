@@ -71,4 +71,17 @@ final _commonRoutes = [
     path: CommonRoutes.aboutApp.path,
     builder: (_, state) => Placeholder(key: state.pageKey),
   ),
+  GoRoute(
+    path: CommonRoutes.photoView.path,
+    builder: (_, state) {
+      assert(state.extra is Map<String, Object>);
+      assert((state.extra! as Map<String, Object>)['images'] is List<Images>);
+      assert((state.extra! as Map<String, Object>)['initialIndex'] is int);
+
+      return PhotoViewPage(
+        initialIndex: (state.extra! as Map<String, Object>)['initialIndex']! as int,
+        images: (state.extra! as Map<String, Object>)['images']! as List<Images>,
+      );
+    },
+  ),
 ];
