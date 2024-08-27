@@ -62,6 +62,8 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                       scrollPhysics: const BouncingScrollPhysics(),
                       builder: (_, index) {
                         return PhotoViewGalleryPageOptions(
+                          minScale: PhotoViewComputedScale.contained * 1,
+                          maxScale: PhotoViewComputedScale.covered * 10,
                           imageProvider: CachedNetworkImageProvider(
                             widget.images[index].large,
                           ),
