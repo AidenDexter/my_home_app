@@ -89,7 +89,7 @@ class _BodyState extends State<_Body> {
           return child!;
         },
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 86),
+          padding: const EdgeInsets.only(bottom: 48),
           child: FloatingActionButton.small(
             onPressed: () => _scrollController.animateTo(
               0,
