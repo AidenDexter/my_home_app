@@ -25,6 +25,8 @@ class PhotoViewPage extends StatefulWidget {
 class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProviderStateMixin {
   late final PageController _pageController;
   late final TabController _tabController;
+  double _dragStartY = 0;
+  double _dragUpdateY = 0;
   bool _isPageAnimating = false;
 
   @override
@@ -53,30 +55,41 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                     borderRadius: const BorderRadius.vertical(
                       bottom: Radius.circular(32),
                     ),
-                    child: PhotoViewGallery.builder(
-                      onPageChanged: (index) {
-                        if (_isPageAnimating) return;
-                        _tabController.animateTo(index);
+                    child: GestureDetector(
+                      onVerticalDragStart: (details) {
+                        _dragStartY = details.globalPosition.dy;
                       },
-                      pageController: _pageController,
-                      scrollPhysics: const BouncingScrollPhysics(),
-                      builder: (_, index) {
-                        return PhotoViewGalleryPageOptions(
-                          minScale: PhotoViewComputedScale.contained * 1,
-                          maxScale: PhotoViewComputedScale.covered * 10,
-                          imageProvider: CachedNetworkImageProvider(
-                            widget.images[index].large,
-                          ),
-                          heroAttributes: PhotoViewHeroAttributes(
-                            tag: widget.images[index],
-                          ),
-                        );
+                      onVerticalDragUpdate: (details) {
+                        _dragUpdateY = details.globalPosition.dy;
+                        if (_dragUpdateY - _dragStartY > 100) {
+                          Navigator.of(context).pop();
+                        }
                       },
-                      itemCount: widget.images.length,
-                      loadingBuilder: (context, event) => const Center(
-                        child: SizedBox.square(
-                          dimension: 40,
-                          child: CircularProgressIndicator(),
+                      child: PhotoViewGallery.builder(
+                        onPageChanged: (index) {
+                          if (_isPageAnimating) return;
+                          _tabController.animateTo(index);
+                        },
+                        pageController: _pageController,
+                        scrollPhysics: const BouncingScrollPhysics(),
+                        builder: (_, index) {
+                          return PhotoViewGalleryPageOptions(
+                            minScale: PhotoViewComputedScale.contained * 1,
+                            maxScale: PhotoViewComputedScale.covered * 10,
+                            imageProvider: CachedNetworkImageProvider(
+                              widget.images[index].large,
+                            ),
+                            heroAttributes: PhotoViewHeroAttributes(
+                              tag: widget.images[index],
+                            ),
+                          );
+                        },
+                        itemCount: widget.images.length,
+                        loadingBuilder: (context, event) => const Center(
+                          child: SizedBox.square(
+                            dimension: 40,
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                       ),
                     ),
