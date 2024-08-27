@@ -66,6 +66,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                         }
                       },
                       child: PhotoViewGallery.builder(
+                        allowImplicitScrolling: true,
                         onPageChanged: (index) {
                           if (_isPageAnimating) return;
                           _tabController.animateTo(index);
