@@ -62,7 +62,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                       onVerticalDragUpdate: (details) {
                         _dragUpdateY = details.globalPosition.dy;
                         if (_dragUpdateY - _dragStartY > 100) {
-                          Navigator.of(context).pop();
+                          context.pop();
                         }
                       },
                       child: PhotoViewGallery.builder(
