@@ -54,6 +54,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                       bottom: Radius.circular(32),
                     ),
                     child: PhotoViewGallery.builder(
+                      allowImplicitScrolling: true,
                       onPageChanged: (index) {
                         if (_isPageAnimating) return;
                         _tabController.animateTo(index);
