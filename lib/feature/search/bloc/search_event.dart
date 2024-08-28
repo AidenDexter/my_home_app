@@ -19,6 +19,7 @@ class SearchEvent with _$SearchEvent {
     @Default(false) bool notFirstFloor,
     @Default(false) bool notLastFloor,
     @Default(false) bool isLastFloor,
+    @Default([]) List<int> rooms,
   }) = _SearchEvent;
 
   const factory SearchEvent.loadMore() = _LoadMoreEvent;

@@ -10,6 +10,7 @@ import '../../components/search_unit_card/search_unit_card.dart';
 import '../bloc/search_bloc.dart';
 import '../domain/entity/deal_type.dart';
 import '../domain/entity/real_estate_type.dart';
+import '../domain/entity/rooms.dart';
 import 'components/search_form.dart';
 import 'search_scope.dart';
 
@@ -44,6 +45,7 @@ class _BodyState extends State<_Body> {
   late final ValueNotifier<bool> _notFirstFloorController;
   late final ValueNotifier<bool> _notLastFloorController;
   late final ValueNotifier<bool> _isLastFloorController;
+  late final ValueNotifier<List<Rooms>> _roomsController;
 
   // Page controllers
   late final ScrollController _scrollController;
@@ -66,6 +68,7 @@ class _BodyState extends State<_Body> {
     _notFirstFloorController = ValueNotifier(false);
     _notLastFloorController = ValueNotifier(false);
     _isLastFloorController = ValueNotifier(false);
+    _roomsController = ValueNotifier([]);
 
     _isShowsUpButton = ValueNotifier(false);
     _scrollController = ScrollController()
@@ -126,6 +129,7 @@ class _BodyState extends State<_Body> {
                     notFirstFloorController: _notFirstFloorController,
                     notLastFloorController: _notLastFloorController,
                     isLastFloorController: _isLastFloorController,
+                    roomsController: _roomsController,
                   ),
                 ),
                 BlocBuilder<SearchBloc, SearchState>(
@@ -203,6 +207,7 @@ class _BodyState extends State<_Body> {
         notFirstFloor: _notFirstFloorController.value,
         notLastFloor: _notLastFloorController.value,
         isLastFloor: _isLastFloorController.value,
+        rooms: _roomsController.value.map((e) => e.id).toList(),
       );
 
   @override

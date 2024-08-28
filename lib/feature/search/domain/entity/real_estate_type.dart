@@ -2,17 +2,17 @@ enum RealEstateType {
   apartments(
     id: 1,
     title: 'Квартиры',
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   houses(
     id: 2,
     title: 'Дома',
-    filters: [],
+    filters: ['rooms'],
   ),
   countryHouses(
     id: 3,
     title: 'Дачи',
-    filters: [],
+    filters: ['rooms'],
   ),
   landPlots(
     id: 4,
@@ -22,12 +22,12 @@ enum RealEstateType {
   commercial(
     id: 5,
     title: 'Коммерческая',
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   hotels(
     id: 6,
     title: 'Гостиницы',
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   ;
 
