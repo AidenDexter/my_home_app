@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
 import '../../../../core/router/routes_enum.dart';
-import '../../../../core/ui_kit/circle_button.dart';
 import '../../../search/domain/entity/search_response.dart';
 
 class DetailImagesCarousel extends StatefulWidget {
@@ -44,12 +42,10 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
     super.dispose();
   }
 
-  void _onShareTap() => Share.share('https://www.myhome.ge/pr/${widget.item.id}');
-
   @override
   Widget build(BuildContext context) {
     if (images.isEmpty) return const SizedBox();
-
+    final topPadding = MediaQuery.of(context).padding.top;
     return SizedBox(
       height: 340,
       width: double.infinity,
@@ -74,35 +70,12 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             ),
           ),
           Positioned(
-            top: 16,
-            left: 16,
-            right: 16,
-            child: Row(
-              children: [
-                CircleButton(
-                  icon: const Icon(Icons.keyboard_arrow_left_rounded, size: 24),
-                  onTap: context.pop,
-                ),
-                const Spacer(),
-                CircleButton(
-                  icon: const Opacity(opacity: .2, child: Icon(Icons.favorite_border, size: 22)),
-                  onTap: () {},
-                ),
-                const SizedBox(width: 8),
-                CircleButton(
-                  icon: Assets.icons.share.svg(height: 20),
-                  onTap: _onShareTap,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 12,
+            top: 12 + topPadding,
             left: 16,
             child: VipLabel(widget.item),
           ),
           Positioned(
-            bottom: 12,
+            top: 12 + topPadding,
             right: 16,
             child: Container(
               decoration: BoxDecoration(
