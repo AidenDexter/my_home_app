@@ -74,14 +74,14 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             left: 16,
             child: VipLabel(widget.item),
           ),
-          Positioned(
-            top: 12 + topPadding,
-            right: 16,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: context.theme.commonColors.black.withOpacity(0.5),
               ),
+              margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
               child: Text(
                 '${_currentPage + 1} / ${widget.item.images.length}',
