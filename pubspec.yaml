@@ -99,6 +99,7 @@ flutter:
     - assets/icons/
     - assets/icons/flags/
     - assets/nav_bar/
+    - assets/images/
 
   fonts:
     - family: TBCXBold

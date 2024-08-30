@@ -11,8 +11,9 @@ import 'components/price_row.dart';
 
 class SearchUnitCard extends StatelessWidget {
   final SearchItem item;
+  final int? maxTitleLines;
 
-  const SearchUnitCard(this.item, {super.key});
+  const SearchUnitCard(this.item, {this.maxTitleLines, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,8 @@ class SearchUnitCard extends StatelessWidget {
                       Text(
                         item.dynamicTitle ?? 'null',
                         style: textStyles.title3,
+                        maxLines: maxTitleLines,
+                        overflow: maxTitleLines != null ? TextOverflow.ellipsis : null,
                       ),
                       const SizedBox(height: 12),
                       PriceRow(item.price),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
-import '../../bloc/bottom_navigation_bloc.dart';
+import '../bottom_navigation_scope.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -37,17 +36,13 @@ class BottomNavBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
-                    ),
+                    onTap: (index) => BottomNavigationScope.change(context, index),
                     index: 0,
                     currentIndex: currentIndex,
                     asset: Assets.navBar.home,
                   ),
                   _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
-                    ),
+                    onTap: (index) => BottomNavigationScope.change(context, index),
                     index: 1,
                     currentIndex: currentIndex,
                     asset: Assets.navBar.search,
@@ -57,17 +52,13 @@ class BottomNavBar extends StatelessWidget {
                     opacity: 0,
                   ),
                   _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
-                    ),
+                    onTap: (index) => BottomNavigationScope.change(context, index),
                     index: 2,
                     currentIndex: currentIndex,
                     asset: Assets.navBar.favourite,
                   ),
                   _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
-                    ),
+                    onTap: (index) => BottomNavigationScope.change(context, index),
                     index: 3,
                     currentIndex: currentIndex,
                     asset: Assets.navBar.profile,
