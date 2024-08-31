@@ -16,34 +16,52 @@ class FavouritesPage extends StatelessWidget {
       ),
       body: BlocBuilder<FavouritesBloc, FavouritesState>(builder: (context, state) {
         if (state.favourites.isEmpty) {
-          return Center(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: Assets.icons.emptyFavourites.svg(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: Text(
-                    'Сохраняйте понравившиеся объявления',
-                    textAlign: TextAlign.center,
-                    style: context.theme.commonTextStyles.headline3.copyWith(
-                      color: context.theme.commonColors.green100,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+          return const _EmptyLayout();
         }
-        return ListView.separated(
-            itemBuilder: (context, index) => Text('${state.favourites[index]}'),
-            separatorBuilder: (context, _) => const SizedBox(
-                  height: 4,
-                ),
-            itemCount: state.favourites.length);
+        return _DataLayout(state.favourites);
       }),
+    );
+  }
+}
+
+class _DataLayout extends StatelessWidget {
+  final List<int> favourites;
+  const _DataLayout(this.favourites);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemBuilder: (_, index) => Text('${favourites[index]}'),
+      separatorBuilder: (_, __) => const SizedBox(height: 4),
+      itemCount: favourites.length,
+    );
+  }
+}
+
+class _EmptyLayout extends StatelessWidget {
+  const _EmptyLayout();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Assets.icons.emptyFavourites.svg(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(50),
+            child: Text(
+              'Сохраняйте понравившиеся объявления',
+              textAlign: TextAlign.center,
+              style: context.theme.commonTextStyles.headline3.copyWith(
+                color: context.theme.commonColors.green100,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
