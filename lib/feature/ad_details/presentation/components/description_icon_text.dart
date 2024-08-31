@@ -17,7 +17,7 @@ class DescriptionIconText extends StatelessWidget {
         Expanded(
           child: _Item(
             title: 'Общая площадь',
-            value: '${item.area?.toStringAsFixed(0).formatNumber()} м²',
+            value: '${item.area?.toStringAsFixed(0).formatNumber()} ${context.l10n.square_meter}',
             icon: Assets.icons.square,
           ),
         ),

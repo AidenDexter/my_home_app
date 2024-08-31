@@ -177,7 +177,7 @@ class _FiltersPageState extends State<FiltersPage> {
                     children: [
                       Expanded(
                         child: RangeTextField(
-                          suffix: 'м²',
+                          suffix: context.l10n.square_meter,
                           label: 'от',
                           controller: widget.areaFromController,
                         ),
@@ -185,7 +185,7 @@ class _FiltersPageState extends State<FiltersPage> {
                       const SizedBox(width: 16),
                       Expanded(
                         child: RangeTextField(
-                          suffix: 'м²',
+                          suffix: context.l10n.square_meter,
                           label: 'до',
                           controller: widget.areaToController,
                         ),

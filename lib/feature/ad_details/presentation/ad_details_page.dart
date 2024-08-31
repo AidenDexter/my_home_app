@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:styled_text/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/extension/extensions.dart';
 import '../../../core/extension/src/theme_extension.dart';
 import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/circle_button.dart';
@@ -13,6 +14,7 @@ import '../../../core/ui_kit/decorated_container.dart';
 import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../currency_control/presentation/currency_scope.dart';
 import '../../currency_control/presentation/currency_switcher.dart';
+import '../../localization_control/presentation/localization_scope.dart';
 import '../../search/domain/entity/search_response.dart';
 import 'components/description_icon_text.dart';
 import 'components/detail_images_carousel.dart';
@@ -86,7 +88,10 @@ class _DataLayer extends StatelessWidget {
               children: [
                 Assets.icons.calendar.svg(),
                 const SizedBox(width: 8),
-                Text(DateFormat('dd MMM. HH:mm').format(item.lastUpdated).toLowerCase()),
+                Text(DateFormat('dd MMM. HH:mm', LocalizationScope.getLocaleCode(context))
+                    .format(item.lastUpdated)
+                    .replaceAll('..', '.')
+                    .toLowerCase()),
                 const Spacer(),
                 SelectableText('ID: ${item.id}')
               ],
@@ -134,12 +139,12 @@ class _DataLayer extends StatelessWidget {
             child: Row(
               children: [
                 if (item.area != null) ...[
-                  Text('Площадь: ${item.area?.toStringAsFixed(0)} м²'),
+                  Text('Площадь: ${item.area?.toStringAsFixed(0)} ${context.l10n.square_meter}'),
                   const SizedBox(width: 8),
                   const Text('|'),
                   const SizedBox(width: 8),
                 ],
-                Text('1 м² - ${CurrencyScope.showPriceSquare(context, price: item.price)}'),
+                Text('1 ${context.l10n.square_meter} - ${CurrencyScope.showPriceSquare(context, price: item.price)}'),
               ],
             ),
           ),

@@ -23,8 +23,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _read(_ReadHomeEvent event, Emitter<HomeState> emit) async {
+    emit(const HomeState.progress());
     try {
-      final response = await _repository.fetchHome();
+      final response = await _repository.fetchHome(event.locale);
       emit(HomeState.success(sections: response.data ?? []));
     } on Object catch (error) {
       emit(HomeState.error(errorHandler: error.toHandler));

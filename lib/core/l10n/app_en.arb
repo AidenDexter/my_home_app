@@ -1,3 +1,13 @@
 {
-	"search": "Search"
+	"search": "Search",
+	"search_text_hint": "ID, text, phone",
+	"detailed_filter": "Detailed filter",
+	"services": "Services",
+	"valuation": "Valuation",
+	"measurement": "Measurement",
+	"photo_service": "Photo service",
+	"mortgage": "Mortgage",
+	"square_meter": "m²",
+	"transaction_type": "Transaction type",
+	"real_estate_type": "Real estate type"
 }

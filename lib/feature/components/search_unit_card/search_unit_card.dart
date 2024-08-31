@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../core/extension/extensions.dart';
 import '../../../core/resources/assets.gen.dart';
 import '../../../core/router/routes_enum.dart';
+import '../../localization_control/presentation/localization_scope.dart';
 import '../../search/domain/entity/search_response.dart';
 import 'components/images_carousel.dart';
 import 'components/price_row.dart';
@@ -97,7 +98,7 @@ class SearchUnitCard extends StatelessWidget {
                                 ),
                                 alignment: PlaceholderAlignment.middle,
                               ),
-                              TextSpan(text: '${item.area!.toStringAsFixed(0)} м²'),
+                              TextSpan(text: '${item.area!.toStringAsFixed(0)} ${context.l10n.square_meter}'),
                               const WidgetSpan(child: SizedBox(width: 16)),
                             ],
                           ],
@@ -128,7 +129,10 @@ class SearchUnitCard extends StatelessWidget {
                           overflow: maxTextLines != null ? TextOverflow.ellipsis : null,
                         ),
                       ),
-                      Text(DateFormat('dd MMM. HH:mm').format(item.lastUpdated).toLowerCase()),
+                      Text(DateFormat('dd MMM. HH:mm', LocalizationScope.getLocaleCode(context))
+                          .format(item.lastUpdated)
+                          .replaceAll('..', '.')
+                          .toLowerCase()),
                     ],
                   ),
                 ),

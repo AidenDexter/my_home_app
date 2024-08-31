@@ -13,5 +13,5 @@ abstract class SearchRemoteDB {
   factory SearchRemoteDB(@Named('BaseDioTnet') Dio dio) = _SearchRemoteDB;
 
   @GET('/statements?{filter}')
-  Future<SearchResponse> search(@Path() String filter);
+  Future<SearchResponse> search(@Path() String filter,@Header('locale') String locale);
 }

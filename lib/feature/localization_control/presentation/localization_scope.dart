@@ -13,8 +13,9 @@ class LocalizationScope extends SingleChildStatelessWidget {
   static Locale? localeOf(BuildContext context) =>
       context.watch<LocalizationControlBloc>().state.currentLocalization.toLocale;
 
-  static String getLocaleCode(BuildContext context) =>
-      context.watch<LocalizationControlBloc>().state.currentLocalization.languageCode;
+  static String getLocaleCode(BuildContext context, {bool listen = true}) => listen
+      ? context.watch<LocalizationControlBloc>().state.currentLocalization.languageCode
+      : context.read<LocalizationControlBloc>().state.currentLocalization.languageCode;
 
   static void changeLocale(BuildContext context, {required Locale locale}) =>
       context.read<LocalizationControlBloc>().add(

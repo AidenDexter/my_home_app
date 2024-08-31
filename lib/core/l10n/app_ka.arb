@@ -1,3 +1,11 @@
 {
-	"search": "ძებნა"
+	"search": "ძებნა",
+	"search_text_hint": "ID, ტელეფონი, სიტყვა",
+	"detailed_filter": "დეტალური ფილტრი",
+	"services": "სერვისები",
+	"valuation": "შეფასება",
+	"measurement": "აზომვა",
+	"photo_service": "ფოტომომსახურება",
+	"mortgage": "იპოთეკა",
+	"square_meter": "მ²"
 }

@@ -4,5 +4,5 @@ import '../entity/home_response.dart';
 
 @immutable
 abstract interface class IHomeRepository {
-  Future<HomeResponse> fetchHome();
+  Future<HomeResponse> fetchHome(String locale);
 }

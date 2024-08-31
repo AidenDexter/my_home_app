@@ -107,7 +107,7 @@ class SearchForm extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('Подробный фильтр'),
+                      Text(context.l10n.detailed_filter),
                       const SizedBox(width: 6),
                       AnimatedBuilder(
                           animation: _listenAll,
@@ -161,7 +161,7 @@ class SearchForm extends StatelessWidget {
           icon: Assets.navBar.search.svg(
             colorFilter: ColorFilter.mode(colors.white, BlendMode.srcIn),
           ),
-          child: const Text('Поиск'),
+          child: Text(context.l10n.search),
         ),
         const SizedBox(height: 8),
       ],
@@ -244,7 +244,7 @@ class _SearchText extends StatelessWidget {
         style: textStyles.body1,
         cursorColor: colors.green100,
         decoration: InputDecoration(
-          hintText: 'ID, слово, телефон',
+          hintText: context.l10n.search_text_hint,
           hintStyle: textStyles.body1.copyWith(color: colors.darkGrey30),
           border: InputBorder.none,
           errorBorder: InputBorder.none,

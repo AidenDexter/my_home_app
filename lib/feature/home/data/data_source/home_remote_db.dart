@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../domain/entity/home_response.dart';
 
-part 'mock_remote_db.g.dart';
+part 'home_remote_db.g.dart';
 
 @RestApi()
 @injectable
@@ -13,6 +13,6 @@ abstract class HomeRemoteDB {
   @factoryMethod
   factory HomeRemoteDB(@Named('BaseDioHome') Dio dio) = _HomeRemoteDB;
 
-  @GET('/ka/home/')
-  Future<HomeResponse> fetchHome();
+  @GET('/{locale}/home/')
+  Future<HomeResponse> fetchHome(@Path() String locale);
 }

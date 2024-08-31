@@ -78,33 +78,36 @@ class _DataLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        _SectionTitle(
-          icon: Assets.icons.services,
-          title: 'Сервисы',
-        ),
-        const ServicesRow(),
-        const SizedBox(height: 8),
-        ...sections.map(
-          (section) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _SectionTitle(
-                icon: _sectionIconFromType(section.type),
-                title: _sectionNameFromType(section.type),
-              ),
-              _HorizontalAds(children: section.children),
-            ],
+    return RefreshIndicator(
+      onRefresh: () async => HomeScope.readOf(context),
+      child: ListView(
+        children: [
+          _SectionTitle(
+            icon: Assets.icons.services,
+            title: context.l10n.services,
           ),
-        ),
-      ],
+          const ServicesRow(),
+          const SizedBox(height: 8),
+          ...sections.map(
+            (section) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _SectionTitle(
+                  icon: _sectionIconFromType(section.type),
+                  title: _sectionNameFromType(section.type),
+                ),
+                _HorizontalAds(children: section.children),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   String _sectionNameFromType(String type) {
-    if (type == 'super_vip_products') return 'SUPER-VIP объявления';
-    if (type == 'vip_plus_products') return 'VIP+ объявления';
+    if (type == 'super_vip_products') return 'SUPER-VIP';
+    if (type == 'vip_plus_products') return 'VIP+';
     return '';
   }
 

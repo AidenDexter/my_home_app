@@ -1,3 +1,11 @@
 {
-	"search": "Поиск"
+	"search": "Поиск",
+	"search_text_hint": "ID, слово, телефон",
+	"detailed_filter": "Подробный фильтр",
+	"services": "Сервисы",
+	"valuation": "Оценка",
+	"measurement": "Измерение",
+	"photo_service": "Фотосервис",
+	"mortgage": "Ипотека",
+	"square_meter": "м²"
 }
