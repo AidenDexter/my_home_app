@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
+import '../../../favourites/bloc/favourites_bloc.dart';
 import '../../bloc/bottom_navigation_bloc.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -56,13 +58,44 @@ class BottomNavBar extends StatelessWidget {
                     child: Assets.navBar.plus.svg(),
                     opacity: 0,
                   ),
-                  _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
-                    ),
-                    index: 2,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.favourite,
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      _NavBarItem(
+                        onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
+                          BottomNavigationEvent.pageChanged(index),
+                        ),
+                        index: 2,
+                        currentIndex: currentIndex,
+                        asset: Assets.navBar.favourite,
+                      ),
+                      BlocBuilder<FavouritesBloc, FavouritesState>(
+                        builder: (context, state) {
+                          if (state.favourites.isNotEmpty) {
+                            return Positioned(
+                              top: 1,
+                              right: -3,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                    color: context.theme.commonColors.red100, borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+                                  child: Text(
+                                    state.favourites.length > 99 ? '99+' : '${state.favourites.length}',
+                                    style: TextStyle(
+                                        height: 1,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: state.favourites.length > 99 ? 10 : 11,
+                                        color: context.theme.commonColors.white),
+                                  ),
+                                ),
+                              ).animate().scale(curve: Curves.easeInOut),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                    ],
                   ),
                   _NavBarItem(
                     onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
@@ -124,7 +157,7 @@ class _NavBarItem extends StatelessWidget {
         duration: context.theme.durations.pageElements,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(100)),
-          color: isSelected ? colors.green10 : null,
+          color: isSelected ? colors.green10 : colors.neutralgrey3,
         ),
         padding: const EdgeInsets.all(12),
         child: asset.svg(

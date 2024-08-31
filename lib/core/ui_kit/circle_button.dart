@@ -8,13 +8,14 @@ class CircleButton extends StatelessWidget {
   final Color? backgroundColor;
   final double dimension;
   final VoidCallback onTap;
-  const CircleButton({
-    required this.icon,
-    required this.onTap,
-    super.key,
-    this.backgroundColor,
-    this.dimension = 35,
-  });
+  final double topIconPadding;
+  const CircleButton(
+      {required this.icon,
+      required this.onTap,
+      super.key,
+      this.backgroundColor,
+      this.dimension = 35,
+      this.topIconPadding = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,10 @@ class CircleButton extends StatelessWidget {
               color: backgroundColor ?? context.theme.commonColors.white,
               borderRadius: BorderRadius.circular(dimension / 2),
             ),
-            child: Center(child: icon),
+            child: Padding(
+              padding: EdgeInsets.only(top: topIconPadding),
+              child: Center(child: icon),
+            ),
           ),
         ),
       ),
