@@ -58,25 +58,29 @@ class _ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
+    return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: Ink(
-        decoration: BoxDecoration(
-          color: context.theme.commonColors.blue10,
+      child: Material(
+        color: context.theme.commonColors.blue10,
+        child: InkWell(
+          onTap: onTap,
           borderRadius: BorderRadius.circular(16),
-        ),
-        width: 130,
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            image.image(),
-            const SizedBox(height: 8),
-            Text(
-              name,
-              style: context.theme.commonTextStyles.title1.copyWith(fontSize: 15),
+          child: SizedBox(
+            width: 130,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  image.image(),
+                  const SizedBox(height: 8),
+                  Text(
+                    name,
+                    style: context.theme.commonTextStyles.title1.copyWith(fontSize: 15),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );

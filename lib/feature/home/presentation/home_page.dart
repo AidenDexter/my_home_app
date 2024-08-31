@@ -158,23 +158,17 @@ class _HorizontalAds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          children.length,
-          (index) => Row(
-            children: [
-              const SizedBox(width: 16),
-              SizedBox(
-                width: width * .75,
-                child: SearchUnitCard(children[index], maxTitleLines: 1),
-              ),
-              if (index == children.length - 1) const SizedBox(width: 16),
-            ],
-          ),
+    return SizedBox(
+      height: 435,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => SizedBox(
+          width: width * .75,
+          child: SearchUnitCard(children[index], maxTextLines: 1),
         ),
+        separatorBuilder: (context, index) => const SizedBox(width: 16),
+        itemCount: children.length,
       ),
     );
   }

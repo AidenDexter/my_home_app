@@ -11,9 +11,9 @@ import 'components/price_row.dart';
 
 class SearchUnitCard extends StatelessWidget {
   final SearchItem item;
-  final int? maxTitleLines;
+  final int? maxTextLines;
 
-  const SearchUnitCard(this.item, {this.maxTitleLines, super.key});
+  const SearchUnitCard(this.item, {this.maxTextLines, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,8 @@ class SearchUnitCard extends StatelessWidget {
                       Text(
                         item.dynamicTitle ?? 'null',
                         style: textStyles.title3,
-                        maxLines: maxTitleLines,
-                        overflow: maxTitleLines != null ? TextOverflow.ellipsis : null,
+                        maxLines: maxTextLines,
+                        overflow: maxTextLines != null ? TextOverflow.ellipsis : null,
                       ),
                       const SizedBox(height: 12),
                       PriceRow(item.price),
@@ -104,7 +104,11 @@ class SearchUnitCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      Text(item.address ?? ''),
+                      Text(
+                        item.address ?? '',
+                        maxLines: maxTextLines,
+                        overflow: maxTextLines != null ? TextOverflow.ellipsis : null,
+                      ),
                     ],
                   ),
                 ),
@@ -118,7 +122,11 @@ class SearchUnitCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(item.cityName ?? ''),
+                        child: Text(
+                          item.cityName ?? '',
+                          maxLines: maxTextLines,
+                          overflow: maxTextLines != null ? TextOverflow.ellipsis : null,
+                        ),
                       ),
                       Text(DateFormat('dd MMM. HH:mm').format(item.lastUpdated).toLowerCase()),
                     ],
