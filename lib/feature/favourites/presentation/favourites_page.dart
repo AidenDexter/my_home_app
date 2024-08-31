@@ -21,7 +21,7 @@ class FavouritesPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 100),
-                  child: Assets.icons.favourites.svg(),
+                  child: Assets.icons.emptyFavourites.svg(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(50),
