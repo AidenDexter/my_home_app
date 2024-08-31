@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../resources/assets.gen.dart';
 import 'primary_icon_button.dart';
 
 @immutable
@@ -78,13 +77,8 @@ class _Leading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icons = Assets.icons;
-
     const padding = EdgeInsets.zero;
-    final child = icons.arrow.svg(
-      height: 24,
-      width: 24,
-    );
+    const child = Icon(Icons.keyboard_arrow_left_rounded);
 
     return Padding(
       padding: const EdgeInsets.only(

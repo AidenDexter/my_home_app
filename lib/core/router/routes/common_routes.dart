@@ -18,6 +18,7 @@ final _commonRoutes = [
       assert((state.extra! as Map<String, Object>)['notFirstFloor'] is ValueNotifier<bool>);
       assert((state.extra! as Map<String, Object>)['notLastFloor'] is ValueNotifier<bool>);
       assert((state.extra! as Map<String, Object>)['isLastFloor'] is ValueNotifier<bool>);
+      assert((state.extra! as Map<String, Object>)['rooms'] is ValueNotifier<List<Rooms>>);
 
       return FiltersPage(
         key: state.pageKey,
@@ -34,6 +35,7 @@ final _commonRoutes = [
         notFirstFloorController: (state.extra! as Map<String, Object>)['notFirstFloor']! as ValueNotifier<bool>,
         notLastFloorController: (state.extra! as Map<String, Object>)['notLastFloor']! as ValueNotifier<bool>,
         isLastFloorController: (state.extra! as Map<String, Object>)['isLastFloor']! as ValueNotifier<bool>,
+        roomsController: (state.extra! as Map<String, Object>)['rooms']! as ValueNotifier<List<Rooms>>,
       );
     },
   ),
