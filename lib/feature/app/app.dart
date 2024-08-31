@@ -43,6 +43,21 @@ class _MaterialAppState extends State<_MaterialApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: _router,
       theme: AppTheme.lightThemeData,
+      builder: (context, child) => _MediaQuery(
+        child: child ?? const SizedBox.shrink(),
+      ),
     );
   }
+}
+
+@immutable
+class _MediaQuery extends StatelessWidget {
+  final Widget child;
+  const _MediaQuery({required this.child});
+
+  @override
+  Widget build(BuildContext context) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+        child: child,
+      );
 }

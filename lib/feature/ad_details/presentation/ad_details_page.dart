@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,6 @@ import 'package:styled_text/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/extension/extensions.dart';
-import '../../../core/extension/src/theme_extension.dart';
 import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/circle_button.dart';
 import '../../../core/ui_kit/decorated_container.dart';
@@ -93,7 +93,27 @@ class _DataLayer extends StatelessWidget {
                     .replaceAll('..', '.')
                     .toLowerCase()),
                 const Spacer(),
-                SelectableText('ID: ${item.id}')
+                InkWell(
+                  onTap: () {
+                    FlutterClipboard.copy(item.id.toString());
+                  },
+                  borderRadius: BorderRadius.circular(4),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(text: 'ID: ${item.id} '),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Icon(
+                            Icons.copy,
+                            size: 16,
+                            color: context.theme.commonColors.darkGrey100,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -139,7 +159,7 @@ class _DataLayer extends StatelessWidget {
             child: Row(
               children: [
                 if (item.area != null) ...[
-                  Text('Площадь: ${item.area?.toStringAsFixed(0)} ${context.l10n.square_meter}'),
+                  Text('${context.l10n.area}: ${item.area?.toStringAsFixed(0)} ${context.l10n.square_meter}'),
                   const SizedBox(width: 8),
                   const Text('|'),
                   const SizedBox(width: 8),
@@ -177,7 +197,7 @@ class _DataLayer extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                   child: Text(
-                                    'Собственник',
+                                    context.l10n.owner,
                                     style: textStyles.body2.copyWith(
                                       color: context.theme.commonColors.darkGrey70,
                                     ),
@@ -191,7 +211,7 @@ class _DataLayer extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                   child: Text(
-                                    'Агент',
+                                    context.l10n.agent,
                                     style: textStyles.body2.copyWith(
                                       color: context.theme.commonColors.green100,
                                     ),
@@ -207,7 +227,7 @@ class _DataLayer extends StatelessWidget {
                   PrimaryElevatedButton.secondary(
                     onPressed: () => launchUrl(Uri.parse('https://www.myhome.ge/pr/${item.id}')),
                     icon: const Icon(Icons.open_in_browser),
-                    child: const Text('Открыть в браузере'),
+                    child: Text(context.l10n.open_in_browser),
                   ),
                 ],
               ),
@@ -220,7 +240,7 @@ class _DataLayer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Краткое описание',
+                    context.l10n.short_description,
                     style: textStyles.headline3,
                   ),
                   const SizedBox(height: 16),

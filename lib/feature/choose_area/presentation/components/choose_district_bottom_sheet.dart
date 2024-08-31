@@ -40,14 +40,13 @@ class ChooseDistrictBottomSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Выбрать район:',
-                  /* TODO: добавить локализацию */
+                  '${context.l10n.select_districts}:',
                   style: context.theme.commonTextStyles.title1,
                 ),
               ),
               TextButton(
                 onPressed: context.pop,
-                child: const Text('Закрыть'), /* TODO: добавить локализацию */
+                child: Text(context.l10n.close),
               ),
             ],
           ),
@@ -155,7 +154,7 @@ class _DistrictCardState extends State<_DistrictCard> {
                           tristate: _isOpenable,
                         ),
                         Expanded(
-                          child: Text(district.translations.ru.displayName),
+                          child: Text(district.translations.getDisplayName(context)),
                         ),
                         if (_isOpenable) ...[
                           AnimatedRotation(
@@ -200,7 +199,7 @@ class _DistrictCardState extends State<_DistrictCard> {
                                       tristate: _isOpenable,
                                     ),
                                     Expanded(
-                                      child: Text(district.urbans![index].translations.ru.displayName),
+                                      child: Text(district.urbans![index].translations.getDisplayName(context)),
                                     ),
                                   ],
                                 ),

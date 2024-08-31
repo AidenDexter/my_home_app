@@ -306,7 +306,7 @@ class _ChosenArea extends StatelessWidget {
                     districtId: item,
                   );
                   if (district == null) continue;
-                  res.add(district.translations.ru.displayName);
+                  res.add(district.translations.getDisplayName(context));
                 }
                 return Text(
                   res.join(', '),
@@ -318,10 +318,10 @@ class _ChosenArea extends StatelessWidget {
 
               final city = ChooseAreaScope.cityById(context, selectedCity.value!);
               if (city == null) return child!;
-              return Text(city.translations.ru.displayName, style: textStyles.body1);
+              return Text(city.translations.getDisplayName(context), style: textStyles.body1);
             },
             child: Text(
-              'Город, район',
+              context.l10n.city_district,
               style: textStyles.body1.copyWith(color: colors.darkGrey30),
             ),
           ),
@@ -360,12 +360,12 @@ class _DealAndRealEstateType extends StatelessWidget {
             AnimatedBuilder(
               animation: Listenable.merge([dealType, realEstateTypes]),
               builder: (context, child) {
-                var dealTypeText = 'Тип сделки';
-                if (dealType.value != null) dealTypeText = dealType.value!.title;
+                var dealTypeText = context.l10n.transaction_type;
+                if (dealType.value != null) dealTypeText = dealType.value!.toLocalizeString(context);
 
-                var realEstateTypesText = 'Тип недв. имущества';
+                var realEstateTypesText = context.l10n.real_estate_type;
                 if (realEstateTypes.value.isNotEmpty) {
-                  realEstateTypesText = 'Тип: ${realEstateTypes.value.map((e) => e.title).join(', ')}';
+                  realEstateTypesText = realEstateTypes.value.map((e) => e.toLocalizeString(context)).join(', ');
                 }
                 return Expanded(
                   child: Column(

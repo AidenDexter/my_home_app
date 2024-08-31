@@ -28,8 +28,8 @@ class ChooseAreaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PrimaryAppBar(
-        title: Text('Выбрать место'),
+      appBar: PrimaryAppBar(
+        title: Text(context.l10n.choose_location),
       ),
       body: BlocBuilder<ChooseAreaBloc, ChooseAreaState>(
         builder: (context, state) => state.map(
@@ -99,7 +99,7 @@ class _DataLayout extends StatelessWidget {
                           selectedUrbans: selectedUrbans,
                           districts: data.firstWhere((city) => city.id == selectedCity.value).districts!,
                         ),
-                        child: const Text('Выбрать районы'),
+                        child: Text(context.l10n.select_districts),
                       ),
                     ),
                     crossFadeState: _hasDistricts() ? CrossFadeState.showSecond : CrossFadeState.showFirst,
@@ -109,7 +109,7 @@ class _DataLayout extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PrimaryElevatedButton.secondary(
-                          child: const Text('Очистить'),
+                          child: Text(context.l10n.clear),
                           onPressed: () {
                             selectedCity.value = null;
                             selectedUrbans.value = [];
@@ -120,7 +120,7 @@ class _DataLayout extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: PrimaryElevatedButton(
-                          child: const Text('Поиск'),
+                          child: Text(context.l10n.search),
                           onPressed: selectedCity.value != null
                               ? () {
                                   context.pop();
@@ -181,7 +181,7 @@ class _CityCard extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              data.translations.ru.displayName,
+              data.translations.getDisplayName(context),
               style: context.theme.commonTextStyles.title2,
             ),
           ),

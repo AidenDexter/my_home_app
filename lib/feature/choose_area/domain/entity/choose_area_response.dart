@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../../localization_control/domain/locale_entity/locale_entity.dart';
+import '../../../localization_control/presentation/localization_scope.dart';
 
 part 'choose_area_response.g.dart';
 
@@ -49,6 +53,17 @@ class Translations {
   final Translate ru;
 
   factory Translations.fromJson(Map<String, dynamic> json) => _$TranslationsFromJson(json);
+
+  String getDisplayName(BuildContext context) {
+    switch (LocalizationScope.localeEntity(context)) {
+      case LocaleEntity.en:
+        return en.displayName;
+      case LocaleEntity.ru:
+        return ru.displayName;
+      case LocaleEntity.ka:
+        return ka.displayName;
+    }
+  }
 }
 
 @JsonSerializable(createToJson: false)

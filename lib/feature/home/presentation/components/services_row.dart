@@ -67,11 +67,12 @@ class _ServiceCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: SizedBox(
             width: 130,
+            height: 120,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  image.image(),
+                  Expanded(child: image.image()),
                   const SizedBox(height: 8),
                   FittedBox(
                     fit: BoxFit.scaleDown,

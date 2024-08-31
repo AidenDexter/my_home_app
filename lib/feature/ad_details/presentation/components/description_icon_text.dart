@@ -16,7 +16,7 @@ class DescriptionIconText extends StatelessWidget {
       if (item.area != null)
         Expanded(
           child: _Item(
-            title: 'Общая площадь',
+            title: context.l10n.total_area,
             value: '${item.area?.toStringAsFixed(0).formatNumber()} ${context.l10n.square_meter}',
             icon: Assets.icons.square,
           ),
@@ -24,7 +24,7 @@ class DescriptionIconText extends StatelessWidget {
       if (item.room != null)
         Expanded(
           child: _Item(
-            title: 'Комнаты',
+            title: context.l10n.rooms,
             value: '${item.room}',
             icon: Assets.icons.rooms,
           ),
@@ -32,7 +32,7 @@ class DescriptionIconText extends StatelessWidget {
       if (item.bedroom != null)
         Expanded(
           child: _Item(
-            title: 'Спальни',
+            title: context.l10n.bedrooms,
             value: '${item.bedroom}',
             icon: Assets.icons.bedrooms,
           ),
@@ -40,7 +40,7 @@ class DescriptionIconText extends StatelessWidget {
       if (item.floor != null)
         Expanded(
           child: _Item(
-            title: 'Этаж',
+            title: context.l10n.floor,
             value: '${item.floor}${item.totalFloors != null ? ' / ${item.totalFloors}' : ''}',
             icon: Assets.icons.floor,
           ),

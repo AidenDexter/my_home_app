@@ -30,40 +30,43 @@ class BottomNavBar extends StatelessWidget {
             ),
             padding: EdgeInsets.only(bottom: bottomPadding),
             margin: const EdgeInsets.only(top: 20),
-            child: SizedBox(
-              height: 64,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _NavBarItem(
-                    onTap: (index) => BottomNavigationScope.change(context, index),
-                    index: 0,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.home,
-                  ),
-                  _NavBarItem(
-                    onTap: (index) => BottomNavigationScope.change(context, index),
-                    index: 1,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.search,
-                  ),
-                  Opacity(
-                    child: Assets.navBar.plus.svg(),
-                    opacity: 0,
-                  ),
-                  _NavBarItem(
-                    onTap: (index) => BottomNavigationScope.change(context, index),
-                    index: 2,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.favourite,
-                  ),
-                  _NavBarItem(
-                    onTap: (index) => BottomNavigationScope.change(context, index),
-                    index: 3,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.profile,
-                  ),
-                ],
+            child: Material(
+              color: context.theme.commonColors.white,
+              child: SizedBox(
+                height: 64,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 0,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.home,
+                    ),
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 1,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.search,
+                    ),
+                    Opacity(
+                      child: Assets.navBar.plus.svg(),
+                      opacity: 0,
+                    ),
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 2,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.favourite,
+                    ),
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 3,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.profile,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -111,10 +114,10 @@ class _NavBarItem extends StatelessWidget {
     final isSelected = index == currentIndex;
     return InkWell(
       onTap: () => onTap(index),
-      child: AnimatedContainer(
-        duration: context.theme.durations.pageElements,
+      borderRadius: const BorderRadius.all(Radius.circular(100)),
+      child: Ink(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
+          shape: BoxShape.circle,
           color: isSelected ? colors.green10 : null,
         ),
         padding: const EdgeInsets.all(12),
