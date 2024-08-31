@@ -1,12 +1,27 @@
+import 'package:flutter/material.dart' show BuildContext;
+
+import '../../../../core/extension/src/app_localizations_x.dart';
+
 enum DealType {
-  sale(id: 1, title: 'Продается'),
-  rent(id: 2, title: 'В аренду'),
-  leaseholdMortgate(id: 3, title: 'Ипотека под аренду'),
-  dailyRent(id: 7, title: 'Посуточная аренда'),
+  sale(id: 1),
+  rent(id: 2),
+  leaseholdMortgate(id: 3),
+  dailyRent(id: 7),
   ;
 
   final int id;
-  final String title;
+  const DealType({required this.id});
 
-  const DealType({required this.id, required this.title});
+  String toLocalizeString(BuildContext context) {
+    switch (this) {
+      case sale:
+        return context.l10n.for_sale;
+      case rent:
+        return context.l10n.for_rent;
+      case leaseholdMortgate:
+        return context.l10n.leasehold_mortgage;
+      case dailyRent:
+        return context.l10n.daily_rent;
+    }
+  }
 }

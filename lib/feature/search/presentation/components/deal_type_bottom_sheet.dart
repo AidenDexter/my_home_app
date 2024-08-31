@@ -40,7 +40,7 @@ class DealTypeBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                const Expanded(child: Text('Выберите параметры')),
+                Expanded(child: Text(context.l10n.select_options)),
                 InkWell(
                   borderRadius: BorderRadius.circular(8),
                   onTap: context.pop,
@@ -63,7 +63,7 @@ class DealTypeBottomSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Тип сделки'),
+                Text(context.l10n.transaction_type),
                 const SizedBox(height: 8),
                 AnimatedBuilder(
                     animation: dealType,
@@ -79,7 +79,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                                         groupValue: dealType.value,
                                         onTap: (value) => dealType.value = value,
                                         value: e,
-                                        title: e.title,
+                                        title: e.toLocalizeString(context),
                                       ),
                                     ),
                                   ),
@@ -88,7 +88,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                       );
                     }),
                 const SizedBox(height: 8),
-                const Text('Тип недв. имущества'),
+                Text(context.l10n.real_estate_type),
                 const SizedBox(height: 8),
                 AnimatedBuilder(
                   animation: realEstateTypes,
@@ -104,7 +104,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                                     isSelected: realEstateTypes.value.contains(e),
                                     onTap: _onRealEstateTap,
                                     value: e,
-                                    title: e.title,
+                                    title: e.toLocalizeString(context),
                                     icon: _realEstateTypeToIcon(context, e, realEstateTypes.value.contains(e)),
                                   ),
                                 ),
@@ -140,7 +140,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                       dealType.value = null;
                       realEstateTypes.value = [];
                     },
-                    child: const Text('Очистить'),
+                    child: Text(context.l10n.clear),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -150,7 +150,7 @@ class DealTypeBottomSheet extends StatelessWidget {
                       context.pop();
                       search();
                     },
-                    child: const Text('Поиск'),
+                    child: Text(context.l10n.search),
                   ),
                 ),
               ],

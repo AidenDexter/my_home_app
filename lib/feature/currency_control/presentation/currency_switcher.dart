@@ -25,10 +25,7 @@ class CurrencySwitcher extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: colors.white,
-                border: Border.all(
-                  color: colors.neutralgrey10,
-                ),
+                border: Border.all(color: colors.neutralgrey10),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

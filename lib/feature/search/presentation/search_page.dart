@@ -80,19 +80,20 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
     return Scaffold(
-      appBar: const PrimaryAppBar(
-        title: Text('Поиск объявлений'),
+      appBar: PrimaryAppBar(
+        title: Text(context.l10n.search_ads),
         ignoreLeading: true,
       ),
       floatingActionButton: AnimatedBuilder(
         animation: _isShowsUpButton,
         builder: (context, child) {
           if (!_isShowsUpButton.value) return const SizedBox.shrink();
-          return child!;
+          return SafeArea(child: child!);
         },
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 48),
+          padding: EdgeInsets.only(bottom: bottomPadding - 32),
           child: FloatingActionButton.small(
             onPressed: () => _scrollController.animateTo(
               0,

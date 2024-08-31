@@ -78,8 +78,8 @@ class _FiltersPageState extends State<FiltersPage> {
     final colors = context.theme.commonColors;
     final currencySymbol = CurrencyScope.currencySymbol(context);
     return Scaffold(
-      appBar: const PrimaryAppBar(
-        title: Text('Detailed filters'),
+      appBar: PrimaryAppBar(
+        title: Text(context.l10n.detailed_filter),
       ),
       body: Column(
         children: [
@@ -89,7 +89,7 @@ class _FiltersPageState extends State<FiltersPage> {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  const Text('Тип сделки'),
+                  Text(context.l10n.transaction_type),
                   const SizedBox(height: 8),
                   AnimatedBuilder(
                       animation: widget.dealType,
@@ -105,7 +105,7 @@ class _FiltersPageState extends State<FiltersPage> {
                                           groupValue: widget.dealType.value,
                                           onTap: (value) => widget.dealType.value = value,
                                           value: e,
-                                          title: e.title,
+                                          title: e.toLocalizeString(context),
                                         ),
                                       ),
                                     ),
@@ -114,7 +114,7 @@ class _FiltersPageState extends State<FiltersPage> {
                         );
                       }),
                   const SizedBox(height: 8),
-                  const Text('Тип недв. имущества'),
+                  Text(context.l10n.real_estate_type),
                   const SizedBox(height: 8),
                   AnimatedBuilder(
                     animation: widget.realEstateTypes,
@@ -130,7 +130,7 @@ class _FiltersPageState extends State<FiltersPage> {
                                       isSelected: widget.realEstateTypes.value.contains(e),
                                       onTap: _onRealEstateTap,
                                       value: e,
-                                      title: e.title,
+                                      title: e.toLocalizeString(context),
                                       icon: _realEstateTypeToIcon(context, e, widget.realEstateTypes.value.contains(e)),
                                     ),
                                   ),
@@ -142,11 +142,11 @@ class _FiltersPageState extends State<FiltersPage> {
                     },
                   ),
                   const SizedBox(height: 8),
-                  const Text.rich(
+                  Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: 'Цена'),
-                        WidgetSpan(
+                        TextSpan(text: context.l10n.full_price),
+                        const WidgetSpan(
                           child: Padding(
                             padding: EdgeInsets.only(left: 8),
                             child: CurrencySwitcher(),
@@ -161,7 +161,7 @@ class _FiltersPageState extends State<FiltersPage> {
                       Expanded(
                         child: RangeTextField(
                           suffix: currencySymbol,
-                          label: 'от',
+                          label: context.l10n.from,
                           controller: widget.priceFromController,
                         ),
                       ),
@@ -169,29 +169,29 @@ class _FiltersPageState extends State<FiltersPage> {
                       Expanded(
                         child: RangeTextField(
                           suffix: currencySymbol,
-                          label: 'до',
+                          label: context.l10n.to,
                           controller: widget.priceToController,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const Text('Площадь'),
+                  Text(context.l10n.area),
                   const SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
                         child: RangeTextField(
-                          suffix: 'м²',
-                          label: 'от',
+                          suffix: context.l10n.square_meter,
+                          label: context.l10n.from,
                           controller: widget.areaFromController,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: RangeTextField(
-                          suffix: 'м²',
-                          label: 'до',
+                          suffix: context.l10n.square_meter,
+                          label: context.l10n.to,
                           controller: widget.areaToController,
                         ),
                       ),
@@ -245,7 +245,7 @@ class _FiltersPageState extends State<FiltersPage> {
                   Expanded(
                     child: PrimaryElevatedButton.secondary(
                       onPressed: _clearAllFilters,
-                      child: const Text('Очистить'),
+                      child: Text(context.l10n.clear),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -255,7 +255,7 @@ class _FiltersPageState extends State<FiltersPage> {
                         context.pop();
                         widget.search();
                       },
-                      child: const Text('Поиск'),
+                      child: Text(context.l10n.search),
                     ),
                   ),
                 ],

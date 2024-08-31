@@ -10,11 +10,15 @@ import '../domain/locale_entity/locale_entity.dart';
 class LocalizationScope extends SingleChildStatelessWidget {
   const LocalizationScope({super.key});
 
-  static Locale? localeOf(BuildContext context) =>
+  static Locale localeOf(BuildContext context) =>
       context.watch<LocalizationControlBloc>().state.currentLocalization.toLocale;
 
-  static String getLocaleCode(BuildContext context) =>
-      context.watch<LocalizationControlBloc>().state.currentLocalization.languageCode;
+  static LocaleEntity localeEntity(BuildContext context) =>
+      context.read<LocalizationControlBloc>().state.currentLocalization;
+
+  static String getLocaleCode(BuildContext context, {bool listen = true}) => listen
+      ? context.watch<LocalizationControlBloc>().state.currentLocalization.languageCode
+      : context.read<LocalizationControlBloc>().state.currentLocalization.languageCode;
 
   static void changeLocale(BuildContext context, {required Locale locale}) =>
       context.read<LocalizationControlBloc>().add(

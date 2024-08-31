@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/services/service_locator/service_locator.dart';
 import '../../currency_control/presentation/currency_scope.dart';
+import '../../localization_control/presentation/localization_scope.dart';
 import '../bloc/search_bloc.dart';
 import '../domain/entity/search_response.dart';
 
@@ -32,6 +33,7 @@ class SearchScope extends StatelessWidget {
     required List<int> rooms,
   }) =>
       context.read<SearchBloc>().add(SearchEvent.search(
+            locale: LocalizationScope.getLocaleCode(context, listen: false),
             cityId: cityId,
             dealType: dealType,
             districts: districts,
@@ -51,14 +53,19 @@ class SearchScope extends StatelessWidget {
             rooms: rooms,
           ));
 
-  static void loadMore(BuildContext context) => context.read<SearchBloc>().add(const SearchEvent.loadMore());
+  static void loadMore(BuildContext context) => context.read<SearchBloc>().add(SearchEvent.loadMore(
+        LocalizationScope.getLocaleCode(context, listen: false),
+      ));
 
   static List<SearchItem> items(BuildContext context) => context.watch<SearchBloc>().state.items;
 
   static bool isLoadingMore(BuildContext context) => context.watch<SearchBloc>().state.isLoadingMore;
   @override
   Widget build(BuildContext context) => BlocProvider<SearchBloc>(
-        create: (context) => getIt<SearchBloc>()..add(const SearchEvent.search()),
+        create: (context) => getIt<SearchBloc>()
+          ..add(SearchEvent.search(
+            locale: LocalizationScope.getLocaleCode(context, listen: false),
+          )),
         child: child,
       );
 }

@@ -9,6 +9,9 @@ class BottomNavigationScope extends StatelessWidget {
 
   const BottomNavigationScope({required this.child, super.key});
 
+  static void change(BuildContext context, int pageIndex) =>
+      context.read<BottomNavigationBloc>().add(BottomNavigationEvent.changed(pageIndex));
+
   @override
   Widget build(BuildContext context) => BlocProvider<BottomNavigationBloc>(
         create: (context) => getIt<BottomNavigationBloc>(),

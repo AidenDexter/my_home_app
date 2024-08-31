@@ -3,6 +3,7 @@ part of 'search_bloc.dart';
 @freezed
 class SearchEvent with _$SearchEvent {
   const factory SearchEvent.search({
+    required String locale,
     int? cityId,
     int? dealType,
     @Default([]) List<int> realEstateTypes,
@@ -22,5 +23,5 @@ class SearchEvent with _$SearchEvent {
     @Default([]) List<int> rooms,
   }) = _SearchEvent;
 
-  const factory SearchEvent.loadMore() = _LoadMoreEvent;
+  const factory SearchEvent.loadMore(String locale) = _LoadMoreEvent;
 }

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
 import '../../../favourites/bloc/favourites_bloc.dart';
-import '../../bloc/bottom_navigation_bloc.dart';
+import '../bottom_navigation_scope.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -33,79 +33,75 @@ class BottomNavBar extends StatelessWidget {
             ),
             padding: EdgeInsets.only(bottom: bottomPadding),
             margin: const EdgeInsets.only(top: 20),
-            child: SizedBox(
-              height: 64,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
+            child: Material(
+              color: context.theme.commonColors.white,
+              child: SizedBox(
+                height: 64,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 0,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.home,
                     ),
-                    index: 0,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.home,
-                  ),
-                  _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 1,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.search,
                     ),
-                    index: 1,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.search,
-                  ),
-                  Opacity(
-                    child: Assets.navBar.plus.svg(),
-                    opacity: 0,
-                  ),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      _NavBarItem(
-                        onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                          BottomNavigationEvent.pageChanged(index),
+                    Opacity(
+                      child: Assets.navBar.plus.svg(),
+                      opacity: 0,
+                    ),
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        _NavBarItem(
+                          onTap: (index) => BottomNavigationScope.change(context, index),
+                          index: 2,
+                          currentIndex: currentIndex,
+                          asset: Assets.navBar.favourite,
                         ),
-                        index: 2,
-                        currentIndex: currentIndex,
-                        asset: Assets.navBar.favourite,
-                      ),
-                      BlocBuilder<FavouritesBloc, FavouritesState>(
-                        builder: (context, state) {
-                          if (state.favourites.isNotEmpty) {
-                            return Positioned(
-                              top: 1,
-                              right: -3,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                    color: context.theme.commonColors.red100, borderRadius: BorderRadius.circular(10)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
-                                  child: Text(
-                                    state.favourites.length > 99 ? '99+' : '${state.favourites.length}',
-                                    style: TextStyle(
-                                        height: 1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: state.favourites.length > 99 ? 10 : 11,
-                                        color: context.theme.commonColors.white),
+                        BlocBuilder<FavouritesBloc, FavouritesState>(
+                          builder: (context, state) {
+                            if (state.favourites.isNotEmpty) {
+                              return Positioned(
+                                top: 1,
+                                right: -3,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      color: context.theme.commonColors.red100,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+                                    child: Text(
+                                      state.favourites.length > 99 ? '99+' : '${state.favourites.length}',
+                                      style: TextStyle(
+                                          height: 1,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: state.favourites.length > 99 ? 10 : 11,
+                                          color: context.theme.commonColors.white),
+                                    ),
                                   ),
-                                ),
-                              ).animate().scale(curve: Curves.easeInOut),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        },
-                      ),
-                    ],
-                  ),
-                  _NavBarItem(
-                    onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context).add(
-                      BottomNavigationEvent.pageChanged(index),
+                                ).animate().scale(curve: Curves.easeInOut),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
+                        ),
+                      ],
                     ),
-                    index: 3,
-                    currentIndex: currentIndex,
-                    asset: Assets.navBar.profile,
-                  ),
-                ],
+                    _NavBarItem(
+                      onTap: (index) => BottomNavigationScope.change(context, index),
+                      index: 3,
+                      currentIndex: currentIndex,
+                      asset: Assets.navBar.profile,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -153,10 +149,10 @@ class _NavBarItem extends StatelessWidget {
     final isSelected = index == currentIndex;
     return InkWell(
       onTap: () => onTap(index),
-      child: AnimatedContainer(
-        duration: context.theme.durations.pageElements,
+      borderRadius: const BorderRadius.all(Radius.circular(100)),
+      child: Ink(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
+          shape: BoxShape.circle,
           color: isSelected ? colors.green10 : colors.neutralgrey3,
         ),
         padding: const EdgeInsets.all(12),

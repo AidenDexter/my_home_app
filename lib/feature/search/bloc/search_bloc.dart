@@ -56,7 +56,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           '${event.rooms.isEmpty ? '' : '&room_types=${event.rooms.join(',')}'}';
 
       _lastFilter = filter;
-      final items = await _repository.search('page=$_page$_lastFilter');
+      final items = await _repository.search('page=$_page$_lastFilter', event.locale);
       emit(SearchState.idle(items));
       _page++;
     } on Object catch (error) {
@@ -68,7 +68,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (_isEndOfList) return;
     emit(SearchState.loadMoreProgress(state.items));
     try {
-      final transactions = await _repository.search('page=$_page$_lastFilter');
+      final transactions = await _repository.search('page=$_page$_lastFilter', event.locale);
       emit(SearchState.idle([...state.items, ...transactions]));
       _page++;
       if (transactions.length < 20) _isEndOfList = true;
