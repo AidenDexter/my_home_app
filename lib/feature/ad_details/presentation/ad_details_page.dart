@@ -1,5 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
@@ -14,6 +15,7 @@ import '../../../core/ui_kit/decorated_container.dart';
 import '../../../core/ui_kit/primary_elevated_button.dart';
 import '../../currency_control/presentation/currency_scope.dart';
 import '../../currency_control/presentation/currency_switcher.dart';
+import '../../favourites/presentation/favourites_scope.dart';
 import '../../localization_control/presentation/localization_scope.dart';
 import '../../search/domain/entity/search_response.dart';
 import 'components/description_icon_text.dart';
@@ -47,8 +49,19 @@ class AdDetailsPage extends StatelessWidget {
                     ),
                     const Spacer(),
                     CircleButton(
-                      icon: const Opacity(opacity: .2, child: Icon(Icons.favorite_border, size: 22)),
-                      onTap: () {},
+                      topIconPadding: 2,
+                      icon: FavouritesScope.isFavourite(context, id: item.id)
+                          ? Icon(Icons.favorite, size: 23, color: context.theme.commonColors.red100)
+                              .animate(key: UniqueKey())
+                              .fade(curve: Curves.easeInOut)
+                          : const Icon(Icons.favorite_border, size: 23)
+                              .animate(key: UniqueKey())
+                              .fade(curve: Curves.easeInOut),
+                      onTap: () {
+                        FavouritesScope.isFavourite(context, id: item.id, listen: false)
+                            ? FavouritesScope.remove(context, id: item.id)
+                            : FavouritesScope.add(context, id: item.id);
+                      },
                     ),
                     const SizedBox(width: 8),
                     CircleButton(

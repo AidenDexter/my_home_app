@@ -30,6 +30,7 @@ class SearchScope extends StatelessWidget {
     required bool notFirstFloor,
     required bool notLastFloor,
     required bool isLastFloor,
+    required List<int> rooms,
   }) =>
       context.read<SearchBloc>().add(SearchEvent.search(
             locale: LocalizationScope.getLocaleCode(context, listen: false),
@@ -49,6 +50,7 @@ class SearchScope extends StatelessWidget {
             notFirstFloor: notFirstFloor,
             notLastFloor: notLastFloor,
             isLastFloor: isLastFloor,
+            rooms: rooms,
           ));
 
   static void loadMore(BuildContext context) => context.read<SearchBloc>().add(SearchEvent.loadMore(

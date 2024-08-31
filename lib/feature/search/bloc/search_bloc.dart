@@ -36,7 +36,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     try {
       _page = 1;
       _isEndOfList = false;
-      final filter = '${event.cityId == null ? '' : '&cities=${event.cityId}'}'
+      final filter = ''
+          '${event.cityId == null ? '' : '&cities=${event.cityId}'}'
           '${event.realEstateTypes.isEmpty ? '' : '&real_estate_types=${event.realEstateTypes.join(',')}'}'
           '${event.dealType == null ? '' : '&deal_types=${event.dealType}'}'
           '${event.districts.isEmpty ? '' : '&districts=${event.districts.join(',')}'}'
@@ -51,7 +52,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           '${event.floorTo.isEmpty ? '' : '&floor_to=${event.floorTo}'}'
           '${!event.notFirstFloor ? '' : '&not_first=${event.notFirstFloor}'}'
           '${!event.notLastFloor ? '' : '&not_last=${event.notLastFloor}'}'
-          '${!event.isLastFloor ? '' : '&is_last=${event.isLastFloor}'}';
+          '${!event.isLastFloor ? '' : '&is_last=${event.isLastFloor}'}'
+          '${event.rooms.isEmpty ? '' : '&room_types=${event.rooms.join(',')}'}';
 
       _lastFilter = filter;
       final items = await _repository.search('page=$_page$_lastFilter', event.locale);

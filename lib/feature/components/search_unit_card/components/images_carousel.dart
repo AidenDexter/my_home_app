@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
+import '../../../../core/ui_kit/primary_icon_button.dart';
+import '../../../favourites/presentation/favourites_scope.dart';
 import '../../../search/domain/entity/search_response.dart';
 import 'slide_button.dart';
 
@@ -75,7 +77,13 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
           Positioned(
             top: 12,
             right: 12,
-            child: Assets.icons.like.svg(height: 24),
+            child: PrimaryIconButton(
+                onTap: () => FavouritesScope.isFavourite(context, id: widget.item.id, listen: false)
+                    ? FavouritesScope.remove(context, id: widget.item.id)
+                    : FavouritesScope.add(context, id: widget.item.id),
+                icon: FavouritesScope.isFavourite(context, id: widget.item.id)
+                    ? Assets.icons.liked.svg(height: 24)
+                    : Assets.icons.like.svg(height: 24)),
           ),
           Align(
             alignment: Alignment.centerRight,

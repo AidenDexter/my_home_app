@@ -8,6 +8,7 @@ import '../../core/services/service_locator/service_locator.dart';
 import '../../core/theme/app_theme.dart';
 import '../choose_area/presentation/choose_area_scope.dart';
 import '../currency_control/presentation/currency_scope.dart';
+import '../favourites/presentation/favourites_scope.dart';
 import '../localization_control/presentation/localization_scope.dart';
 
 class App extends StatelessWidget {
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
         ChooseAreaScope(),
         CurrencyScope(),
         LocalizationScope(),
+        FavouritesScope(),
       ],
       child: const _MaterialApp(),
     );

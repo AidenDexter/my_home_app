@@ -5,15 +5,15 @@ import '../../../../core/extension/src/app_localizations_x.dart';
 enum RealEstateType {
   apartments(
     id: 1,
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   houses(
     id: 2,
-    filters: [],
+    filters: ['rooms'],
   ),
   countryHouses(
     id: 3,
-    filters: [],
+    filters: ['rooms'],
   ),
   landPlots(
     id: 4,
@@ -21,11 +21,11 @@ enum RealEstateType {
   ),
   commercial(
     id: 5,
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   hotels(
     id: 6,
-    filters: ['floor'],
+    filters: ['floor', 'rooms'],
   ),
   ;
 

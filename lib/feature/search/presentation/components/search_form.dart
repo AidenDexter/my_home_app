@@ -8,6 +8,7 @@ import '../../../../core/ui_kit/primary_elevated_button.dart';
 import '../../../choose_area/presentation/choose_area_scope.dart';
 import '../../domain/entity/deal_type.dart';
 import '../../domain/entity/real_estate_type.dart';
+import '../../domain/entity/rooms.dart';
 import 'deal_type_bottom_sheet.dart';
 
 class SearchForm extends StatelessWidget {
@@ -28,6 +29,7 @@ class SearchForm extends StatelessWidget {
     required this.notFirstFloorController,
     required this.notLastFloorController,
     required this.isLastFloorController,
+    required this.roomsController,
     super.key,
   });
 
@@ -48,6 +50,7 @@ class SearchForm extends StatelessWidget {
   final ValueNotifier<bool> notFirstFloorController;
   final ValueNotifier<bool> notLastFloorController;
   final ValueNotifier<bool> isLastFloorController;
+  final ValueNotifier<List<Rooms>> roomsController;
 
   final VoidCallback search;
 
@@ -101,6 +104,7 @@ class SearchForm extends StatelessWidget {
                       'notFirstFloor': notFirstFloorController,
                       'notLastFloor': notLastFloorController,
                       'isLastFloor': isLastFloorController,
+                      'rooms': roomsController,
                     });
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
@@ -187,6 +191,7 @@ class SearchForm extends StatelessWidget {
     notFirstFloorController.value = false;
     notLastFloorController.value = false;
     isLastFloorController.value = false;
+    roomsController.value = [];
   }
 
   Listenable get _listenAll => Listenable.merge([
@@ -205,6 +210,7 @@ class SearchForm extends StatelessWidget {
         notFirstFloorController,
         notLastFloorController,
         isLastFloorController,
+        roomsController,
       ]);
 
   int get _usedFiltersCount {
@@ -224,6 +230,7 @@ class SearchForm extends StatelessWidget {
     if (notFirstFloorController.value) res++;
     if (notLastFloorController.value) res++;
     if (isLastFloorController.value) res++;
+    if (roomsController.value.isNotEmpty) res++;
     return res;
   }
 }
