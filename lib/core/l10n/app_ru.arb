@@ -41,5 +41,6 @@
 	"hotels": "Гостиницы",
 	"full_price": "Полная стоимость",
 	"select_districts": "Выберите районы",
-	"select_options": "Выберите параметры"
+	"select_options": "Выберите параметры",
+	"page_in_development": "Добавление\nобъявлений находится\nв разработке"
 }

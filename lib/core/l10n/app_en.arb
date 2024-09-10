@@ -41,5 +41,6 @@
 	"hotels": "Hotels",
 	"full_price": "Full price",
 	"select_districts": "Select districts",
-	"select_options": "Select options"
+	"select_options": "Select options",
+	"page_in_development": "Page is in development"
 }

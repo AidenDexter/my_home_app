@@ -41,5 +41,6 @@
 	"hotels": "სასტუმროები",
 	"full_price": "სრული ფასი",
 	"select_districts": "აირჩიეთ რაიონები",
-	"select_options": "აირჩიეთ პარამეტრები"
+	"select_options": "აირჩიეთ პარამეტრები",
+	"page_in_development": "გვერდი ვითარდება"
 }

@@ -7,6 +7,7 @@ import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
 import '../../components/search_unit_card/search_unit_card.dart';
+import '../../localization_control/bloc/localization_control_bloc.dart';
 import '../bloc/search_bloc.dart';
 import '../domain/entity/deal_type.dart';
 import '../domain/entity/real_estate_type.dart';
@@ -133,54 +134,57 @@ class _BodyState extends State<_Body> {
                     roomsController: _roomsController,
                   ),
                 ),
-                BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) => state.maybeMap(
-                    initProgress: (value) => const SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
-                    error: (value) => SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 400,
-                        width: double.infinity,
-                        child: ErrorBody(
-                          error: value.errorHandler,
-                          actions: [
-                            ElevatedButton(
-                              onPressed: _search,
-                              child: const Text('try_again'),
-                            ),
-                          ],
+                BlocListener<LocalizationControlBloc, LocalizationControlState>(
+                  listener: (context, state) => _search(),
+                  child: BlocBuilder<SearchBloc, SearchState>(
+                    builder: (context, state) => state.maybeMap(
+                      initProgress: (value) => const SliverToBoxAdapter(
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                      error: (value) => SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 400,
+                          width: double.infinity,
+                          child: ErrorBody(
+                            error: value.errorHandler,
+                            actions: [
+                              ElevatedButton(
+                                onPressed: _search,
+                                child: const Text('try_again'),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    orElse: () {
-                      if (state.items.isEmpty) return const SliverToBoxAdapter(child: _EmptySearchResult());
-                      return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            final child = SearchUnitCard(state.items[index]);
+                      orElse: () {
+                        if (state.items.isEmpty) return const SliverToBoxAdapter(child: _EmptySearchResult());
+                        return SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final child = SearchUnitCard(state.items[index]);
 
-                            if (index == state.items.length - 1) {
-                              SearchScope.loadMore(context);
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  child,
-                                  if (SearchScope.isLoadingMore(context)) ...[
-                                    const SizedBox(height: 8),
-                                    const Center(child: CircularProgressIndicator()),
+                              if (index == state.items.length - 1) {
+                                SearchScope.loadMore(context);
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    child,
+                                    if (SearchScope.isLoadingMore(context)) ...[
+                                      const SizedBox(height: 8),
+                                      const Center(child: CircularProgressIndicator()),
+                                    ],
+                                    const SizedBox(height: 80),
                                   ],
-                                  const SizedBox(height: 80),
-                                ],
-                              );
-                            }
+                                );
+                              }
 
-                            return child;
-                          },
-                          childCount: state.items.length,
-                        ),
-                      );
-                    },
+                              return child;
+                            },
+                            childCount: state.items.length,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
