@@ -8,7 +8,7 @@ import '../../feature/add_ad/presentation/add_ad_page.dart';
 import '../../feature/choose_area/presentation/choose_area_page.dart';
 import '../../feature/favourites/presentation/favourites_page.dart';
 import '../../feature/home/presentation/home_page.dart';
-import '../../feature/mock/presentation/mock_page.dart';
+import '../../feature/profile/presentation/profile_page.dart';
 import '../../feature/root/presentation/root_page.dart';
 import '../../feature/search/domain/entity/deal_type.dart';
 import '../../feature/search/domain/entity/real_estate_type.dart';

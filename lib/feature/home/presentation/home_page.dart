@@ -7,9 +7,10 @@ import '../../../core/ui_kit/decorated_container.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
 import '../../../core/ui_kit/primary_icon_button.dart';
+import '../../../core/ui_kit/primary_refresh_indicator.dart';
+import '../../../core/ui_kit/skeleton.dart';
 import '../../components/search_unit_card/search_unit_card.dart';
 import '../../currency_control/presentation/currency_switcher.dart';
-import '../../localization_control/bloc/localization_control_bloc.dart';
 import '../../localization_control/presentation/language_bottom_sheet.dart';
 import '../../root/presentation/bottom_navigation_scope.dart';
 import '../../search/domain/entity/search_response.dart';
@@ -58,16 +59,13 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: BlocListener<LocalizationControlBloc, LocalizationControlState>(
-          listener: (context, state) => HomeScope.readOf(context),
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) => state.map(
-              progress: (_) => const Center(child: CircularProgressIndicator()),
-              success: (state) => _DataLayout(state.sections),
-              error: (state) => ErrorBody(
-                error: state.errorHandler,
-                actions: [ElevatedButton(onPressed: () => HomeScope.readOf(context), child: const Text('Try again'))],
-              ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) => state.map(
+            progress: (_) => const _ProgressLayout(),
+            success: (state) => _DataLayout(state.sections),
+            error: (state) => ErrorBody(
+              error: state.errorHandler,
+              actions: [ElevatedButton(onPressed: () => HomeScope.readOf(context), child: const Text('Try again'))],
             ),
           ),
         ),
@@ -82,7 +80,7 @@ class _DataLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return PrimaryRefreshIndicator(
       onRefresh: () async => HomeScope.readOf(context),
       child: ListView(
         children: [
@@ -177,6 +175,95 @@ class _HorizontalAds extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 16),
         itemCount: children.length,
       ),
+    );
+  }
+}
+
+class _ProgressLayout extends StatelessWidget {
+  const _ProgressLayout();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Skeleton.rect(
+              width: 150,
+              height: 28,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 120,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Skeleton.rect(
+              width: 130,
+              height: 120,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            itemCount: 4,
+            separatorBuilder: (context, index) => const SizedBox(width: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Skeleton.rect(
+              width: 150,
+              height: 28,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 400,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Skeleton.rect(
+              width: 290,
+              height: 400,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            itemCount: 4,
+            separatorBuilder: (context, index) => const SizedBox(width: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Skeleton.rect(
+              width: 150,
+              height: 28,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 400,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Skeleton.rect(
+              width: 290,
+              height: 400,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            itemCount: 4,
+            separatorBuilder: (context, index) => const SizedBox(width: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+      ],
     );
   }
 }

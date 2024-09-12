@@ -45,5 +45,14 @@
 	"favourites": "Saved listing forms",
 	"save_to_favorites": "Save listing forms",
   "page_in_development": "Page is in development"
+	"authorization": "Authorization",
+	"dont_have_account": "Don't have an account?",
+	"log_in": "Log in",
+	"create_account": "Create account",
+	"help": "Help",
+	"contacts": "Contacts",
+	"settings": "Settings",
+	"about_app": "About app",
+	"access_all_functions": "To access all the functionality of the app, please log in or register",
+	"profile": "Profile"
 }
-
