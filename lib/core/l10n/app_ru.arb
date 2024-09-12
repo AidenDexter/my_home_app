@@ -42,7 +42,9 @@
 	"full_price": "Полная стоимость",
 	"select_districts": "Выберите районы",
 	"select_options": "Выберите параметры",
-	"page_in_development": "Добавление\nобъявлений находится\nв разработке",
+	"favourites": "Избранное",
+	"save_to_favorites": "Сохраняйте понравившиеся объявления",
+ 	"page_in_development": "Добавление\nобъявлений находится\nв разработке"
 	"authorization": "Авторизация",
 	"dont_have_account": "Не зарегистрированы?",
 	"log_in": "Войти",

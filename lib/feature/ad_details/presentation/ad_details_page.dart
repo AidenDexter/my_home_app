@@ -60,7 +60,7 @@ class AdDetailsPage extends StatelessWidget {
                       onTap: () {
                         FavouritesScope.isFavourite(context, id: item.id, listen: false)
                             ? FavouritesScope.remove(context, id: item.id)
-                            : FavouritesScope.add(context, id: item.id);
+                            : FavouritesScope.add(context, item: item);
                       },
                     ),
                     const SizedBox(width: 8),

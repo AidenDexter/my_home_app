@@ -4,5 +4,5 @@ part of 'favourites_bloc.dart';
 class FavouritesState with _$FavouritesState {
   const FavouritesState._();
 
-  const factory FavouritesState.idle({required List<int> favourites}) = _IdleFavouritesState;
+  const factory FavouritesState.idle({required List<FavouriteEntity> favourites}) = _IdleFavouritesState;
 }

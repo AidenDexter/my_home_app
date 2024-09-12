@@ -87,9 +87,7 @@ class SearchForm extends StatelessWidget {
             children: [
               Expanded(
                 child: PrimaryElevatedButton.secondary(
-                  icon: Assets.icons.filters.svg(
-                    height: 20,
-                  ),
+                  icon: Assets.icons.filters.svg(height: 20),
                   onPressed: () {
                     context.push(CommonRoutes.filters.path, extra: {
                       'search': search,
