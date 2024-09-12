@@ -40,9 +40,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
   Widget build(BuildContext context) {
     final colors = context.theme.commonColors;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light,
-      ),
+      value: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
       child: Material(
         color: Colors.transparent,
         child: Stack(

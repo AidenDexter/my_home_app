@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extension/extensions.dart';
 import '../../../../core/resources/assets.gen.dart';
+import '../../../../core/router/routes_enum.dart';
 import '../../../favourites/bloc/favourites_bloc.dart';
 import '../bottom_navigation_scope.dart';
 
@@ -112,7 +114,7 @@ class BottomNavBar extends StatelessWidget {
               child: InkWell(
                 overlayColor: WidgetStateProperty.all<Color>(context.theme.commonColors.green10),
                 borderRadius: BorderRadius.circular(100),
-                onTap: () {},
+                onTap: () => context.push(AddAdRoutes.ad.path),
                 child: Ink(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
