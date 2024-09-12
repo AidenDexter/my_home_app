@@ -65,6 +65,7 @@ class _PrimaryAppBarState extends State<PrimaryAppBar> {
       title: widget.title,
       actions: actions,
       titleSpacing: 4,
+      centerTitle: true,
     );
   }
 }
