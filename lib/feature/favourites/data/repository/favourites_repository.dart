@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:injectable/injectable.dart';
 
+import '../../../search/domain/entity/search_response.dart';
 import '../../domain/repository/i_favourites_repository.dart';
 import '../data_source/favourites_local_db.dart';
 import '../data_source/favourites_remote_db.dart';
@@ -21,4 +22,8 @@ class FavouritesRepository implements IFavouritesRepository {
 
   @override
   Future<void> saveFavourites({required List<String> value}) => _localDB.saveFavourites(value: value);
+
+  @override
+  Future<SearchResponse> fetchFavouriteInfo({required String id, required String locale}) =>
+      _remoteDB.fetchFavouriteInfo(id, locale);
 }

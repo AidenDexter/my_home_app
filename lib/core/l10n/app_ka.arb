@@ -33,13 +33,15 @@
 	"for_rent": "ქირავდება",
 	"leasehold_mortgage": "გირავდება",
 	"daily_rent": "ქირავდება დღიურად",
-	"apartments":"ბინები",
-	"houses":"სახლები",
-	"country_houses":"აგარაკები",
-	"land_plots":"მიწის ნაკვეთები",
-	"commercial":"კომერციული ფართები",
+	"apartments": "ბინები",
+	"houses": "სახლები",
+	"country_houses": "აგარაკები",
+	"land_plots": "მიწის ნაკვეთები",
+	"commercial": "კომერციული ფართები",
 	"hotels": "სასტუმროები",
 	"full_price": "სრული ფასი",
 	"select_districts": "აირჩიეთ რაიონები",
-	"select_options": "აირჩიეთ პარამეტრები"
+	"select_options": "აირჩიეთ პარამეტრები",
+	"favourites": "შენახული განცხადებები",
+	"save_to_favorites": "შეინახეთ განცხადებები"
 }

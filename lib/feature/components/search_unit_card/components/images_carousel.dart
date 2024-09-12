@@ -80,7 +80,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
             child: PrimaryIconButton(
                 onTap: () => FavouritesScope.isFavourite(context, id: widget.item.id, listen: false)
                     ? FavouritesScope.remove(context, id: widget.item.id)
-                    : FavouritesScope.add(context, id: widget.item.id),
+                    : FavouritesScope.add(context, item: widget.item),
                 icon: FavouritesScope.isFavourite(context, id: widget.item.id)
                     ? Assets.icons.liked.svg(height: 24)
                     : Assets.icons.like.svg(height: 24)),
