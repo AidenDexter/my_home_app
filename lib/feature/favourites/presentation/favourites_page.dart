@@ -14,6 +14,7 @@ class FavouritesPage extends StatelessWidget {
     return Scaffold(
       appBar: const PrimaryAppBar(
         title: Text('Избранное'),
+        ignoreLeading: true,
       ),
       body: BlocBuilder<FavouritesBloc, FavouritesState>(builder: (context, state) {
         if (state.favourites.isEmpty) {
