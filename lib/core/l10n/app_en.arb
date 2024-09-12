@@ -43,5 +43,7 @@
 	"select_districts": "Select districts",
 	"select_options": "Select options",
 	"favourites": "Saved listing forms",
-	"save_to_favorites": "Save listing forms"
+	"save_to_favorites": "Save listing forms",
+  "page_in_development": "Page is in development"
 }
+

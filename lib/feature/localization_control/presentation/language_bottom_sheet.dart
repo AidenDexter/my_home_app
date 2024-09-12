@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/ui_kit/primary_bottom_sheet.dart';
 import '../../home/presentation/components/localization_card.dart';
@@ -32,6 +33,7 @@ class LanguageBottomSheet extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
                     onTap: () {
+                      context.pop();
                       context.read<LocalizationControlBloc>().add(
                             LocalizationControlEvent.changeLocalization(locale: localeEntity),
                           );

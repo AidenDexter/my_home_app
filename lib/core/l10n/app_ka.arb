@@ -43,5 +43,7 @@
 	"select_districts": "აირჩიეთ რაიონები",
 	"select_options": "აირჩიეთ პარამეტრები",
 	"favourites": "შენახული განცხადებები",
-	"save_to_favorites": "შეინახეთ განცხადებები"
+	"save_to_favorites": "შეინახეთ განცხადებები",
+  "page_in_development": "გვერდი ვითარდება"
 }
+

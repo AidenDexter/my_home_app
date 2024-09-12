@@ -9,6 +9,7 @@ import '../../../core/ui_kit/primary_app_bar.dart';
 import '../../../core/ui_kit/primary_icon_button.dart';
 import '../../components/search_unit_card/search_unit_card.dart';
 import '../../currency_control/presentation/currency_switcher.dart';
+import '../../localization_control/bloc/localization_control_bloc.dart';
 import '../../localization_control/presentation/language_bottom_sheet.dart';
 import '../../root/presentation/bottom_navigation_scope.dart';
 import '../../search/domain/entity/search_response.dart';
@@ -57,13 +58,16 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) => state.map(
-            progress: (_) => const Center(child: CircularProgressIndicator()),
-            success: (state) => _DataLayout(state.sections),
-            error: (state) => ErrorBody(
-              error: state.errorHandler,
-              actions: [ElevatedButton(onPressed: () => HomeScope.readOf(context), child: const Text('Try again'))],
+        body: BlocListener<LocalizationControlBloc, LocalizationControlState>(
+          listener: (context, state) => HomeScope.readOf(context),
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) => state.map(
+              progress: (_) => const Center(child: CircularProgressIndicator()),
+              success: (state) => _DataLayout(state.sections),
+              error: (state) => ErrorBody(
+                error: state.errorHandler,
+                actions: [ElevatedButton(onPressed: () => HomeScope.readOf(context), child: const Text('Try again'))],
+              ),
             ),
           ),
         ),
