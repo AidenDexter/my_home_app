@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/ui_kit/skeleton.dart';
 import '../../../components/search_unit_card/search_unit_card.dart';
 import '../../domain/entity/favourite_entity.dart';
 import '../favourites_scope.dart';
@@ -24,10 +25,10 @@ class _FavouriteInfoCardState extends State<FavouriteInfoCard> {
   @override
   Widget build(BuildContext context) {
     if (widget.item.item == null) {
-      return const SizedBox(
-        height: 400,
+      return Skeleton.rect(
         width: double.infinity,
-        child: Center(child: CircularProgressIndicator()),
+        height: 400,
+        borderRadius: BorderRadius.circular(16),
       );
     }
     return SearchUnitCard(widget.item.item!);
