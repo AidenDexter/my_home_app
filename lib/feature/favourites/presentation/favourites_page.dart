@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extension/src/theme_extension.dart';
 import '../../../core/resources/assets.gen.dart';
+import '../../../core/ui_kit/primary_app_bar.dart';
 import '../bloc/favourites_bloc.dart';
 
 class FavouritesPage extends StatelessWidget {
@@ -11,8 +12,8 @@ class FavouritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Избранное'),
+      appBar: const PrimaryAppBar(
+        title: Text('Избранное'),
       ),
       body: BlocBuilder<FavouritesBloc, FavouritesState>(builder: (context, state) {
         if (state.favourites.isEmpty) {
