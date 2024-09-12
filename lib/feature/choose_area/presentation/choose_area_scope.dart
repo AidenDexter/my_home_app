@@ -20,6 +20,7 @@ class ChooseAreaScope extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => BlocProvider<ChooseAreaBloc>(
         create: (context) => getIt<ChooseAreaBloc>()..add(const ChooseAreaEvent.read()),
+        lazy: false,
         child: child,
       );
 }

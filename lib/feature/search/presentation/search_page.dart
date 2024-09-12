@@ -6,6 +6,8 @@ import '../../../core/extension/extensions.dart';
 import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/error_page.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
+import '../../../core/ui_kit/primary_refresh_indicator.dart';
+import '../../../core/ui_kit/skeleton.dart';
 import '../../components/search_unit_card/search_unit_card.dart';
 import '../../localization_control/bloc/localization_control_bloc.dart';
 import '../bloc/search_bloc.dart';
@@ -108,7 +110,7 @@ class _BodyState extends State<_Body> {
       body: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16),
         child: Builder(builder: (context) {
-          return RefreshIndicator(
+          return PrimaryRefreshIndicator(
             onRefresh: () async => _search(),
             child: CustomScrollView(
               controller: _scrollController,
@@ -138,9 +140,7 @@ class _BodyState extends State<_Body> {
                   listener: (context, state) => _search(),
                   child: BlocBuilder<SearchBloc, SearchState>(
                     builder: (context, state) => state.maybeMap(
-                      initProgress: (value) => const SliverToBoxAdapter(
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                      initProgress: (value) => const SliverToBoxAdapter(child: _ProgressLayout()),
                       error: (value) => SliverToBoxAdapter(
                         child: SizedBox(
                           height: 400,
@@ -235,6 +235,29 @@ class _BodyState extends State<_Body> {
 
     _scrollController.dispose();
     super.dispose();
+  }
+}
+
+class _ProgressLayout extends StatelessWidget {
+  const _ProgressLayout();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Skeleton.rect(
+          width: double.infinity,
+          height: 350,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        const SizedBox(height: 8),
+        Skeleton.rect(
+          width: double.infinity,
+          height: 350,
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ],
+    );
   }
 }
 

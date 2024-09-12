@@ -148,9 +148,23 @@ class _DataLayer extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  Assets.icons.location.svg(),
+                  Assets.icons.location.svg(
+                    colorFilter: ColorFilter.mode(
+                      context.theme.commonColors.green100,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   const SizedBox(width: 8),
-                  Expanded(child: Text('${item.address}', style: textStyles.body1)),
+                  Expanded(
+                    child: Text(
+                      '${item.address}',
+                      style: textStyles.body1.copyWith(
+                        color: context.theme.commonColors.green100,
+                        decoration: TextDecoration.underline,
+                        decorationColor: context.theme.commonColors.green100,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
