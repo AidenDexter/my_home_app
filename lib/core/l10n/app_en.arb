@@ -54,5 +54,7 @@
 	"settings": "Settings",
 	"about_app": "About app",
 	"access_all_functions": "To access all the functionality of the app, please log in or register",
-	"profile": "Profile"
+	"profile": "Profile",
+	"search_is_empty": "No listing forms found",
+	"search_is_empty_comment": "Based on your selected parameters, no listing forms were found"
 }

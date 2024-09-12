@@ -268,12 +268,23 @@ class _EmptySearchResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 32),
+        const SizedBox(height: 16),
         Assets.icons.emptySearch.svg(),
         const SizedBox(height: 32),
-        const Text('Свойства не найдены'),
+        Text(
+          context.l10n.search_is_empty,
+          textAlign: TextAlign.center,
+          style: context.theme.commonTextStyles.headline3,
+        ),
         const SizedBox(height: 12),
-        const Text('Не найдено свойств по указанным критериям'),
+        Text(
+          context.l10n.search_is_empty_comment,
+          textAlign: TextAlign.center,
+          style: context.theme.commonTextStyles.body1.copyWith(
+            color: context.theme.commonColors.darkGrey70,
+          ),
+        ),
+        const SizedBox(height: 88),
       ],
     );
   }
