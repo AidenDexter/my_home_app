@@ -49,18 +49,34 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
   Future<void> _fetchItem(_FetchItemFavouritesEvent event, Emitter<FavouritesState> emit) async {
     if (state.favourites.firstWhere((e) => e.id == event.id).item != null) return;
-
-    try {
-      final response = await _repository.fetchFavouriteInfo(id: event.id.toString(), locale: event.locale);
-      final item = response.data.data[0];
-      final index = state.favourites.indexWhere((e) => e.id == item.id);
+    final index = state.favourites.indexWhere((e) => e.id == event.id);
+    final item = state.favourites[index];
       emit(
         FavouritesState.idle(
           favourites: List.from(state.favourites)
             ..removeWhere((e) => e.id == event.id)
-            ..insert(index, FavouriteEntity(id: item.id, item: item)),
+            ..insert(index, FavouriteEntity(id: item.id, item: item.item)),
         ),
       );
-    } on Object catch (error) {}
+    try {
+      final response = await _repository.fetchFavouriteInfo(id: event.id.toString(), locale: event.locale);
+      final item = response.data.data[0];
+      emit(
+        FavouritesState.idle(
+          favourites: List.from(state.favourites)
+            ..removeWhere((e) => e.id == event.id)
+            ..insert(index, FavouriteEntity(id: item.id, item: item, status: LoadingStatus.success)),
+        ),
+      );
+    } on Object catch (_) {
+      final item = state.favourites[index];
+      emit(
+        FavouritesState.idle(
+          favourites: List.from(state.favourites)
+            ..removeWhere((e) => e.id == event.id)
+            ..insert(index, FavouriteEntity(id: item.id, item: item.item, status: LoadingStatus.error)),
+        ),
+      );
+    }
   }
 }

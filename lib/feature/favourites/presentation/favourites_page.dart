@@ -8,7 +8,7 @@ import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/primary_app_bar.dart';
 import '../bloc/favourites_bloc.dart';
 import '../domain/entity/favourite_entity.dart';
-import 'components/favourite_Info_card.dart';
+import 'components/favourite_info_card.dart';
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({super.key});
@@ -97,7 +97,7 @@ class _DataLayout extends StatelessWidget {
         key: ValueKey(favourites[index]),
         item: favourites[index],
       ),
-      separatorBuilder: (_, __) => const SizedBox(height: 4),
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemCount: favourites.length,
     );
   }
