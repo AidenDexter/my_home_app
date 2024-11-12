@@ -33,7 +33,11 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     emit(
       FavouritesState.idle(
         favourites: [
-          FavouriteEntity(id: event.item.id, item: event.item),
+          FavouriteEntity(
+            id: event.item.id,
+            item: event.item,
+            status: LoadingStatus.success,
+          ),
           ...state.favourites,
         ],
       ),
@@ -51,13 +55,13 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     if (state.favourites.firstWhere((e) => e.id == event.id).item != null) return;
     final index = state.favourites.indexWhere((e) => e.id == event.id);
     final item = state.favourites[index];
-      emit(
-        FavouritesState.idle(
-          favourites: List.from(state.favourites)
-            ..removeWhere((e) => e.id == event.id)
-            ..insert(index, FavouriteEntity(id: item.id, item: item.item)),
-        ),
-      );
+    emit(
+      FavouritesState.idle(
+        favourites: List.from(state.favourites)
+          ..removeWhere((e) => e.id == event.id)
+          ..insert(index, FavouriteEntity(id: item.id, item: item.item)),
+      ),
+    );
     try {
       final response = await _repository.fetchFavouriteInfo(id: event.id.toString(), locale: event.locale);
       final item = response.data.data[0];

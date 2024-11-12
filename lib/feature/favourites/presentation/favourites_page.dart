@@ -94,7 +94,7 @@ class _DataLayout extends StatelessWidget {
       controller: controller,
       padding: EdgeInsets.only(right: 16, left: 16, bottom: bottomPadding),
       itemBuilder: (_, index) => FavouriteInfoCard(
-        key: ValueKey(favourites[index]),
+        key: ValueKey(favourites[index].id),
         item: favourites[index],
       ),
       separatorBuilder: (_, __) => const SizedBox(height: 12),
