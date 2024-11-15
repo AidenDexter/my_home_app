@@ -12,6 +12,7 @@ import '../../../search/domain/entity/search_response.dart';
 class PhotoViewPage extends StatefulWidget {
   final int initialIndex;
   final List<Images> images;
+
   const PhotoViewPage({
     required this.initialIndex,
     required this.images,
@@ -36,9 +37,31 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
     super.initState();
   }
 
+  void _onPageChanged(int index) {
+    if (_isPageAnimating) return;
+
+    setState(() {
+      _tabController.index = index % widget.images.length;
+    });
+  }
+
+  void _jumpToPage(int index) {
+    if (_isPageAnimating) return;
+
+    _isPageAnimating = true;
+    _pageController
+        .animateToPage(
+          index,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        )
+        .then((_) => _isPageAnimating = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.theme.commonColors;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
       child: Material(
@@ -63,33 +86,28 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                           context.pop();
                         }
                       },
-                      child: PhotoViewGallery.builder(
+                      child: PageView.builder(
                         allowImplicitScrolling: true,
-                        onPageChanged: (index) {
-                          if (_isPageAnimating) return;
-                          _tabController.animateTo(index);
-                        },
-                        pageController: _pageController,
-                        scrollPhysics: const BouncingScrollPhysics(),
-                        builder: (_, index) {
-                          return PhotoViewGalleryPageOptions(
-                            minScale: PhotoViewComputedScale.contained * 1,
-                            maxScale: PhotoViewComputedScale.covered * 10,
+                        onPageChanged: _onPageChanged,
+                        controller: _pageController,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final imageIndex = index % widget.images.length; // Бесконечная прокрутка
+                          return PhotoView(
+                            minScale: PhotoViewComputedScale.contained,
+                            maxScale: PhotoViewComputedScale.covered * 6,
                             imageProvider: CachedNetworkImageProvider(
-                              widget.images[index].large,
+                              widget.images[imageIndex].large,
                             ),
-                            heroAttributes: PhotoViewHeroAttributes(
-                              tag: widget.images[index],
+                            heroAttributes: PhotoViewHeroAttributes(tag: widget.images[imageIndex]),
+                            loadingBuilder: (context, event) => const Center(
+                              child: SizedBox.square(
+                                dimension: 40,
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                           );
                         },
-                        itemCount: widget.images.length,
-                        loadingBuilder: (context, event) => const Center(
-                          child: SizedBox.square(
-                            dimension: 40,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
                       ),
                     ),
                   ),
@@ -108,6 +126,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                             );
                       },
                       indicator: const BoxDecoration(),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       dividerColor: Colors.transparent,
                       indicatorWeight: 0,
                       indicatorColor: Colors.transparent,
