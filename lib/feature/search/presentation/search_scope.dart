@@ -67,5 +67,6 @@ class SearchScope extends StatelessWidget {
             locale: LocalizationScope.getLocaleCode(context, listen: false),
           )),
         child: child,
+        lazy: false,
       );
 }

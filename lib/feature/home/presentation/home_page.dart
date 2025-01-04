@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/error/error_handler.dart';
 import '../../../core/extension/extensions.dart';
 import '../../../core/resources/assets.gen.dart';
 import '../../../core/ui_kit/decorated_container.dart';
@@ -14,8 +15,8 @@ import '../../currency_control/presentation/currency_switcher.dart';
 import '../../localization_control/presentation/language_bottom_sheet.dart';
 import '../../root/presentation/bottom_navigation_scope.dart';
 import '../../search/domain/entity/search_response.dart';
-import '../bloc/home_bloc.dart';
-import '../domain/entity/home_response.dart';
+import '../bloc/home_super_vip.dart';
+import '../bloc/home_vip_plus.dart';
 import 'components/flag_card.dart';
 import 'components/services_row.dart';
 import 'home_scope.dart';
@@ -59,24 +60,14 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) => state.map(
-            progress: (_) => const _ProgressLayout(),
-            success: (state) => _DataLayout(state.sections),
-            error: (state) => ErrorBody(
-              error: state.errorHandler,
-              actions: [ElevatedButton(onPressed: () => HomeScope.readOf(context), child: const Text('Try again'))],
-            ),
-          ),
-        ),
+        body: const _Body(),
       ),
     );
   }
 }
 
-class _DataLayout extends StatelessWidget {
-  final List<Sections> sections;
-  const _DataLayout(this.sections);
+class _Body extends StatelessWidget {
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -90,67 +81,60 @@ class _DataLayout extends StatelessWidget {
           ),
           const ServicesRow(),
           const SizedBox(height: 8),
-          ...sections.map(
-            (section) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _SectionTitle(
-                  icon: _sectionIconFromType(section.type),
-                  title: _sectionNameFromType(section.type),
-                ),
-                _HorizontalAds(children: section.children),
-              ],
+          _SectionTitle(
+            icon: Assets.icons.superVipIcon,
+            title: 'SUPER-VIP',
+          ),
+          BlocBuilder<HomeSuperVipBloc, HomeSuperVipState>(
+            builder: (context, state) => state.map(
+              progress: (_) => const _ProgressLayout(),
+              success: (state) => _HorizontalAds(children: state.items),
+              error: (state) => _ErrorLayout(state.errorHandler, () => HomeScope.readSuperVipOf(context)),
+            ),
+          ),
+          _SectionTitle(
+            icon: Assets.icons.vipPlusIcon,
+            title: 'VIP+',
+          ),
+          BlocBuilder<HomeVipPlusBloc, HomeVipPlusState>(
+            builder: (context, state) => state.map(
+              progress: (_) => const _ProgressLayout(),
+              success: (state) => _HorizontalAds(children: state.items),
+              error: (state) => _ErrorLayout(state.errorHandler, () => HomeScope.readVipPlusOf(context)),
             ),
           ),
         ],
       ),
     );
   }
-
-  String _sectionNameFromType(String type) {
-    if (type == 'super_vip_products') return 'SUPER-VIP';
-    if (type == 'vip_plus_products') return 'VIP+';
-    return '';
-  }
-
-  SvgGenImage _sectionIconFromType(String type) {
-    if (type == 'super_vip_products') return Assets.icons.superVipIcon;
-    if (type == 'vip_plus_products') return Assets.icons.vipPlusIcon;
-    return Assets.icons.filters;
-  }
 }
 
 class _SectionTitle extends StatelessWidget {
   final SvgGenImage icon;
   final String title;
-  const _SectionTitle({
-    required this.icon,
-    required this.title,
-  });
+  const _SectionTitle({required this.icon, required this.title});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Text.rich(
-        TextSpan(
-          children: [
-            WidgetSpan(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: icon.svg(height: 24),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              WidgetSpan(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: icon.svg(height: 24),
+                ),
+                alignment: PlaceholderAlignment.middle,
               ),
-              alignment: PlaceholderAlignment.middle,
-            ),
-            TextSpan(
-              text: title,
-              style: context.theme.commonTextStyles.headline2,
-            ),
-          ],
+              TextSpan(
+                text: title,
+                style: context.theme.commonTextStyles.headline2,
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class _HorizontalAds extends StatelessWidget {
@@ -183,87 +167,48 @@ class _ProgressLayout extends StatelessWidget {
   const _ProgressLayout();
 
   @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Skeleton.rect(
-              width: 150,
-              height: 28,
-              borderRadius: BorderRadius.circular(8),
+  Widget build(BuildContext context) => SizedBox(
+        height: 400,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) => Skeleton.rect(
+            width: 290,
+            height: 400,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          itemCount: 4,
+          separatorBuilder: (context, index) => const SizedBox(width: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+        ),
+      );
+}
+
+class _ErrorLayout extends StatelessWidget {
+  final IErrorHandler error;
+  final VoidCallback tryAgain;
+  const _ErrorLayout(
+    this.error,
+    this.tryAgain,
+  );
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: DecoratedContainer(
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.transparent,
+          child: SizedBox(
+            height: 400,
+            child: ErrorBody(
+              error: error,
+              actions: [
+                ElevatedButton(
+                  onPressed: tryAgain,
+                  child: const Text('Try again'),
+                ),
+              ],
             ),
           ),
         ),
-        SizedBox(
-          height: 120,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Skeleton.rect(
-              width: 130,
-              height: 120,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            itemCount: 4,
-            separatorBuilder: (context, index) => const SizedBox(width: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Skeleton.rect(
-              width: 150,
-              height: 28,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 400,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Skeleton.rect(
-              width: 290,
-              height: 400,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            itemCount: 4,
-            separatorBuilder: (context, index) => const SizedBox(width: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Skeleton.rect(
-              width: 150,
-              height: 28,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 400,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => Skeleton.rect(
-              width: 290,
-              height: 400,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            itemCount: 4,
-            separatorBuilder: (context, index) => const SizedBox(width: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-        ),
-      ],
-    );
-  }
+      );
 }

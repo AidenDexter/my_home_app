@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart' show immutable;
 
-import '../entity/home_response.dart';
+import '../../../search/domain/entity/search_response.dart';
 
 @immutable
 abstract interface class IHomeRepository {
-  Future<HomeResponse> fetchHome(String locale);
+  Future<List<SearchItem>> fetchSuperVipItems(String locale);
+
+  Future<List<SearchItem>> fetchVipPlusItems(String locale);
 }
