@@ -80,7 +80,7 @@ class AdDetailsPage extends StatelessWidget {
     );
   }
 
-  void _onShareTap() => Share.share('https://www.myhome.ge/pr/${item.id}');
+  void _onShareTap() => Share.share('tnet://myhome.ge/${item.id}');
 }
 
 class _DataLayer extends StatelessWidget {
