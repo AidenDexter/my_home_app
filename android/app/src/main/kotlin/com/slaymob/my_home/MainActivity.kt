@@ -1,4 +1,4 @@
-package com.example.my_home_app
+package com.slaymob.my_home
 
 import io.flutter.embedding.android.FlutterActivity
 
