@@ -29,7 +29,7 @@ class SlideButton extends StatelessWidget {
             child: Ink(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: context.theme.commonColors.black.withOpacity(0.5),
+                color: context.theme.commonColors.black.withValues(alpha: .5),
               ),
               padding: const EdgeInsets.all(4),
               child: Icon(

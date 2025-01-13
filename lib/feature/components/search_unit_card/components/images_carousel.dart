@@ -116,7 +116,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: context.theme.commonColors.black.withOpacity(0.5),
+                  color: context.theme.commonColors.black.withValues(alpha: .5),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                 child: Text(

@@ -149,7 +149,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                   margin: const EdgeInsets.only(top: 16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: colors.black.withOpacity(0.5),
+                    color: colors.black.withValues(alpha: .5),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                   child: AnimatedBuilder(
@@ -170,7 +170,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
               right: 16,
               child: SafeArea(
                 child: CircleButton(
-                  backgroundColor: colors.black.withOpacity(.4),
+                  backgroundColor: colors.black.withValues(alpha: .4),
                   icon: Icon(
                     Icons.close_rounded,
                     color: colors.green10,

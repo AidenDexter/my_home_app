@@ -53,7 +53,7 @@ class _CircleSkeleton extends StatelessWidget {
             BoxShadow(
               blurRadius: 8,
               offset: const Offset(0, 4),
-              color: context.theme.commonColors.black.withOpacity(0.03),
+              color: context.theme.commonColors.black.withValues(alpha: .03),
             )
           ],
           color: backgroundColor ?? theme.cardColor,
@@ -88,7 +88,7 @@ class _RectangleSkeleton extends StatelessWidget {
             BoxShadow(
               blurRadius: 8,
               offset: const Offset(0, 4),
-              color: context.theme.commonColors.black.withOpacity(0.03),
+              color: context.theme.commonColors.black.withValues(alpha: .03),
             )
           ],
           color: backgroundColor ?? theme.cardColor,
@@ -109,7 +109,7 @@ class _ShimmerAnimation extends StatelessWidget {
     return Animate(
       effects: [
         ShimmerEffect(
-          color: context.theme.commonColors.neutralgrey10.withOpacity(.5),
+          color: context.theme.commonColors.neutralgrey10.withValues(alpha: .5),
           duration: const Duration(milliseconds: 1200),
         ),
       ],

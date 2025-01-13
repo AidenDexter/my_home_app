@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: context.theme.commonColors.neutralgrey10.withOpacity(.2),
+            color: context.theme.commonColors.neutralgrey10.withValues(alpha: .2),
             blurRadius: 8,
             spreadRadius: 2,
           ),

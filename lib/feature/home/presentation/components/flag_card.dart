@@ -12,7 +12,7 @@ class FlagCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-          color: context.theme.commonColors.darkGrey30.withOpacity(.2),
+          color: context.theme.commonColors.darkGrey30.withValues(alpha: .2),
           blurRadius: 1,
         ),
       ]),
