@@ -79,7 +79,7 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: context.theme.commonColors.black.withOpacity(0.5),
+                color: context.theme.commonColors.black.withValues(alpha: .5),
               ),
               margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
