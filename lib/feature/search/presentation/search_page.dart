@@ -150,7 +150,7 @@ class _BodyState extends State<_Body> {
                             actions: [
                               ElevatedButton(
                                 onPressed: _search,
-                                child: const Text('try_again'),
+                                child: Text(context.l10n.try_again),
                               ),
                             ],
                           ),

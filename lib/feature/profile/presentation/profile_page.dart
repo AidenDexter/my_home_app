@@ -185,7 +185,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Text(
-            'App version\n${getIt<IPackageInfoService>().version}',
+            context.l10n.app_version(getIt<IPackageInfoService>().version),
             textAlign: TextAlign.center,
             style: context.theme.commonTextStyles.label.copyWith(
               color: context.theme.commonColors.darkGrey30,

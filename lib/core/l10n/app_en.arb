@@ -56,5 +56,26 @@
 	"access_all_functions": "To access all the functionality of the app, please log in or register",
 	"profile": "Profile",
 	"search_is_empty": "No listing forms found",
-	"search_is_empty_comment": "Based on your selected parameters, no listing forms were found"
+	"search_is_empty_comment": "Based on your selected parameters, no listing forms were found",
+	"error": "Error",
+	"something_went_wrong_repeat_request": "Something went wrong, \nplease repeat the request",
+	"try_again": "Try again",
+	"delete_from_favorites": "Delete from Favorites",
+	"filterNotFound": "Filter {filter} is not in the list",
+	"@filterNotFound": {
+		"description": "Message when a filter is missing in the list",
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	},
+	"app_version": "App version \n{filter}",
+	"@app_version": {
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	}
 }

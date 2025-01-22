@@ -56,5 +56,26 @@
 	"access_all_functions": "აპლიკაციის ყველა ფუნქციონალზე წვდომისთვის, გთხოვთ შეხვიდეთ ან დარეგისტრირდეთ",
 	"profile": "პროფილი",
 	"search_is_empty": "განცხადებები ვერ მოიძებნა",
-	"search_is_empty_comment": "შენი ძებნის პარამეტრების მიხედვით განცხადებები ვერ მოიძებნა"
+	"search_is_empty_comment": "შენი ძებნის პარამეტრების მიხედვით განცხადებები ვერ მოიძებნა",
+	"error": "შეცდომა",
+	"something_went_wrong_repeat_request": "რაღაც არასწორია, \nგთხოვთ გაიმეოროთ მოთხოვნა",
+	"try_again": "სცადეთ კიდევ ერთხელ",
+	"delete_from_favorites": "წაშალეთ ფავორიტებიდან",
+	"filterNotFound": "ფილტრი {filter} არ არის სიაში",
+	"@filterNotFound": {
+		"description": "ფილტრი არ არის სიაში",
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	},
+	"app_version": "განაცხადის ვერსია \n{filter}",
+	"@app_version": {
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	}
 }

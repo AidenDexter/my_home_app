@@ -56,5 +56,26 @@
 	"access_all_functions": "Чтобы получить доступ ко всему функционалу приложения, пожалуйста, авторизуйтесь или зарегистрируйтесь",
 	"profile": "Профиль",
 	"search_is_empty": "Не найдено объявлений",
-	"search_is_empty_comment": "По указанным фильтрам не найдено объявлений"
+	"search_is_empty_comment": "По указанным фильтрам не найдено объявлений",
+	"error": "Ошибка",
+	"something_went_wrong_repeat_request": "Что-то пошло не так,\nпожалуйста повторите запрос",
+	"try_again": "Попробовать еще раз",
+	"delete_from_favorites": "Удалить из избранного",
+	"filterNotFound": "Фильтр {filter} отсутствует в списке",
+	"@filterNotFound": {
+		"description": "Сообщение об отсутствии фильтра в списке",
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	},
+	"app_version": "Версия приложения \n{filter}",
+	"@app_version": {
+		"placeholders": {
+			"filter": {
+				"type": "String"
+			}
+		}
+	}
 }

@@ -204,7 +204,7 @@ class _ErrorLayout extends StatelessWidget {
               actions: [
                 ElevatedButton(
                   onPressed: tryAgain,
-                  child: const Text('Try again'),
+                  child: Text(context.l10n.try_again),
                 ),
               ],
             ),
