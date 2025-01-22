@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/extension/extensions.dart';
 import '../../../../../core/ui_kit/multi_selection_card.dart';
 import '../../../domain/entity/rooms.dart';
 
@@ -13,7 +14,7 @@ class RoomsFilter extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        const Text('Комнаты'),
+        Text(context.l10n.rooms),
         const SizedBox(height: 8),
         AnimatedBuilder(
           animation: roomsController,
@@ -23,7 +24,7 @@ class RoomsFilter extends StatelessWidget {
                   .map(
                     (item) => WidgetSpan(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 4,bottom: 4,right: 8),
+                        padding: const EdgeInsets.only(top: 4, bottom: 4, right: 8),
                         child: MultiSelectionCard(
                           isSelected: roomsController.value.contains(item),
                           onTap: (value) {

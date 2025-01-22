@@ -215,7 +215,7 @@ class _FiltersPageState extends State<FiltersPage> {
                       return Column(
                         children: firstTypeFilters
                             .map(
-                              (e) => _filters[e] ?? Text('Фильтр $e отсутствует в списке'),
+                              (e) => _filters[e] ?? Text(context.l10n.filterNotFound(e)),
                             )
                             .toList(),
                       );

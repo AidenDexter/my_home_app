@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/extension/extensions.dart';
 import '../../../../../core/ui_kit/multi_selection_card.dart';
 import '../../../../../core/ui_kit/range_text_field.dart';
 
@@ -25,14 +26,14 @@ class FloorFilters extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        const Text('Этаж'),
+        Text(context.l10n.floor),
         const SizedBox(height: 8),
         Row(
           children: [
             Expanded(
               child: RangeTextField(
                 suffix: null,
-                label: 'от',
+                label: context.l10n.from,
                 controller: floorFromController,
               ),
             ),
@@ -40,7 +41,7 @@ class FloorFilters extends StatelessWidget {
             Expanded(
               child: RangeTextField(
                 suffix: null,
-                label: 'до',
+                label: context.l10n.to,
                 controller: floorToController,
               ),
             ),
@@ -63,7 +64,7 @@ class FloorFilters extends StatelessWidget {
                             notLastFloorController.value = false;
                           },
                           value: true,
-                          title: 'Последний',
+                          title: context.l10n.last,
                         ),
                       ),
                     ),
@@ -78,7 +79,7 @@ class FloorFilters extends StatelessWidget {
                             isLastFloorController.value = false;
                           },
                           value: true,
-                          title: 'Не последний',
+                          title: context.l10n.not_last,
                         ),
                       ),
                     ),
@@ -90,7 +91,7 @@ class FloorFilters extends StatelessWidget {
                           isSelected: notFirstFloorController.value,
                           onTap: (_) => notFirstFloorController.value = !notFirstFloorController.value,
                           value: true,
-                          title: 'Не первый',
+                          title: context.l10n.not_first,
                         ),
                       ),
                     ),

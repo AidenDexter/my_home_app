@@ -71,10 +71,10 @@ class _FavouriteInfoCardState extends State<FavouriteInfoCard> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      Text('Ошибка', style: context.theme.commonTextStyles.headline2),
+                      Text(context.l10n.error, style: context.theme.commonTextStyles.headline2),
                       const SizedBox(height: 2),
                       Text(
-                        'Что-то пошло не так,\nпожалуйста повторите запрос',
+                        context.l10n.something_went_wrong_repeat_request,
                         textAlign: TextAlign.center,
                         style: context.theme.commonTextStyles.label.copyWith(
                           color: colors.darkGrey30,
@@ -84,12 +84,12 @@ class _FavouriteInfoCardState extends State<FavouriteInfoCard> {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () => FavouritesScope.fetchItem(context, id: widget.item.id),
-                        child: const Text('Попробовать еще раз'),
+                        child: Text(context.l10n.try_again),
                       ),
                       const SizedBox(height: 8),
                       PrimaryElevatedButton.secondary(
                         onPressed: () => FavouritesScope.remove(context, id: widget.item.id),
-                        child: const Text('Удалить из избранного'),
+                        child: Text(context.l10n.delete_from_favorites),
                       ),
                     ],
                   ),
