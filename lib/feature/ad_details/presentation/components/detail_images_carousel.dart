@@ -54,16 +54,17 @@ class _DetailImagesCarouselState extends State<DetailImagesCarousel> {
         children: [
           GestureDetector(
             onTap: () {
-              context.push(CommonRoutes.photoView.path, extra: {
+              context.push<int>(CommonRoutes.photoView.path, extra: {
                 'initialIndex': _currentPage,
                 'images': images,
+                'parentController': _carouselController,
               });
             },
             child: PageView.builder(
               allowImplicitScrolling: true,
               controller: _carouselController,
               itemBuilder: (context, index) => CachedNetworkImage(
-                imageUrl: images[index].thumb,
+                imageUrl: images[index].large,
                 fit: BoxFit.cover,
               ),
               itemCount: images.length,

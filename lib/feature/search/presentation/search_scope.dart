@@ -27,9 +27,6 @@ class SearchScope extends StatelessWidget {
     required String areaTo,
     required String floorFrom,
     required String floorTo,
-    required bool notFirstFloor,
-    required bool notLastFloor,
-    required bool isLastFloor,
     required List<int> rooms,
   }) =>
       context.read<SearchBloc>().add(SearchEvent.search(
@@ -47,9 +44,6 @@ class SearchScope extends StatelessWidget {
             areaTo: areaTo,
             floorFrom: floorFrom,
             floorTo: floorTo,
-            notFirstFloor: notFirstFloor,
-            notLastFloor: notLastFloor,
-            isLastFloor: isLastFloor,
             rooms: rooms,
           ));
 

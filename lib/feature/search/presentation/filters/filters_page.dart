@@ -25,9 +25,6 @@ class FiltersPage extends StatefulWidget {
   final TextEditingController areaToController;
   final TextEditingController floorFromController;
   final TextEditingController floorToController;
-  final ValueNotifier<bool> notFirstFloorController;
-  final ValueNotifier<bool> notLastFloorController;
-  final ValueNotifier<bool> isLastFloorController;
   final ValueNotifier<List<Rooms>> roomsController;
   final VoidCallback search;
 
@@ -41,9 +38,6 @@ class FiltersPage extends StatefulWidget {
     required this.areaToController,
     required this.floorFromController,
     required this.floorToController,
-    required this.notFirstFloorController,
-    required this.notLastFloorController,
-    required this.isLastFloorController,
     required this.roomsController,
     super.key,
   });
@@ -62,9 +56,6 @@ class _FiltersPageState extends State<FiltersPage> {
   void onRealEstateChange() {
     widget.floorFromController.text = '';
     widget.floorToController.text = '';
-    widget.notFirstFloorController.value = false;
-    widget.notLastFloorController.value = false;
-    widget.isLastFloorController.value = false;
   }
 
   @override
@@ -277,9 +268,6 @@ class _FiltersPageState extends State<FiltersPage> {
     widget.areaToController.text = '';
     widget.floorFromController.text = '';
     widget.floorToController.text = '';
-    widget.notFirstFloorController.value = false;
-    widget.notLastFloorController.value = false;
-    widget.isLastFloorController.value = false;
     widget.roomsController.value = [];
   }
 
@@ -320,9 +308,6 @@ class _FiltersPageState extends State<FiltersPage> {
     'floor': FloorFilters(
       floorFromController: widget.floorFromController,
       floorToController: widget.floorToController,
-      notFirstFloorController: widget.notFirstFloorController,
-      notLastFloorController: widget.notLastFloorController,
-      isLastFloorController: widget.isLastFloorController,
     ),
     'rooms': RoomsFilter(
       roomsController: widget.roomsController,

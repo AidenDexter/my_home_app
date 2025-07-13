@@ -26,9 +26,6 @@ class SearchForm extends StatelessWidget {
     required this.areaToController,
     required this.floorFromController,
     required this.floorToController,
-    required this.notFirstFloorController,
-    required this.notLastFloorController,
-    required this.isLastFloorController,
     required this.roomsController,
     super.key,
   });
@@ -47,9 +44,6 @@ class SearchForm extends StatelessWidget {
   final TextEditingController areaToController;
   final TextEditingController floorFromController;
   final TextEditingController floorToController;
-  final ValueNotifier<bool> notFirstFloorController;
-  final ValueNotifier<bool> notLastFloorController;
-  final ValueNotifier<bool> isLastFloorController;
   final ValueNotifier<List<Rooms>> roomsController;
 
   final VoidCallback search;
@@ -99,9 +93,6 @@ class SearchForm extends StatelessWidget {
                       'areaTo': areaToController,
                       'floorFrom': floorFromController,
                       'floorTo': floorToController,
-                      'notFirstFloor': notFirstFloorController,
-                      'notLastFloor': notLastFloorController,
-                      'isLastFloor': isLastFloorController,
                       'rooms': roomsController,
                     });
                     FocusManager.instance.primaryFocus?.unfocus();
@@ -186,9 +177,6 @@ class SearchForm extends StatelessWidget {
     floorFromController.text = '';
     floorToController.text = '';
 
-    notFirstFloorController.value = false;
-    notLastFloorController.value = false;
-    isLastFloorController.value = false;
     roomsController.value = [];
   }
 
@@ -205,9 +193,6 @@ class SearchForm extends StatelessWidget {
         areaToController,
         floorFromController,
         floorToController,
-        notFirstFloorController,
-        notLastFloorController,
-        isLastFloorController,
         roomsController,
       ]);
 
@@ -225,9 +210,6 @@ class SearchForm extends StatelessWidget {
     if (areaToController.text.isNotEmpty) res++;
     if (floorFromController.text.isNotEmpty) res++;
     if (floorToController.text.isNotEmpty) res++;
-    if (notFirstFloorController.value) res++;
-    if (notLastFloorController.value) res++;
-    if (isLastFloorController.value) res++;
     if (roomsController.value.isNotEmpty) res++;
     return res;
   }

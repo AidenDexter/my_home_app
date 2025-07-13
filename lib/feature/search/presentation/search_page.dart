@@ -45,9 +45,6 @@ class _BodyState extends State<_Body> {
   late final TextEditingController _areaToController;
   late final TextEditingController _floorFromController;
   late final TextEditingController _floorToController;
-  late final ValueNotifier<bool> _notFirstFloorController;
-  late final ValueNotifier<bool> _notLastFloorController;
-  late final ValueNotifier<bool> _isLastFloorController;
   late final ValueNotifier<List<Rooms>> _roomsController;
 
   // Page controllers
@@ -68,9 +65,6 @@ class _BodyState extends State<_Body> {
     _areaToController = TextEditingController();
     _floorFromController = TextEditingController();
     _floorToController = TextEditingController();
-    _notFirstFloorController = ValueNotifier(false);
-    _notLastFloorController = ValueNotifier(false);
-    _isLastFloorController = ValueNotifier(false);
     _roomsController = ValueNotifier([]);
 
     _isShowsUpButton = ValueNotifier(false);
@@ -130,9 +124,6 @@ class _BodyState extends State<_Body> {
                     areaToController: _areaToController,
                     floorFromController: _floorFromController,
                     floorToController: _floorToController,
-                    notFirstFloorController: _notFirstFloorController,
-                    notLastFloorController: _notLastFloorController,
-                    isLastFloorController: _isLastFloorController,
                     roomsController: _roomsController,
                   ),
                 ),
@@ -209,9 +200,6 @@ class _BodyState extends State<_Body> {
         areaTo: _areaToController.text,
         floorFrom: _floorFromController.text,
         floorTo: _floorToController.text,
-        notFirstFloor: _notFirstFloorController.value,
-        notLastFloor: _notLastFloorController.value,
-        isLastFloor: _isLastFloorController.value,
         rooms: _roomsController.value.map((e) => e.id).toList(),
       );
 
@@ -229,9 +217,6 @@ class _BodyState extends State<_Body> {
     _areaToController.dispose();
     _floorFromController.dispose();
     _floorToController.dispose();
-    _notFirstFloorController.dispose();
-    _notLastFloorController.dispose();
-    _isLastFloorController.dispose();
 
     _scrollController.dispose();
     super.dispose();

@@ -32,7 +32,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
   void _onChangePage() {
     if (mounted) {
       setState(() {
-        _currentPage = _carouselController.page?.toInt() ?? 0;
+        _currentPage = _carouselController.page?.round() ?? 0;
         _isLastPage = _currentPage == images.length - 1;
         _isFirstPage = _currentPage == 0;
       });

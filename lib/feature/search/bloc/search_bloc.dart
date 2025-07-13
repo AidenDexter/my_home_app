@@ -50,9 +50,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           '${event.areaTo.isEmpty ? '' : '&area_to=${event.areaTo}'}'
           '${event.floorFrom.isEmpty ? '' : '&floor_from=${event.floorFrom}'}'
           '${event.floorTo.isEmpty ? '' : '&floor_to=${event.floorTo}'}'
-          '${!event.notFirstFloor ? '' : '&not_first=${event.notFirstFloor}'}'
-          '${!event.notLastFloor ? '' : '&not_last=${event.notLastFloor}'}'
-          '${!event.isLastFloor ? '' : '&is_last=${event.isLastFloor}'}'
           '${event.rooms.isEmpty ? '' : '&room_types=${event.rooms.join(',')}'}';
 
       _lastFilter = filter;

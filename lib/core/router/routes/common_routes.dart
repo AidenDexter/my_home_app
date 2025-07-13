@@ -14,10 +14,6 @@ final _commonRoutes = [
       assert((state.extra! as Map<String, Object>)['areaTo'] is TextEditingController);
       assert((state.extra! as Map<String, Object>)['floorFrom'] is TextEditingController);
       assert((state.extra! as Map<String, Object>)['floorTo'] is TextEditingController);
-
-      assert((state.extra! as Map<String, Object>)['notFirstFloor'] is ValueNotifier<bool>);
-      assert((state.extra! as Map<String, Object>)['notLastFloor'] is ValueNotifier<bool>);
-      assert((state.extra! as Map<String, Object>)['isLastFloor'] is ValueNotifier<bool>);
       assert((state.extra! as Map<String, Object>)['rooms'] is ValueNotifier<List<Rooms>>);
 
       return FiltersPage(
@@ -32,9 +28,6 @@ final _commonRoutes = [
         search: (state.extra! as Map<String, Object>)['search']! as VoidCallback,
         floorFromController: (state.extra! as Map<String, Object>)['floorFrom']! as TextEditingController,
         floorToController: (state.extra! as Map<String, Object>)['floorTo']! as TextEditingController,
-        notFirstFloorController: (state.extra! as Map<String, Object>)['notFirstFloor']! as ValueNotifier<bool>,
-        notLastFloorController: (state.extra! as Map<String, Object>)['notLastFloor']! as ValueNotifier<bool>,
-        isLastFloorController: (state.extra! as Map<String, Object>)['isLastFloor']! as ValueNotifier<bool>,
         roomsController: (state.extra! as Map<String, Object>)['rooms']! as ValueNotifier<List<Rooms>>,
       );
     },
@@ -79,10 +72,12 @@ final _commonRoutes = [
       assert(state.extra is Map<String, Object>);
       assert((state.extra! as Map<String, Object>)['images'] is List<Images>);
       assert((state.extra! as Map<String, Object>)['initialIndex'] is int);
+      assert((state.extra! as Map<String, Object>)['parentController'] is PageController);
 
       return PhotoViewPage(
         initialIndex: (state.extra! as Map<String, Object>)['initialIndex']! as int,
         images: (state.extra! as Map<String, Object>)['images']! as List<Images>,
+        parentController: (state.extra! as Map<String, Object>)['parentController']! as PageController,
       );
     },
   ),

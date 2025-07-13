@@ -12,9 +12,11 @@ import '../../../search/domain/entity/search_response.dart';
 class PhotoViewPage extends StatefulWidget {
   final int initialIndex;
   final List<Images> images;
+  final PageController parentController;
   const PhotoViewPage({
     required this.initialIndex,
     required this.images,
+    required this.parentController,
     super.key,
   });
 
@@ -68,6 +70,7 @@ class _PhotoViewPageState extends State<PhotoViewPage> with SingleTickerProvider
                         onPageChanged: (index) {
                           if (_isPageAnimating) return;
                           _tabController.animateTo(index);
+                          widget.parentController.jumpToPage(index);
                         },
                         pageController: _pageController,
                         scrollPhysics: const BouncingScrollPhysics(),
