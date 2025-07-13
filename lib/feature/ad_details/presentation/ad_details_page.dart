@@ -141,10 +141,13 @@ class _DataLayer extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               onTap: () {
                 if (item.lat != null && item.lng != null) {
-                  MapsLauncher.launchCoordinates(item.lat!, item.lng!);
-                } else {
-                  MapsLauncher.launchQuery(item.address!);
+                  MapsLauncher.launchCoordinates(item.lng!, item.lat!);
+                  return;
                 }
+                final adress = '${item.cityName ?? ''} ${item.address ?? ''}'.trim();
+                if (adress.isEmpty) return;
+
+                MapsLauncher.launchQuery(adress);
               },
               child: Row(
                 children: [
