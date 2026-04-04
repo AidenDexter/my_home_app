@@ -12,6 +12,6 @@ abstract class ChooseAreaRemoteDB {
   @factoryMethod
   factory ChooseAreaRemoteDB(@Named('BaseDioHome') Dio dio) = _ChooseAreaRemoteDB;
 
-  @GET('/ka/loc/cities')
+  @GET('https://api-locations.tnet.ge/v2/cities')
   Future<ChooseAreaResponse> fetchCities();
 }

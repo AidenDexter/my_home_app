@@ -10,11 +10,11 @@ part 'choose_area_response.g.dart';
 class ChooseAreaResponse {
   ChooseAreaResponse({
     required this.data,
-    required this.success,
+    required this.result,
   });
 
   final List<Datum> data;
-  final bool success;
+  final bool result;
 
   factory ChooseAreaResponse.fromJson(Map<String, dynamic> json) => _$ChooseAreaResponseFromJson(json);
 }
